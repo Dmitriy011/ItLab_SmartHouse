@@ -1,0 +1,4 @@
+﻿  Main.cpp
+C:\Users\rozan\source\repos\ITLab\ITLab\Main.cpp(139,21): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\Main.cpp(140,22): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+  ITLab.vcxproj -> C:\Users\rozan\source\repos\ITLab\x64\Debug\ITLab.exe
