@@ -1,5 +1,0 @@
-﻿  vertexShaderSource.cpp
-LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
-LINK : warning LNK4098: библиотека по умолчанию "LIBCMT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: "vc120.pdb" PDB не найден с "glew32s.lib(glew.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\vc120.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-  vertexShaderSource.vcxproj -> C:\Users\rozan\source\repos\ITLab\x64\Debug\vertexShaderSource.exe
