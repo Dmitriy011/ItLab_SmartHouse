@@ -3,30 +3,12 @@
 #include <glew.h>
 #include <glfw3.h>
 
+#include "SomeFunc.h"
+#include "Shader.h"
+
 #include <iostream>
 
-#include "SomeFunc.h"
-	
 const GLuint WIDTH = 800, HEIGHT = 600;												//Размер окна
-
-//Исходный код Вершинного Шейдера (обязательный для написания шейдер)
-const GLchar* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 position;\n"											//входные вершинные атрибуты в вершинном шейдере передали с помощью IN. Создаем vec3(вершины имеют трехмерные координаты) с названием POSITION. Позиция нашей переменной указали через layout (location = 0)
-"layout (location = 1) in vec3 color;\n"
-"out vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(position, 1.0);\n"												//Т.к. наш входной вектор трехмерный мы должны преобразовать его в четырехмерный --->  передаем компоненты vec3 в vec4, а компоненте w задать значение 1.0f. (VEC4 ХРАНИТ 4 FLOAT знач.)(СУЩ BVEC, IVEC - которые хранят bool или int)
-"ourColor = color;\n"
-"}\0";
-//Исходный код Фрагментного Шейдера (обязательный для написания шейдер)
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-"out vec4 color;\n"																	//Указываем выходную переменную с помощью ключевого слова out, ее название  color. Фрагментный шейдер требует только значения цвета, являющийся 4 компонентным вектором.
-"uniform vec4 ourColor;\n"															//объявили переменную формы ourColor типа вектора из 4 элементов в фрагментном шейдере и используем ее для установки выходного значение фрагментного шейдера								
-"void main()\n"
-"{\n"
-"color = ourColor;\n"
-"}\n\0";
 
 int main(int argc, char** argv)														//argc число аргументов, argv массив аргументов
 {
@@ -61,42 +43,6 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 
 	glfwSetKeyCallback(window, key_callback);										//Передаем сущ-е ф-ии в GLWF
 
-	//Вершинный шейдер
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);							//1)Создаем объект шейдера. GL_VERTEX_SHADER - тип шейдер
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);						//Привзяываем код шейдера. 1ый аргумент принимает шейдер, который требуется собрать, 2ой  описывает количество строк(одна строка), 3ий - это сам исходный код шейдера, 4ый мы оставим в NULL.
-	glCompileShader(vertexShader);													//Компилир шейдер
-	//Проверка на создание Вершинного шейдера
-	GLint success;																	//число для определения успешности сборки
-	GLchar infoLog[512];															//контейнер для хранения ошибок
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);						//проверяем успешность с помощью
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);						//Если сборка провалится — получим сообщение об ошибки с помощью glGetShaderInfoLog и выведется эта ошибка
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	//Фрагментный шейдер(Аналогично вершинному)
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);						//2)Создаем объект шейдера. GL_VERTEX_SHADER - тип шейдера						
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);					//Привзяываем код шейдера.
-	glCompileShader(fragmentShader);												//Компилир шейдер
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);						//проверка
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-
-	//Для того, чтобы использовать собранные шейдеры их требуется соединить в объект шейдерной программы, а затем активировать эту программу при отрисовке объектов, и эта программа будет использоваться при вызове команд отрисовки.
-	GLuint shaderProgram = glCreateProgram();										//glCreateProgram создает программу и возвращает идентификатор этой программы										
-	glAttachShader(shaderProgram, vertexShader);									//присоед вершинный шейдер
-	glAttachShader(shaderProgram, fragmentShader);									//присоед фрагментный шейдер
-	glLinkProgram(shaderProgram);													//Объединяем в программу
-	//Проверка связки шейдеров
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if(!success) 
-	{
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-	}
-
 	GLfloat vertices[] = 
 	{
 		 0.5f,  0.5f, 0.0f,  // Top Right
@@ -124,6 +70,7 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	glEnableVertexAttribArray(0);													//5)Т.к атрибут вершин отключен -> включить
 	glBindVertexArray(0);															//Отвязываем Vao (далее можно снова привязать "glBindVertexArray(VAO);" и необх снова отвязать) 												
 	
+	Shader ourShader("../Shader/Vertex/Vertex.txt", "../Shader/Fragment/fragment.txt ");
 
 	while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
 	{
@@ -131,17 +78,15 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 		
 	//Команды отрисовки ...
 		glClearColor(0.1f, 0.1f, 0.3f, 1.0f);										//Цвет окна
-		glClear(GL_COLOR_BUFFER_BIT);												//GlClear(<какие биты очистить>) - очистить буфер (GL_COLOR_BUFFER_BIT - цветовой,  GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT )Как только мы вызываем glClear весь буфер будет заполнен указанным 	цветом.glClearColor — это функция устанавливающая состояние, а glClear — это функция использующая состояние.
+		glClear(GL_COLOR_BUFFER_BIT);												//GlClear(<какие биты очистить>) - очистить буфер (GL_COLOR_BUFFER_BIT - цветовой,  GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT )Как только мы вызываем glClear весь буфер будет заполнен указанным 	цветом.glClearColor — это функция устанавливающая состояние, а glClear — это функция использующая состояние
 		
-		
-		
-		
+		ourShader.Use();
 		GLfloat timeValue = glfwGetTime();
 		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		GLint vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+		GLint vertexColorLocation = glGetUniformLocation(ourShader.Program, "ourColor");
 		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 		
-		glUseProgram(shaderProgram);
+		glUseProgram(ourShader.Program);
 		glBindVertexArray(VAO);		
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);								// 1ый ар. - г что мы хотим отрисовывать переднюю и заднюю части всех треугольников, а 2ой-  что мы хотим отрисовывать только линии. Для того, чтобы вернуться к начальной конфигурации  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL).
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);											//Описываем рисуемый примитив GL_TRIANGLES. 2ой аругмент - нач индекс массива  вершин, 3ий количество вершин
@@ -152,9 +97,7 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	}
 
 	glfwTerminate();																//*очистить выделенные рессурсы
-	glDeleteShader(vertexShader);													//Удаление вершинног ошейдера
-	glDeleteShader(fragmentShader);													//Удаление фрагментного шейдера
-	glBindVertexArray(0);															//Отвязываем VAO 
+
 
 	return 0;
 }
