@@ -13,4 +13,59 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
+
+    if ((key >= 0) && (key < 1024))
+    {
+        if (action == GLFW_PRESS)
+        {
+
+            keys[key] = true;
+        }
+        else
+        {
+            if (action == GLFW_RELEASE)
+            {
+
+                keys[key] = false;
+            }
+        }
+    }
+}
+
+void movement()
+{
+    if (keys[GLFW_KEY_W])
+    {
+        camera.ProcessKeyboard(FORWARD, deltaTime);
+    }
+    if (keys[GLFW_KEY_S])
+    {
+        camera.ProcessKeyboard(BACKWARD, deltaTime);
+    }
+    if (keys[GLFW_KEY_A])
+    {
+        camera.ProcessKeyboard(LEFT, deltaTime);
+    }
+    if (keys[GLFW_KEY_D])
+    {
+        camera.ProcessKeyboard(RIGHT, deltaTime);
+    }
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)                   //xpos, ypos - коорд мыши.
+{
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    GLfloat xoffset = xpos - lastX;
+    GLfloat yoffset = lastY - ypos;  
+
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
