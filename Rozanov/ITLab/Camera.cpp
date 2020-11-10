@@ -5,6 +5,11 @@ glm::mat4 Camera::GetViewMatrix()
     return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 }
 
+glm::mat4 Camera::getProjectionMatrix()
+{
+    return projectionMatrix;
+}
+
 void Camera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 {
     GLfloat velocity = this->MovementSpeed * deltaTime;  
@@ -26,7 +31,7 @@ void Camera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
         this->Position += this->Right * velocity;
     }
 
-    Position.y = -0.25f;
+    Position.y = 0.5f;
 }
 
 void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)

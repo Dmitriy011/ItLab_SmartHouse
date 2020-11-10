@@ -10,6 +10,8 @@
 #include "SomeFunc.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Model.h"
+#include "Mesh.h"
 
 #include <iostream>
 
@@ -65,40 +67,40 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 
 	float vertices[] = 
 	{
-	-4.5f, -1.0f, -2.75f,  0.0f, 0.0f,	//1тр
-	 4.5f, -1.0f, -2.75f,  1.0f, 0.0f,
-	 4.5f,  1.0f, -2.75f,  1.0f, 1.0f,
-	 4.5f,  1.0f, -2.75f,  1.0f, 1.0f,	//2тр
-	-4.5f,  1.0f, -2.75f,  0.0f, 1.0f,
-	-4.5f, -1.0f, -2.75f,  0.0f, 0.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 0.0f,	//1тр
+	 4.5f, 0.0f, -2.75f,  1.0f, 0.0f,
+	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
+	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,	//2тр
+	-4.5f,  2.0f, -2.75f,  0.0f, 1.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 0.0f,
 
-	-4.5f, -1.0f,  2.75f,  0.0f, 0.0f,	//1тр
-	 4.5f, -1.0f,  2.75f,  1.0f, 0.0f,
-	 4.5f,  1.0f,  2.75f,  1.0f, 1.0f,
-	 4.5f,  1.0f,  2.75f,  1.0f, 1.0f,	//2тр
-	-4.5f,  1.0f,  2.75f,  0.0f, 1.0f,
-	-4.5f, -1.0f,  2.75f,  0.0f, 0.0f,
+	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,	//1тр
+	 4.5f, 0.0f,  2.75f,  1.0f, 0.0f,
+	 4.5f,  2.0f,  2.75f,  1.0f, 1.0f,
+	 4.5f,  2.0f,  2.75f,  1.0f, 1.0f,	//2тр
+	-4.5f,  2.0f,  2.75f,  0.0f, 1.0f,
+	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
 
-	-4.5f,  1.0f,  2.75f,  1.0f, 0.0f,	//1тр
-	-4.5f,  1.0f, -2.75f,  1.0f, 1.0f,
-	-4.5f, -1.0f, -2.75f,  0.0f, 1.0f,
-	-4.5f, -1.0f, -2.75f,  0.0f, 1.0f,	//2тр
-	-4.5f, -1.0f,  2.75f,  0.0f, 0.0f,
-	-4.5f,  1.0f,  2.75f,  1.0f, 0.0f,
+	-4.5f,  2.0f,  2.75f,  1.0f, 0.0f,	//1тр
+	-4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//2тр
+	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
+	-4.5f,  2.0f,  2.75f,  1.0f, 0.0f,
 
-	 4.5f,  1.0f,  2.75f,  1.0f, 0.0f,	//1тр
-	 4.5f,  1.0f, -2.75f,  1.0f, 1.0f,
-	 4.5f, -1.0f, -2.75f,  0.0f, 1.0f,
-	 4.5f, -1.0f, -2.75f,  0.0f, 1.0f,	//2тр		
-	 4.5f, -1.0f,  2.75f,  0.0f, 0.0f,
-	 4.5f,  1.0f,  2.75f,  1.0f, 0.0f,
+	 4.5f,  2.0f,  2.75f,  1.0f, 0.0f,	//1тр
+	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
+	 4.5f, 0.0f, -2.75f,  0.0f, 1.0f,
+	 4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//2тр		
+	 4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
+	 4.5f,  2.0f,  2.75f,  1.0f, 0.0f,
 
-	-4.5f, -1.0f, -2.75f,  0.0f, 1.0f,	//1тр
-	 4.5f, -1.0f, -2.75f,  1.0f, 1.0f,
-	 4.5f, -1.0f,  2.75f,  1.0f, 0.0f,
-	 4.5f, -1.0f,  2.75f,  1.0f, 0.0f,	//2тр
-	-4.5f, -1.0f,  2.75f,  0.0f, 0.0f,
-	-4.5f, -1.0f, -2.75f,  0.0f, 1.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//1тр
+	 4.5f, 0.0f, -2.75f,  1.0f, 1.0f,
+	 4.5f, 0.0f,  2.75f,  1.0f, 0.0f,
+	 4.5f, 0.0f,  2.75f,  1.0f, 0.0f,	//2тр
+	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
+	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,
 	};
 
 	GLuint indices[] =
@@ -129,9 +131,9 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));	//5)Атрибут расположения текстуры
 	glEnableVertexAttribArray(2);																			//5)Вкл					
 	glBindVertexArray(0);															//Отвязываем Vao (далее можно снова привязать "glBindVertexArray(VAO);" и необх снова отвязать) 												
-
-	GLuint texture1;																//6)Создание текстуры
-	GLuint texture2;																				
+	
+	
+	GLuint texture1;																				//6)Создание текстур																				
 	// Texture 1
 	glGenTextures(1, &texture1);																	//6)Создание текстуры (1ый арг - колличество текстур, 2ой - массив идентификаторов текстур)
 	glBindTexture(GL_TEXTURE_2D, texture1);															//Привяз
@@ -145,18 +147,11 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	glGenerateMipmap(GL_TEXTURE_2D);																//Генерация мипмапов
 	SOIL_free_image_data(image);																	//Освобожд уч.памяти под изображ	
 	glBindTexture(GL_TEXTURE_2D, 0);																//Отвязка объекта текстуры	
-	// Texture 2
-	glGenTextures(1, &texture2);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	image = SOIL_load_image("../Pics/q.jpg", &width, &height, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	
+
+	//Model Table(const_cast<GLchar*>("../Models/Table/Wood_Table.obj"));
+	//Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
+	Model Tree(const_cast<GLchar*>("../Models/Tree/Tree.obj"));
 
 	while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
 	{
@@ -175,9 +170,6 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glUniform1i(glGetUniformLocation(ourShader.Program, "ourTexture1"), 0);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture2);
-		glUniform1i(glGetUniformLocation(ourShader.Program, "ourTexture2"), 1);
 
 		ourShader.Use();
 		
@@ -195,8 +187,13 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 		GLint projLoc = glGetUniformLocation(ourShader.Program, "projection");		//3)передача матрицы проекции в шейдер
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-		glDrawArrays(GL_TRIANGLES, 0, 30);											//Описываем рисуемый примитив GL_TRIANGLES. 2ой аругмент - нач индекс массива  вершин, 3ий количество вершин
+		glDrawArrays(GL_TRIANGLES, 0, 30);										//Описываем рисуемый примитив GL_TRIANGLES. 2ой аругмент - нач индекс массива  вершин, 3ий количество вершин
 		
+		
+		//Door.Draw(ourShader);
+		//Table.Draw(ourShader);
+		Tree.Draw(ourShader);
+
 		glBindVertexArray(0);														//Отвязываем VAO
 	//Конец.
 
@@ -209,3 +206,4 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	glfwTerminate();																//*очистить выделенные рессурсы
 	return 0;
 }
+
