@@ -1,4 +1,11 @@
-﻿  Main.cpp
+﻿  Camera.cpp
+  GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: rotate_slow function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: perspectiveFov function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: infinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  GLM: tweakedInfinitePerspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  Main.cpp
   GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: rotate_slow function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
@@ -11,10 +18,10 @@
   GLM: yaw function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angle function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
-C:\Users\rozan\source\repos\ITLab\ITLab\Main.cpp(163,24): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\Main.cpp(158,24): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
   GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
-  Mesh.cpp
+  SomeFunc.cpp
   GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: rotate_slow function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
@@ -27,10 +34,26 @@ C:\Users\rozan\source\repos\ITLab\ITLab\Main.cpp(163,24): warning C4244: ини�
   GLM: yaw function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angle function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
-  Shader.cpp
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(59,17): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(60,17): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(64,21): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(65,21): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(67,13): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\rozan\source\repos\ITLab\ITLab\SomeFunc.cpp(68,13): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
   Создание кода...
 LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
 LINK : warning LNK4098: библиотека по умолчанию "LIBCMT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
+LINK : warning LNK4286: Символ "__glewActiveTexture", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewBindBuffer", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewBufferData", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewGenBuffers", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewEnableVertexAttribArray", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewGetUniformLocation", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewUniform1i", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewVertexAttribPointer", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewBindVertexArray", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewGenVertexArrays", определенный в "glew32s.lib(glew.obj)", импортирован "Mesh.obj".
+LINK : warning LNK4286: Символ "__glewGenerateMipmap", определенный в "glew32s.lib(glew.obj)", импортирован "Model.obj".
 LINK : warning LNK4286: Символ "__glewAttachShader", определенный в "glew32s.lib(glew.obj)", импортирован "Shader.obj".
 LINK : warning LNK4286: Символ "__glewCompileShader", определенный в "glew32s.lib(glew.obj)", импортирован "Shader.obj".
 LINK : warning LNK4286: Символ "__glewCreateProgram", определенный в "glew32s.lib(glew.obj)", импортирован "Shader.obj".
@@ -44,4 +67,8 @@ LINK : warning LNK4286: Символ "__glewLinkProgram", определенны
 LINK : warning LNK4286: Символ "__glewShaderSource", определенный в "glew32s.lib(glew.obj)", импортирован "Shader.obj".
 LINK : warning LNK4286: Символ "__glewUseProgram", определенный в "glew32s.lib(glew.obj)", импортирован "Shader.obj".
 glew32s.lib(glew.obj) : warning LNK4099: "vc120.pdb" PDB не найден с "glew32s.lib(glew.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\vc120.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+soil.lib(image_helper.obj) : warning LNK4099: "soil.pdb" PDB не найден с "soil.lib(image_helper.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\soil.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+soil.lib(stb_image_aug.obj) : warning LNK4099: "soil.pdb" PDB не найден с "soil.lib(stb_image_aug.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\soil.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+soil.lib(image_DXT.obj) : warning LNK4099: "soil.pdb" PDB не найден с "soil.lib(image_DXT.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\soil.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+soil.lib(SOIL.obj) : warning LNK4099: "soil.pdb" PDB не найден с "soil.lib(SOIL.obj)" или на "C:\Users\rozan\source\repos\ITLab\x64\Debug\soil.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
   ITLab.vcxproj -> C:\Users\rozan\source\repos\ITLab\x64\Debug\ITLab.exe

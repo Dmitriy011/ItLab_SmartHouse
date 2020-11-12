@@ -12,15 +12,25 @@ int main()
     SetConsoleOutputCP(1251);
     srand(time(NULL));
 
+    LightSensors LS;
+
+    //write_sensors_data_in_file(generate_sensors_data(LS, 3));
+
     SmartLamp A;
-    A.set_degree(30) ;
+    A.get_string();
+    A.parse_string();
+    A.set_p_of_li();
     A.print_info();
-    A.set_degree(90.123);
-    A.print_info();
-    //A.generate_one_le(1);
-    A.generate_data(3);
-    cout << A.total_data << endl;
-    A.write_data_in_file();
+
+ // A.parse_string();
+    //A.set_degree(30) ;
+    //A.print_info();
+    //A.set_degree(90.123);
+    //A.print_info();
+    ////A.generate_one_le(1);
+    //A.generate_data(12);
+    //cout << A.total_data << endl;
+    //A.write_data_in_file();
 
     /////////////////////////
    /* map<string, string> vocabulary;
