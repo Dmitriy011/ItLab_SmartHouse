@@ -49,12 +49,20 @@ public:
         this->Yaw = yaw;
         this->Pitch = pitch;
         this->updateCameraVectors();
+
     }
+
     glm::mat4 GetViewMatrix();
+    glm::mat4 getProjectionMatrix();
+   
 
     void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
 
     void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true);
 private:
+    glm::mat4 viewMatrix;
+    glm::mat4 projectionMatrix;
+  
+
     void updateCameraVectors();
 };

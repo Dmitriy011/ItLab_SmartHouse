@@ -1,15 +1,19 @@
 #include "Shader.h"
 
-Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)                //указатели на массив символов(текст - путь к файлу с кодом шейдера)
+Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath,  const GLchar* geometryPath)                //указатели на массив символов(текст - путь к файлу с кодом шейдера)
 {
+    //----//  получение исходного кода вершинного/фрагментного/геометрического шейдера
     std::string vertexCode;
     std::string fragmentCode;
+    std::string geometryCode;
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
+    std::ifstream gShaderFile;
 
     //проверка на выброс исключения Объектов ifstream
     vShaderFile.exceptions(std::ifstream::failbit);
     fShaderFile.exceptions(std::ifstream::failbit);
+    gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     try
     {
         vShaderFile.open(vertexPath);                                                      //1) Открываем файлы
@@ -23,6 +27,15 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)            
     
         vertexCode = vShaderStream.str();                                                  //4)Преобразовываем потоки в массив GLchar
         fragmentCode = fShaderStream.str();                                                //4)Преобразовываем потоки в массив GLchar
+    
+        if (geometryPath != nullptr)
+        {
+            gShaderFile.open(geometryPath);
+            std::stringstream gShaderStream;
+            gShaderStream << gShaderFile.rdbuf();
+            gShaderFile.close();
+            geometryCode = gShaderStream.str();
+        }
     }
     catch (std::ifstream::failure e)
     {
@@ -35,34 +48,47 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)            
     GLuint vertex, fragment;
     GLint success;
     GLchar infoLog[512];
-    // Vertex Shader
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode, NULL);
     glCompileShader(vertex);
-    // Print compile errors if any
     glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
     if (!success)
     {
         glGetShaderInfoLog(vertex, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
-    // Fragment Shader
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fShaderCode, NULL);
     glCompileShader(fragment);
-    // Print compile errors if any
     glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
     if (!success)
     {
         glGetShaderInfoLog(fragment, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
-    // Shader Program
+    GLuint geometry;
+    if (geometryPath != nullptr)
+    {
+        const char* gShaderCode = geometryCode.c_str();
+        geometry = glCreateShader(GL_GEOMETRY_SHADER);
+        glShaderSource(geometry, 1, &gShaderCode, NULL);
+        glCompileShader(geometry);
+        if (!success)
+        {
+            glGetShaderInfoLog(geometry, 512, NULL, infoLog);
+            std::cout << "ERROR::SHADER::GEOMETRY::COMPILATION_FAILED\n" << infoLog << std::endl;
+        }
+    }
+
+    //Шейдерная программа
     this->Program = glCreateProgram();
     glAttachShader(this->Program, vertex);
     glAttachShader(this->Program, fragment);
     glLinkProgram(this->Program);
-    // Print linking errors if any
+    if (geometryPath != nullptr)
+    {
+        glAttachShader(Program, geometry);
+    }
     glGetProgramiv(this->Program, GL_LINK_STATUS, &success);
     if (!success)
     {
@@ -72,6 +98,10 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)            
     // Delete the shaders as they're linked into our program now and no longer necessery
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+    if (geometryPath != nullptr)
+    {
+        glDeleteShader(geometry);
+    }
 }
 
 void Shader::Use()

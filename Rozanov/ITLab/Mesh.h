@@ -7,11 +7,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 #include "Shader.h"
 
 using namespace std;
 
-struct Vertex                                                                           //Для хранения каждой вершины
+struct Vertex                                                                           //Для хранения каждой вершины полигональной сетки
 {
     glm::vec3 Position;                                                                 //Вектор позиций для каждой вершины
     glm::vec3 Normal;                                                                   //Векто нормали для каждой врешины
@@ -20,22 +24,23 @@ struct Vertex                                                                   
 
 struct Texture                                                                          //Хранит текстурные данные для каждой вершины
 {
-    unsigned int id;                            
+    GLuint id;                            
     string type;                                                                        //тип текстуры(диффузная или бликовая)
+    aiString path;                                                                      //путь к текстуре
 };
 
-class Mesh 
+class Mesh                                                                              //Полигональная сетка
 {
 public:
     vector<Vertex> vertices;
     vector<unsigned int> indices;
     vector<Texture> textures;
 
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+    Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
 
-    void Draw(Shader& shader);
+    void Draw(Shader& shader);                                                          //отрисовыв. полигональной сетки
 private:
-    unsigned int VAO, VBO, EBO;
+    GLuint VAO, VBO, EBO;
 
-    void setupMesh();                                                                       //Инициализируем буферы
+    void setupMesh();                                                                   //Инициализируем буферы
 };
