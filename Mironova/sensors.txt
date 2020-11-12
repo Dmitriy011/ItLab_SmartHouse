@@ -1,0 +1,3 @@
+Sensor;value;
+Light sensor;250;
+Light sensor;150;
