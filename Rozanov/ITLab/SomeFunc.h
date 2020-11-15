@@ -10,6 +10,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "Shader.h"
 
 extern Camera camera;
 extern bool keys[1024];
