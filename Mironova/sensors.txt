@@ -1,0 +1,3 @@
+Sensor;value;
+p_of_li;250;
+p_of_li;150;

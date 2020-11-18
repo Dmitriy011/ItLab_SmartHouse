@@ -13,6 +13,7 @@
 #include "Model.h"
 #include "Mesh.h"
 
+
 #include <iostream>
 
 #include <SOIL.h>
@@ -27,6 +28,7 @@ bool firstMouse = true;
 //----// Для разных комьютеров сокрость передвижения разная -> вычисл время затраченное на визуализацию и от него зависит скорость
 GLfloat deltaTime = 0.0f;															// время, затраченное на визуализацию последнего выведенного кадра
 GLfloat lastFrame = 0.0f;															// время вывода последнего кадра
+
 
 int main(int argc, char** argv)														//argc число аргументов, argv массив аргументов
 {
@@ -69,31 +71,31 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	{
 	-4.5f, 0.0f, -2.75f,  0.0f, 0.0f,	//1тр
 	 4.5f, 0.0f, -2.75f,  1.0f, 0.0f,
-	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
-	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,	//2тр
-	-4.5f,  2.0f, -2.75f,  0.0f, 1.0f,
+	 4.5f,  2.5f, -2.75f,  1.0f, 1.0f,
+	 4.5f,  2.5f, -2.75f,  1.0f, 1.0f,	//2тр
+	-4.5f,  2.5f, -2.75f,  0.0f, 1.0f,
 	-4.5f, 0.0f, -2.75f,  0.0f, 0.0f,
 
 	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,	//1тр
 	 4.5f, 0.0f,  2.75f,  1.0f, 0.0f,
-	 4.5f,  2.0f,  2.75f,  1.0f, 1.0f,
-	 4.5f,  2.0f,  2.75f,  1.0f, 1.0f,	//2тр
-	-4.5f,  2.0f,  2.75f,  0.0f, 1.0f,
+	 4.5f,  2.5f,  2.75f,  1.0f, 1.0f,
+	 4.5f,  2.5f,  2.75f,  1.0f, 1.0f,	//2тр
+	-4.5f,  2.5f,  2.75f,  0.0f, 1.0f,
 	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
 
-	-4.5f,  2.0f,  2.75f,  1.0f, 0.0f,	//1тр
-	-4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
+	-4.5f,  2.5f,  2.75f,  1.0f, 0.0f,	//1тр
+	-4.5f,  2.5f, -2.75f,  1.0f, 1.0f,
 	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,
 	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//2тр
 	-4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
-	-4.5f,  2.0f,  2.75f,  1.0f, 0.0f,
+	-4.5f,  2.5f,  2.75f,  1.0f, 0.0f,
 
-	 4.5f,  2.0f,  2.75f,  1.0f, 0.0f,	//1тр
-	 4.5f,  2.0f, -2.75f,  1.0f, 1.0f,
+	 4.5f,  2.5f,  2.75f,  1.0f, 0.0f,	//1тр
+	 4.5f,  2.5f, -2.75f,  1.0f, 1.0f,
 	 4.5f, 0.0f, -2.75f,  0.0f, 1.0f,
 	 4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//2тр		
 	 4.5f, 0.0f,  2.75f,  0.0f, 0.0f,
-	 4.5f,  2.0f,  2.75f,  1.0f, 0.0f,
+	 4.5f,  2.5f,  2.75f,  1.0f, 0.0f,
 
 	-4.5f, 0.0f, -2.75f,  0.0f, 1.0f,	//1тр
 	 4.5f, 0.0f, -2.75f,  1.0f, 1.0f,
@@ -142,16 +144,19 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("../Pics/1.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = SOIL_load_image("../Pics/floor.jpg", &width, &height, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);		//1ый - текстурная цель(GL_TEXTURE_2D), 2ой - описывает уровень мипмапа для которого мы хотим сгенерировать текстуру(0 - генерация на OPENGL),	3ий - каком формате хранить текстуру, 4ый - ширина, 5ый - высота, 6ой - утсаревший(всегд 0), 7ой - формат изображ(RGB), 8ой - тип данных изображения(т.к. загружали изображение и хранили в байтах (cha)r - GL_UNSIGNED_BYTE), 9ый - изображение
 	glGenerateMipmap(GL_TEXTURE_2D);																//Генерация мипмапов
 	SOIL_free_image_data(image);																	//Освобожд уч.памяти под изображ	
 	glBindTexture(GL_TEXTURE_2D, 0);																//Отвязка объекта текстуры	
 	
 
-	//Model Table(const_cast<GLchar*>("../Models/Table/Wood_Table.obj"));
-	//Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
-	Model Tree(const_cast<GLchar*>("../Models/Tree/Tree.obj"));
+	Model Table(const_cast<GLchar*>("../Models/Table/Wood_Table.obj"));
+	Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
+	//Model Tree(const_cast<GLchar*>("../Models/Tree/Tree.obj"));
+	Model Ref(const_cast<GLchar*>("../Models/refregerator/Refrigerator.obj"));
+	//Model Ta(const_cast<GLchar*>("../Models/table2/table3.obj"));
+	Model lamp(const_cast<GLchar*>("../Models/lamp/eb_lamp_01.obj"));
 
 	while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
 	{
@@ -174,36 +179,49 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 		ourShader.Use();
 		
 		glm::mat4 model;
-		model = glm::rotate(model, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));				//применяем матрицу модели, чтобы равзернуть изображение в виде плосоктсти, повернув на 55 градусов, передвая в качестве поворота ОХ (1, 0, 0)														//матрица модели (состоит из сдвигов, масштабирования, поворотов) ->преобразов. все локальные вершины объекта в глобальное мировое пространство
+		model = glm::translate(model, glm::vec3(0.0f, .0f, 0.0f));				//применяем матрицу модели, чтобы равзернуть изображение в виде плосоктсти, повернув на 55 градусов, передвая в качестве поворота ОХ (1, 0, 0)														//матрица модели (состоит из сдвигов, масштабирования, поворотов) ->преобразов. все локальные вершины объекта в глобальное мировое пространство
 		GLint modelLoc = glGetUniformLocation(ourShader.Program, "model");			//1)передача матрицы модели в шейдер
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
 		glm::mat4 view = camera.GetViewMatrix();									//матрица камеры (результат преобразования мировых координат в координаты, которые выглядят, как будто пользователь смотрит на них спереди)
 		GLint viewLoc = glGetUniformLocation(ourShader.Program, "view");			//2)передача матрицы вида в шейдер
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-
 		glm::mat4 projection;														//матрица проекции
 		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);	//перпективная проекция (Сущ. ортогональная, в которой удаленные предметы не кажутся ближе - исп для 2д). 1ый арг - fov (поле обзора) 45 градусов
 		GLint projLoc = glGetUniformLocation(ourShader.Program, "projection");		//3)передача матрицы проекции в шейдер
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		glDrawArrays(GL_TRIANGLES, 0, 30);										//Описываем рисуемый примитив GL_TRIANGLES. 2ой аругмент - нач индекс массива  вершин, 3ий количество вершин
+	
+		model = glm::translate(model, glm::vec3(4.5f, 0.0f, 0.0f));				 		
+		model = glm::rotate(model, 270.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		modelLoc = glGetUniformLocation(ourShader.Program, "model");			
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		Door.Draw(ourShader);
 		
+		model = glm::translate(model, glm::vec3(2.2f, 0.7f, 8.5f));				
+		model = glm::rotate(model, 130.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		modelLoc = glGetUniformLocation(ourShader.Program, "model");			
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		Ref.Draw(ourShader);
 		
-		//Door.Draw(ourShader);
-		//Table.Draw(ourShader);
-		Tree.Draw(ourShader);
+		model = glm::translate(model, glm::vec3(2.1f, -0.7f, -2.5f));
+		model = glm::scale(model, glm::vec3(0.015, 0.015, 0.015));
+		modelLoc = glGetUniformLocation(ourShader.Program, "model");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		lamp.Draw(ourShader);
 
-		glBindVertexArray(0);														//Отвязываем VAO
+		
+
+		glBindVertexArray(0);													//Отвязываем VAO
 	//Конец.
 
-		glfwSwapBuffers(window);													//заменяет цветовой буфер, который использовался для отрисовки во время текущей итерации и показывает результат на экране.
+		glfwSwapBuffers(window);												//заменяет цветовой буфер, который использовался для отрисовки во время текущей итерации и показывает результат на экране.
 	}
 	
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
-	glfwTerminate();																//*очистить выделенные рессурсы
+	glfwTerminate();															//*очистить выделенные рессурсы
 	return 0;
 }
 
