@@ -281,8 +281,9 @@ public:
 class SmartLamp : public SmartLight
 {
 
-    float max_value =500, min_value = 20;
 public:
+
+    float max_value = 500, min_value = 20;
     map<string, int> smart_lamp_char;
     int power_of_light = 0;
 
@@ -348,14 +349,14 @@ class GatherInfo :public SmartLamp
 {
     string total_info = "\0";
 public:
-    string gather_info(SmartLamp L)
+    string gather_info_lamp(SmartLamp L)
     {
         map<string, int> ::iterator it;
 
         it = L.smart_lamp_char.find("power_of_light");
         cout << "\n" << it->second;
 
-        total_info = "power_of_light=" + to_string(it->second);
+        total_info = "power_of_light=" + to_string((it->second - L.min_value) / (L.max_value - L.min_value));
 
 
         return total_info;
@@ -364,20 +365,12 @@ public:
 
     string gather_info_and_write_in_file(SmartLamp L)
     {
-        map<string, int> ::iterator it;
 //power_of_light
-        it = L.smart_lamp_char.find("power_of_light");
-        cout << "\n L :   " << it->second;
-
-        total_info = "power_of_light="+to_string(it->second);
-
-
-
+        total_info=gather_info_lamp(L);
 
         write_total_info_in_file();
 
         return total_info;
-
     }
 
     void write_total_info_in_file()
