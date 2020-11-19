@@ -1,5 +1,6 @@
 #include <iostream>
-#include "ClassCleverThings.h"
+#//include "ClassCleverThings.h"
+#include "ClassCleverThings_0.2.h"
 #include <map> 
 #include<Windows.h>
 
@@ -22,6 +23,11 @@ int main()
     A.set_p_of_li();
     A.print_info();
 
+
+    GatherInfo TOTAL;
+
+    TOTAL.gather_info_and_write_in_file(A);
+    
  // A.parse_string();
     //A.set_degree(30) ;
     //A.print_info();

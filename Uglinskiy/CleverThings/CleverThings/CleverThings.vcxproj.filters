@@ -23,5 +23,8 @@
     <ClInclude Include="ClassCleverThings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClassCleverThings_0.2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

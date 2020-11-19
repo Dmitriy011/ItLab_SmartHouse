@@ -175,7 +175,7 @@ public:
 
 
 
-    float get_degree() //Получение значения состояния
+    /*float get_degree() //Получение значения состояния
     {
         return this->degree;
     };
@@ -189,7 +189,7 @@ public:
 
         on_off = temp_on_off;
     }
-
+    */
    /* string generate_one_le(int size);
     string generate_data(const int total_le);
     void write_data_in_file();*/
@@ -282,6 +282,7 @@ class SmartLamp : public SmartLight
 {
 
     float max_value =500, min_value = 20;
+public:
     map<string, int> smart_lamp_char;
     int power_of_light = 0;
 
@@ -291,12 +292,14 @@ public:
     {
         map<string, int> ::iterator it;
         it = characteristics.find("power_of_light");
-        power_of_light = it->second;
+        smart_lamp_char.insert(make_pair("power_of_light", it->second));
+
     }
     void print_info() override
     {
-              
-       cout << "Set Brightness is " << power_of_light << " Lux" << endl;
+        map<string, int> ::iterator it;
+        it = smart_lamp_char.find("power_of_light");
+       cout << "Set Brightness is " << it->second << " Lux" << endl;
     }
 };
 
@@ -338,4 +341,53 @@ class SmartJalousie : public SmartLight, public SmartClimateControl
 
 class SmartCurtains : public SmartLight, public SmartClimateControl
 {
+};
+
+//----------------------------//
+class GatherInfo :public SmartLamp
+{
+    string total_info = "\0";
+public:
+    string gather_info(SmartLamp L)
+    {
+        map<string, int> ::iterator it;
+
+        it = L.smart_lamp_char.find("power_of_light");
+        cout << "\n" << it->second;
+
+        total_info = "power_of_light=" + to_string(it->second);
+
+
+        return total_info;
+    
+    }
+
+    string gather_info_and_write_in_file(SmartLamp L)
+    {
+        map<string, int> ::iterator it;
+//power_of_light
+        it = L.smart_lamp_char.find("power_of_light");
+        cout << "\n L :   " << it->second;
+
+        total_info = "power_of_light="+to_string(it->second);
+
+
+
+
+        write_total_info_in_file();
+
+        return total_info;
+
+    }
+
+    void write_total_info_in_file()
+    {
+        ofstream in_file("C:\\Users\\Kek\\Desktop\\Smart_things_info.txt"/*, ios::app*/);//*
+        if (in_file.is_open())
+        {
+            in_file << total_info << std::endl;
+        }
+        in_file.close();
+    }
+
 };
