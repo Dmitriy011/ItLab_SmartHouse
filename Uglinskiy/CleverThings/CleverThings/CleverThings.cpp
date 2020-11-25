@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_DEPRECATE
 #include <iostream>
 #//include "ClassCleverThings.h"
 #include "ClassCleverThings_0.2.h"
@@ -12,22 +13,34 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     srand(time(NULL));
+   
 
     LightSensors LS;
-
-    write_sensors_data_in_file(generate_sensors_data(LS, 1));
-
+    TemperatureSensors TS;
+    HumiditySensors HS;
     SmartLamp A;
-    A.get_string();
-    A.parse_string();
+    clock_t stop_working_time= clock();
+    write_sensors_data_in_file(LS.generate__light_sensors_data(),TS.generate__temperature_sensors_data(),HS.generate__humidity_sensors_data());
+    A.initialize_string();
     A.set_p_of_li();
     A.print_info();
+   
+    /*while (stop_working_time <=2900)
+    {      
+        cout << "total working time" << stop_working_time<<endl;
+        write_sensors_data_in_file(LS.generate__light_sensors_data());
+        A.initialize_string();
+        Sleep(3000);
+        stop_working_time = clock();
+    }*/
+
+  
+    /*A.parse_string();
+    A.set_p_of_li();
+    A.print_info();*/
 
 
-    GatherInfo TOTAL;
-
-    TOTAL.gather_info_and_write_in_file(A);
-    
+  
  // A.parse_string();
     //A.set_degree(30) ;
     //A.print_info();
