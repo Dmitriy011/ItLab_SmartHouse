@@ -8,7 +8,7 @@ while 1:
     f=open('sensors.txt','r')
     last_string=read_last_string(f)
     i=0
-    while last_string[i]!=';':
+    while last_string[i]!='=':
         i+=1
     sensor_name=last_string[0:i]
     k=i+1
@@ -19,7 +19,7 @@ while 1:
     #обработка полученных данных
     if sensor_name=="p_of_li":
         SmartLight.Regulation_of_artificial_lighting(float(value))
-    time.sleep(20)
+    time.sleep(0.5)
     
 f.close()
 

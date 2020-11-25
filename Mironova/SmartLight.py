@@ -6,6 +6,7 @@ def read_last_string(f):
 
 NORMAL_ILLUMINATION=200 #в Лк
 
+
 class SmartLight:
         
     @staticmethod
@@ -13,20 +14,22 @@ class SmartLight:
         #работа с файлом, хранящим данные лампочки
         f=open('smart_lamp.txt','r+')
         last_string=read_last_string(f)
-        lamp_state=last_string[0] 
-        brightness=last_string[2:5]
+        i=16
+        while last_string[i]!=';':
+            i+=1
+        lamp_state=last_string[16:i]
     
         if value<NORMAL_ILLUMINATION:
-            if int(lamp_state)!=1:
+            if int(lamp_state)==0:
                 print("Включить лампочку")
-                f.write("\n1;0.5;")
+                f.write("\nlamp_brightness=1;")
             else:
-                if float(brightness)<1:
+                if int(lamp_state)<12:
                     print("Увеличить яркость")
-                    new_brightness=round(float(brightness)+0.1,1)
-                    f.write("\n1;"+str(new_brightness)+";")
+                    new_brightness=int(lamp_state)+1
+                    f.write("\nlamp_brightness="+str(new_brightness)+";")
         if value>NORMAL_ILLUMINATION:
-            print("Уменьшить яркость")
-            new_brightness=round(float(brightness)-0.1,1)
-            f.write("\n1;"+str(new_brightness)+";")
-         
+            if int(lamp_state)>0:
+                print("Уменьшить яркость")
+                new_brightness=int(lamp_state)-1
+                f.write("\nlamp_brightness="+str(new_brightness)+";")       

@@ -1,5 +1,13 @@
-Lamp state;brightness;
-1;0.2;
-0;0.0;
-1;0.5;
-1;0.6;
+lamp_brightness=0;
+lamp_brightness=1;
+lamp_brightness=2;
+lamp_brightness=3;
+lamp_brightness=4;
+lamp_brightness=5;
+lamp_brightness=6;
+lamp_brightness=7;
+lamp_brightness=8;
+lamp_brightness=9;
+lamp_brightness=10;
+lamp_brightness=11;
+lamp_brightness=12;
