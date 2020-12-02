@@ -70,5 +70,128 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)               
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
+void brighness(Shader& shader)
+{
+    string filename = "../test/test.txt";
+    ifstream fin;
+    fin.open(filename);
+    if (fin.is_open())
+    {
+        fin.seekg(-1, ios_base::end);
 
+        bool tmp = true;
+        while (tmp)
+        {
+            char ch;
+            fin.get(ch);
 
+            if ((int)fin.tellg() <= 1)
+            {
+                fin.seekg(0);
+                tmp = false;
+            }
+            else
+            {
+                if (ch == '\n')
+                {
+                    tmp = false;
+                }
+                else
+                {
+                    fin.seekg(-2, ios_base::cur);
+                }
+            }
+
+        }
+    }
+        string lastLine;
+        getline(fin, lastLine);
+        
+        switch (stoi(lastLine))
+        {
+        case 0:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.7f);
+            shader.setFloat("light.quadratic", 1.8f);
+            break;
+        }
+        case 1:
+        {   
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.35f);
+            shader.setFloat("light.quadratic", 0.44f);
+            break;
+        }
+        case 2:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.22f);
+            shader.setFloat("light.quadratic", 0.20f);
+            break;
+        }
+        case 3:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.14f);
+            shader.setFloat("light.quadratic", 0.07f);
+            break;
+        }
+        case 4:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.09f);
+            shader.setFloat("light.quadratic", 0.032f);
+            break;
+        }
+        case 5:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.07f);
+            shader.setFloat("light.quadratic", 0.017f);
+            break;
+        }
+        case 6:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.045f);
+            shader.setFloat("light.quadratic", 0.0075f);
+            break;
+        }
+        case 7:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.027f);
+            shader.setFloat("light.quadratic", 0.0028f);
+            break;
+        }
+        case 8:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.022f);
+            shader.setFloat("light.quadratic", 0.0019f);
+            break;
+        }
+        case 9:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.014f);
+            shader.setFloat("light.quadratic", 0.0007f);
+            break;
+        }
+        case 10:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.007f);
+            shader.setFloat("light.quadratic", 0.0002f);
+            break;
+        }
+        case 11:
+        {
+            shader.setFloat("light.constant", 1.0f);
+            shader.setFloat("light.linear", 0.0014f);
+            shader.setFloat("light.quadratic", 0.000007f);
+            break;
+        }
+    }
+}
