@@ -24,7 +24,7 @@ class SmartLight:
                 print("Включить лампочку")
                 f.write("\nlamp_brightness=1;")
             else:
-                if int(lamp_state)<12:
+                if int(lamp_state)<11:
                     print("Увеличить яркость")
                     new_brightness=int(lamp_state)+1
                     f.write("\nlamp_brightness="+str(new_brightness)+";")

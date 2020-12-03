@@ -1,1 +1,4 @@
-p_of_li=450;
+Wed Nov 25 20:32:01 2020
+li_sensor_BATH=201;li_sensor_BED=362;li_sensor_K=60;li_sensor_L=130;
+tp_sensor_BATH=-31;tp_sensor_BED=48;tp_sensor_K=-16;tp_sensor_L=-40;
+hm_sensor_BATH=49;hm_sensor_BED=63;hm_sensor_K=61;hm_sensor_L=27;
