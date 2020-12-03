@@ -1,10 +1,2 @@
-0
-1
-0
-2
-11
-1
-11
-0
-12
-11
+lamp_brightness=0;
+lamp_brightness=11;

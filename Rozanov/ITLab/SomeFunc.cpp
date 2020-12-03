@@ -106,8 +106,22 @@ void brighness(Shader& shader)
     }
         string lastLine;
         getline(fin, lastLine);
+
+        string temp;
+
+        if (lastLine.find_last_of(';') == 18)
+        {
+            temp.push_back(lastLine[16]);
+            temp.push_back(lastLine[17]);
+            cout << temp;
+        }
+        if (lastLine.find_last_of(';') == 17)
+        {
+            temp.push_back(lastLine[16]);
+            cout << temp;
+        }
         
-        switch (stoi(lastLine))
+        switch (stoi(temp))
         {
         case 0:
         {
