@@ -20,11 +20,25 @@ int main()
     HumiditySensors HS;
     SmartLamp A;
     clock_t stop_working_time= clock();
-    write_sensors_data_in_file(LS.generate__light_sensors_data(),TS.generate__temperature_sensors_data(),HS.generate__humidity_sensors_data());
-    A.initialize_string();
+   // write_sensors_data_in_file(LS.generate__light_sensors_data(),TS.generate__temperature_sensors_data(),HS.generate__humidity_sensors_data());
+  
     A.set_p_of_li();
     A.print_info();
-   
+ 
+    int i = 0;
+    
+  parse_string(A.initialize_string(),A);
+
+    cout << "BR:" << A.smart_lamp_char["lamp_1"]["BR"];
+    cout << "\nR:" << A.smart_lamp_char["lamp_1"]["R"];
+    cout << "\nG:" << A.smart_lamp_char["lamp_1"]["G"];
+    cout << "\nB:" << A.smart_lamp_char["lamp_1"]["B"];
+    cout<<A.return_all_data();
+    set_light_sensors_data(A, LS);
+   // write_smart_things_data_in_file(A.return_all_data());
+    write_one_cycle_data_in_file(LS, TS, HS, A);
+       
+    cout <<"light_sensor: "<< LS.light_sensors["li_sensor_L"];
     /*while (stop_working_time <=2900)
     {      
         cout << "total working time" << stop_working_time<<endl;
