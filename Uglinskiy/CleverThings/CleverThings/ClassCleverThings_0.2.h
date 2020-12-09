@@ -19,9 +19,9 @@ class ISensors
 
 class LightSensors : public ISensors
 {
-    map<string, int> light_sensors;
-public:
    
+public:
+    map<string, int> light_sensors;
     LightSensors()
     {
         light_sensors.insert(make_pair("li_sensor_BATH", 0));
@@ -31,7 +31,7 @@ public:
         light_sensors.insert(make_pair("li_sensor_L", 0));
         //--------------//
         light_sensors.insert(make_pair("li_sensor_K", 0));
-
+        
     }
   string  generate_one_lexeme(int start_index) override
     {
@@ -65,19 +65,36 @@ public:
       return sensors_data;
   }
 
+  string current_data_to_string()
+  {
+      string tmp_string = "\0";
+      map<string, int> ::iterator it;
+      it = light_sensors.begin();
+      while (it != light_sensors.end())
+      {
+          tmp_string += it->first + "=" + to_string(it->second) + ';';
+          it++;
+      }
+      return tmp_string;
+  }
+
     
 };
 
 class TemperatureSensors : public ISensors
 {
-    map<string, int> temperature_sensors;
+
 public:
+    map<string, int> temperature_sensors;
+  
+  
     TemperatureSensors()
     {
         temperature_sensors.insert(make_pair("tp_sensor_BATH",0));
         temperature_sensors.insert(make_pair("tp_sensor_BED", 0));
         temperature_sensors.insert(make_pair("tp_sensor_K", 0));
-        temperature_sensors.insert(make_pair("tp_sensor_L", 0));
+        temperature_sensors.insert(make_pair("tp_sensor_L", 0));    
+      
     }
     string  generate_one_lexeme(int start_index) override
     {
@@ -113,14 +130,17 @@ public:
 
 class HumiditySensors : public ISensors
 {
-    map<string, int> humidity_sensors;
+  
 public:
+    map<string, int> humidity_sensors;
+    map<string, int> ::iterator it;
+   
     HumiditySensors()
     {
         humidity_sensors.insert(make_pair("hm_sensor_BATH", 0));
         humidity_sensors.insert(make_pair("hm_sensor_BED", 0));
         humidity_sensors.insert(make_pair("hm_sensor_K", 0));
-        humidity_sensors.insert(make_pair("hm_sensor_L", 0));
+        humidity_sensors.insert(make_pair("hm_sensor_L", 0));     
 
     }
     string  generate_one_lexeme(int start_index) override
@@ -158,18 +178,18 @@ public:
 
 
 
-void write_sensors_data_in_file(string light_sensors_data, string temperature_sensors_data,string humidity_sensors_data)
+void write_sensors_data_in_file(LightSensors& LS, TemperatureSensors& TS, HumiditySensors& HS)
 {
-    time_t now = time(NULL);
+  //  time_t now = time(NULL);
   
-    ofstream in_file("C:\\Users\\Kek\\Desktop\\Total_sensors_data.txt"/*, ios::app*/);//*
+    ofstream in_file(/*"C:\\Users\\Kek\\Desktop\\*/"Total_sensors_data.txt", ios::app);//*
     if (in_file.is_open())
     {
         
-        in_file << asctime(localtime(&now));
-        in_file << light_sensors_data << endl;
-        in_file << temperature_sensors_data << endl;
-        in_file << humidity_sensors_data << endl;
+       // in_file << asctime(localtime(&now));
+        in_file << LS.current_data_to_string() << endl;
+       /* in_file << TS.total_current_data << endl;
+        in_file << HS.total_current_data << endl;*/
     }
     in_file.close();
 }
@@ -179,15 +199,14 @@ void write_sensors_data_in_file(string light_sensors_data, string temperature_se
 
 ///-----------------Class SmartItem
 
-void parse_line()
-{
 
-}
+
+
 
 
 class ISmartItem
 {public:
-   virtual void initialize_string( ) = 0;
+   virtual string initialize_string( ) = 0;
    virtual string set_string() = 0;
 };
 
@@ -207,11 +226,12 @@ protected:
             return sstr.str();
         }
 
-        void initialize_string() override
+        string initialize_string() override
         {
-            ifstream in("C:\\Users\\Kek\\Desktop\\smart_lamp.txt", ios::in); // окрываем файл для чтения
+            ifstream in(/*"C:\\Users\\Kek\\Desktop\\*/"smart_lamp.txt", ios::in); // окрываем файл для чтения
             data_from_file=get_string(in);
             cout <<"Data from file:\n"<< data_from_file << endl;
+            return data_from_file;
         }
 
     
@@ -220,46 +240,10 @@ protected:
     {
         return "\0";
     }
-   /* void parse_string() override
-    {
-        return ;
-    }*/
+
        void parse_string()
     {
-       int i = 0;
-        int value_from_file = 0;
-        string tmp_value = "\0";
-        while (data_from_file[i] != '\0')
-        {
-            map<string, int> ::iterator it;
-            it = characteristics.begin();
-            while ((data_from_file[i] != ';'))
-            {
-                if ((data_from_file[i] == 'p') && (data_from_file[i + 6] == 'i'))
-                {
-
-                    i += 6 + 2;
-                    while ((data_from_file[i] >= 48) && (data_from_file[i] <= 57))
-                    {
-                        tmp_value = tmp_value + to_string(data_from_file[i] - 48);
-                        cout << tmp_value << endl;
-                        ++i;
-                    }
-
-                    value_from_file = stoi(tmp_value);
-                    characteristics.insert(make_pair("power_of_light", value_from_file));
-                    //it = characteristics.find("power_of_light");                  
-                    --i;
-                    cout << "Value_from_file =" << value_from_file<<endl;
-                    value_from_file = 0;
-                    tmp_value = "\0";
-                }
-                ++i;
-            }        
-            ++i;
            
-           
-        }      
       
     }
 
@@ -313,42 +297,52 @@ class SmartLamp : public SmartLight
 public:
 
     float max_value = 12, min_value = 0;
-    map<string, int> RGBB;
 
+    map<string, int> RGBB;
     map<string, map<string,int>> smart_lamp_char;
     int power_of_light = 0;
-        int red = 0;
-        int green = 0;
-        int blue = 0;
         SmartLamp()
         {
             RGBB.insert(make_pair("R", 0));
             RGBB.insert(make_pair("G", 0));
             RGBB.insert(make_pair("B", 0));
-            RGBB.insert(make_pair("BR", 0));
+            RGBB.insert(make_pair("BR", 5));
 
             smart_lamp_char.insert(make_pair("lamp_1", RGBB));
             smart_lamp_char.insert(make_pair("lamp_2", RGBB));
 
         }
         
-  
-
 public:
 
     void set_p_of_li()
     {
-        map<string, int> ::iterator it;
-        it = characteristics.find("power_of_light");
-        smart_lamp_char["lamp_1"]["R"] = 256;
+       
+        smart_lamp_char["lamp_1"]["B"] = 256;
        
 
     }
     void print_info() override
-    {
-      
-      
+    {           
        cout << "Red: " << smart_lamp_char["lamp_1"]["R"] << " " << endl;
+    }
+
+    string return_all_data()
+    {
+        string return_string = "\0";
+        map<string, map<string,int>> ::iterator it;
+        it = smart_lamp_char.begin();
+
+        map<string,  int> ::iterator it2;
+        it2 = it->second.begin();
+
+        return_string = return_string+'\n' + it->first+'\n';
+        while (it2 != it->second.end())
+        {
+            return_string = return_string + it2->first + "=" + to_string(it2->second)+' ';
+            it2++;
+        }          
+        return return_string;
     }
 };
 
@@ -393,3 +387,96 @@ class SmartCurtains : public SmartLight, public SmartClimateControl
 };
 
 //----------------------------//
+
+void set_light_sensors_data(SmartLamp SL, LightSensors& LS)
+{
+    LS.light_sensors["li_sensor_L"] = SL.smart_lamp_char["lamp_1"]["BR"];
+}
+
+int parse_value(int start_index,string value_from_datafile)
+{ 
+    int i = start_index;
+    string tmp_value = "\0";
+
+    while ((value_from_datafile[i] >= 48) && (value_from_datafile[i] <= 57))
+    {
+        tmp_value = tmp_value + to_string(value_from_datafile[i] - 48);
+        ++i;
+    }
+   
+    return stoi(tmp_value);
+}
+
+
+void parse_string(string data_from_file,SmartLamp& SL)
+{
+
+    int i = 0;
+    int value_from_file = 0;   
+    while (i<data_from_file.size())
+    {
+        while ((data_from_file[i] != ';'))
+        {
+            if ((data_from_file[i] == 'l') && (data_from_file[i + 14] == 's'))
+            {
+                i += 14 + 2;                                                          
+                SL.smart_lamp_char["lamp_1"]["BR"] = parse_value(i, data_from_file);
+                i=data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["BR"]),i);          
+                --i;                               
+            }
+            else if (data_from_file[i] == 'R')
+            {
+                i += 0 + 2;
+                SL.smart_lamp_char["lamp_1"]["R"] = parse_value(i, data_from_file);
+                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["R"]), i);
+                --i;             
+            }
+            else if (data_from_file[i] == 'G')
+            {
+                i += 0 + 2;
+                SL.smart_lamp_char["lamp_1"]["G"] = parse_value(i, data_from_file);
+                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["G"]), i);
+                --i;           
+            }
+            else if (data_from_file[i] == 'B')
+            {
+                i += 0 + 2;
+                SL.smart_lamp_char["lamp_1"]["B"] = parse_value(i, data_from_file);
+                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["B"]), i);
+                --i;              
+            }       
+           
+            ++i;
+        }
+        ++i;
+
+
+    }
+
+
+}
+
+
+void write_smart_things_data_in_file(string smart_lamp_info)
+{
+    time_t now = time(NULL);
+
+    ofstream in_file(/*"C:\\Users\\Kek\\Desktop\\*/"Total_sensors_data.txt"/*, ios::app*/);//*
+    if (in_file.is_open())
+    {
+
+        in_file << asctime(localtime(&now));
+        in_file << smart_lamp_info << endl;
+
+    }
+    in_file.close();
+}
+
+
+void write_one_cycle_data_in_file(LightSensors &LS, TemperatureSensors& TS, HumiditySensors& HS, SmartLamp& SL)
+{
+    parse_string(SL.initialize_string(), SL);
+    set_light_sensors_data(SL,LS);
+    write_smart_things_data_in_file(SL.return_all_data());
+    write_sensors_data_in_file(LS,TS,HS);
+}
