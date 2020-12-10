@@ -1,0 +1,4 @@
+0
+lamp_1
+B=123 BR=12 G=165 R=255 
+li_sensor_BATH=0.000000;li_sensor_BED=0.000000;li_sensor_K=0.000000;li_sensor_L=32.000000;

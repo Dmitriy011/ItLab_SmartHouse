@@ -1,0 +1,4 @@
+lamp_brightness=0;B=123;G=165;R=255;
+lamp_brightness=11;
+lamp_brightness=12;
+jalousie_degree=125;
