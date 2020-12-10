@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <ctime>
 #include <string>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-enum ON_OFF {OFF=0,ON=1};
+enum ON_OFF { OFF = 0, ON = 1 };
 
 ///------------Class Sensors--------------
 class ISensors
@@ -27,32 +27,32 @@ public:
     {
         tmp_propertie = rand() % 481 + 20;
     }
-  string  generate_one_lexeme() override
+    string  generate_one_lexeme() override
     {
-      one_lexem = "p_of_li";
-      one_lexem = one_lexem + "=";
-      tmp_propertie = rand() % 481 + 20;
-      one_lexem = one_lexem + to_string(tmp_propertie) + ";";
-      return one_lexem;
+        one_lexem = "p_of_li";
+        one_lexem = one_lexem + "=";
+        tmp_propertie = rand() % 481 + 20;
+        one_lexem = one_lexem + to_string(tmp_propertie) + ";";
+        return one_lexem;
     }
-  void write_lexeme_in_file() override
-  {
+    void write_lexeme_in_file() override
+    {
 
-  }
-    
+    }
+
 };
 
 
 string generate_sensors_data(LightSensors& A, const int total_le)
 {
-    string sensors_data ;
+    string sensors_data;
     for (int i = 0; i < total_le; i++)
     {
         if (((i % 5) == 0) && (i != 0))
         {
             sensors_data = sensors_data + "\n";
         }
-            sensors_data = sensors_data + A.generate_one_lexeme();            
+        sensors_data = sensors_data + A.generate_one_lexeme();
     }
     cout << sensors_data << endl;
     return sensors_data;
@@ -73,37 +73,37 @@ void write_sensors_data_in_file(string sensors_data)
 ///-----------------Class SmartItem
 class ICleverItem
 {
-   virtual void get_string( ) = 0;
-   virtual string set_string() = 0;
-   virtual void parse_string() = 0;
+    virtual void get_string() = 0;
+    virtual string set_string() = 0;
+    virtual void parse_string() = 0;
 };
 
-class SmartLight:public ICleverItem
+class SmartLight :public ICleverItem
 {
 public:
-    
-    string data_from_file ="\0";
+
+    string data_from_file = "\0";
     map<string, int> characteristics;
     int total_characteristics = 0;
-  
-    
-   void get_string() override
+
+
+    void get_string() override
     {
-       string tmp_string_for_getline = "\0";
-        ifstream in("C:\\Users\\Kek\\Desktop\\Total_sensors_data.txt", ios::in); // окрываем файл для чтения
+        string tmp_string_for_getline = "\0";
+        ifstream in("C:\\Users\\Kek\\Desktop\\Total_sensors_data.txt", ios::in); // Г®ГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г« Г¤Г«Гї Г·ГІГҐГ­ГЁГї
         if (in.is_open())
         {
             while (getline(in, tmp_string_for_getline))
             {
-                if (tmp_string_for_getline != "\0") 
+                if (tmp_string_for_getline != "\0")
                 {
                     data_from_file = tmp_string_for_getline;
                 }
-               cout <<"get_string\n\n"<< tmp_string_for_getline << endl;
+                cout << "get_string\n\n" << tmp_string_for_getline << endl;
             }
         }
         in.close();
-       
+
     }
     string set_string() override
     {
@@ -112,7 +112,7 @@ public:
 
     void parse_string() override
     {
-       int i = 0;
+        int i = 0;
         int value_from_file = 0;
         string tmp_value = "\0";
         while (data_from_file[i] != '\0')
@@ -136,28 +136,28 @@ public:
                     characteristics.insert(make_pair("power_of_light", value_from_file));
                     //it = characteristics.find("power_of_light");                  
                     --i;
-                    cout << "Value_from_file =" << value_from_file<<endl;
+                    cout << "Value_from_file =" << value_from_file << endl;
                     value_from_file = 0;
                     tmp_value = "\0";
                 }
                 ++i;
-            }        
+            }
             ++i;
-           
-           
-        }      
-      
+
+
+        }
+
     }
 
 
- 
-    
 
-    float degree = 0;                   //Процентное значение выражающее состояние
-    float max_value = 1, min_value = 0; //Максимальное и минимальное значения состояния
+
+
+    float degree = 0;                   //ГЏГ°Г®Г¶ГҐГ­ГІГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ ГўГ»Г°Г Г¦Г ГѕГ№ГҐГҐ Г±Г®Г±ГІГ®ГїГ­ГЁГҐ
+    float max_value = 1, min_value = 0; //ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г®ГҐ ГЁ Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГї Г±Г®Г±ГІГ®ГїГ­ГЁГї
     bool on_off = 0;
 
-    virtual void print_info() = 0; //Вывод текущей информации об объекте
+    virtual void print_info() = 0; //Г‚Г»ГўГ®Г¤ ГІГҐГЄГіГ№ГҐГ© ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГЁ Г®ГЎ Г®ГЎГєГҐГЄГІГҐ
     bool is_on()
     {
         if (on_off == ON)
@@ -174,24 +174,24 @@ public:
 
 
 
-    float get_degree() //Получение значения состояния
+    float get_degree() //ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ Г§Г­Г Г·ГҐГ­ГЁГї Г±Г®Г±ГІГ®ГїГ­ГЁГї
     {
         return this->degree;
     };
-    void set_degree(float new_degree) //Установка значения состояния
+    void set_degree(float new_degree) //Г“Г±ГІГ Г­Г®ГўГЄГ  Г§Г­Г Г·ГҐГ­ГЁГї Г±Г®Г±ГІГ®ГїГ­ГЁГї
     {
         degree = new_degree;
     };
 
-    void set_on_off(bool temp_on_off) //Вкл/выкл
+    void set_on_off(bool temp_on_off) //Г‚ГЄГ«/ГўГ»ГЄГ«
     {
 
         on_off = temp_on_off;
     }
 
-   /* string generate_one_le(int size);
-    string generate_data(const int total_le);
-    void write_data_in_file();*/
+    /* string generate_one_le(int size);
+     string generate_data(const int total_le);
+     void write_data_in_file();*/
 
 };
 
@@ -276,11 +276,11 @@ public:
 //}
 
 
-//Класс умная лампочка
+//ГЉГ«Г Г±Г± ГіГ¬Г­Г Гї Г«Г Г¬ГЇГ®Г·ГЄГ 
 class SmartLamp : public SmartLight
 {
 
-    float max_value =500, min_value = 20;
+    float max_value = 500, min_value = 20;
     map<string, int> smart_lamp_char;
     int power_of_light = 0;
 
@@ -294,8 +294,8 @@ public:
     }
     void print_info() override
     {
-              
-       cout << "Set Brightness is " << power_of_light << " Lux" << endl;
+
+        cout << "Set Brightness is " << power_of_light << " Lux" << endl;
     }
 };
 
