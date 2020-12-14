@@ -25,7 +25,6 @@ void Model::loadModel(string cd)																		//загрузка модели в структуру 
 																
 }
 
-
 void Model::processNode(aiNode* node, const aiScene* scene)
 {
 	//обработать все полигональные сетки в узле(если есть
@@ -41,7 +40,6 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 		processNode(node->mChildren[i], scene);
 	}
 }
-
 
 Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
@@ -161,4 +159,3 @@ unsigned int Model::TextureFromFile(const char* path, const string& directory, b
 
 		return textureID;
 }
-
