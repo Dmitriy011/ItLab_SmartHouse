@@ -29,7 +29,7 @@ void Utils::movement()
 
 void Utils::brighness(Shader& shader)
 {
-    string filename = "../test/test.txt";
+    string filename = "smart_lamp.txt";
     ifstream fin;
     fin.open(filename);
     if (fin.is_open())
