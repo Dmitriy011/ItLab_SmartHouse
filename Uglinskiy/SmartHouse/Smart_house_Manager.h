@@ -11,13 +11,20 @@
 
 using namespace std;
 
+class ISensors
+{
+    virtual string get_string() = 0;
+    virtual void   set_parameter(string what, float value) = 0;
+    virtual float  get_parameter(string what)= 0 ;
+};
 
-class Sensors
+
+class Sensors : public ISensors
 {
 protected:
     map<string, float> sensors;
 public:
-    virtual string current_data_to_string()
+    string get_string() override
     {
         string tmp_string = "\0";
         map<string, float> ::iterator it;
@@ -29,11 +36,19 @@ public:
         }
         return tmp_string;
     }
+    void set_parameter(string what, float value) override
+    {
+        sensors[what] = value;
+    }
+
+    float get_parameter(string what) override
+    {
+        return sensors[what];
+    }
 };
 
 class LightSensors : public Sensors
-{
-    map<string, float> light_sensors;
+{  
 public:
    
     LightSensors()
@@ -49,7 +64,6 @@ public:
 class TemperatureSensors : public Sensors
 {   
 public:
- 
     TemperatureSensors()
     {
         sensors.insert(make_pair("tp_sensor_BATH", 0));
@@ -123,17 +137,14 @@ public:
         return return_string;
     }
 
-
-
 };
 
 //Класс умная лампочка
 class SmartLamp : public SmartLight
 {
-   
-   // map<string, map<string, int>> smart_thing_char;
-public: 
     map<string, int> RGBB;
+public: 
+   
     SmartLamp()
     {
         RGBB.insert(make_pair("R", 0));
@@ -141,8 +152,6 @@ public:
         RGBB.insert(make_pair("B", 0));
         RGBB.insert(make_pair("BR", 5));
 
-    /*  smart_thing_char["lamp_1"] = RGBB;
-        smart_thing_char["lamp_2"] = RGBB;*/
         smart_thing_char.insert(make_pair("lamp_1", RGBB));
         smart_thing_char.insert(make_pair("lamp_2", RGBB));
         
@@ -155,7 +164,6 @@ public:
 class SmartJalousie :public SmartLight
 {
     map<string, int> DEG;
-   // map<string, map<string, int>> smart_thing_char;
 public: 
     SmartJalousie()
     {
@@ -187,21 +195,7 @@ class SmartHouseManager
 public:
     //-----------------/func
 
-    void write_sensors_data_in_file()
-    {
-        //  time_t now = time(NULL);
-
-        ofstream in_file("Total_sensors_data.txt", ios::app);
-        if (in_file.is_open())
-        {
-            cout << LS.current_data_to_string();
-            // in_file << asctime(localtime(&now));
-            in_file << LS.current_data_to_string() << endl;
-            /* in_file << TS.total_current_data << endl;
-             in_file << HS.total_current_data << endl;*/
-        }
-        in_file.close();
-    }
+    
     //---------------------//
 
     string convert_data_from_file_to_string(std::ifstream& in)
@@ -318,13 +312,14 @@ public:
         }
     }
 
-
     //Обсчёт значений датчиков в зависимости от работы умных вещей
-    /*void set_sensors_data()
+    void set_sensors_data()
     {
-      LS. = SL.smart_lamp_char["lamp_1"]["BR"] + 0.8 * SJ.smart_jalousie_char["jalousie_1"]["DEG"];
+        float tmp = 0; 
+        tmp = SL.get_parameter("lamp_1", "BR") + 0.8 * SJ.get_parameter("jalousie_1", "DEG");
+        LS.set_parameter("li_sensor_L",tmp);
 
-    }*/
+    }
   
     //Запись данных с умных вещей в файл
     void write_smart_things_data_in_file()
@@ -336,8 +331,25 @@ public:
         {
 
             in_file << asctime(localtime(&now));
-            cout << asctime(localtime(&now)) <<SL.get_string();
+            cout << asctime(localtime(&now)) ;
             in_file << SL.get_string() << endl;
+            in_file << SJ.get_string() << endl;
+            cout << SL.get_string() << "\n" << SJ.get_string() << endl;
+        }
+        in_file.close();
+    }
+
+    void write_sensors_data_in_file()
+    {
+        //  time_t now = time(NULL);
+
+        time_t now = time(NULL);
+
+        ofstream in_file("Total_sensors_data.txt", std::ios_base::app);
+        if (in_file.is_open())
+        {
+            in_file << LS.get_string() << endl;
+            cout <<"\n" <<LS.get_string();
 
         }
         in_file.close();
@@ -347,72 +359,8 @@ public:
     {
         parse_string();
         write_smart_things_data_in_file();
-      //  set_sensors_data();
+        set_sensors_data();
         write_sensors_data_in_file();       
     }
 };
 
-
-
-//
-//int parse_value(int start_index, string value_from_datafile)
-//{
-//    int i = start_index;
-//    string tmp_value = "\0";
-//
-//    while ((value_from_datafile[i] >= 48) && (value_from_datafile[i] <= 57))
-//    {
-//        tmp_value = tmp_value + to_string(value_from_datafile[i] - 48);
-//        ++i;
-//    }
-//
-//    return stoi(tmp_value);
-//}
-
-//void parse_string(string data_from_file, SmartLamp& SL)
-//{
-//
-//    int i = 0;
-//    int value_from_file = 0;
-//    while (i < data_from_file.size())
-//    {
-//        while ((data_from_file[i] != ';'))
-//        {
-//            if ((data_from_file[i] == 'l') && (data_from_file[i + 14] == 's'))
-//            {
-//                i += 14 + 2;
-//                SL.smart_lamp_char["lamp_1"]["BR"] = parse_value(i, data_from_file);
-//                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["BR"]), i);
-//                --i;
-//            }
-//            else if (data_from_file[i] == 'R')
-//            {
-//                i += 0 + 2;
-//                SL.smart_lamp_char["lamp_1"]["R"] = parse_value(i, data_from_file);
-//                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["R"]), i);
-//                --i;
-//            }
-//            else if (data_from_file[i] == 'G')
-//            {
-//                i += 0 + 2;
-//                SL.smart_lamp_char["lamp_1"]["G"] = parse_value(i, data_from_file);
-//                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["G"]), i);
-//                --i;
-//            }
-//            else if (data_from_file[i] == 'B')
-//            {
-//                i += 0 + 2;
-//                SL.smart_lamp_char["lamp_1"]["B"] = parse_value(i, data_from_file);
-//                i = data_from_file.rfind(to_string(SL.smart_lamp_char["lamp_1"]["B"]), i);
-//                --i;
-//            }
-//
-//            ++i;
-//        }
-//        ++i;
-//
-//
-//    }
-//
-//
-//}

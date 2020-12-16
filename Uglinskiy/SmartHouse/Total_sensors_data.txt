@@ -1,7 +1,12 @@
-Wed Dec 16 12:09:23 2020
+Wed Dec 16 13:58:39 2020
 
 lamp_1
 B=123 BR=12 G=0 R=0 
 lamp_2
 B=0 BR=11 G=165 R=255 
-li_sensor_BATH=0.000000;li_sensor_BED=0.000000;li_sensor_K=0.000000;li_sensor_L=0.000000;
+
+jalousie_1
+DEG=0 
+jalousie_2
+DEG=0 
+li_sensor_BATH=0.000000;li_sensor_BED=0.000000;li_sensor_K=0.000000;li_sensor_L=12.000000;
