@@ -1,6 +1,5 @@
 from SmartThing import SmartLight
-from SensorInfoWorker import ISensorInfoWorker
-from SensorInfoWorker import TSensorInfoFileWorker
+from SensorInfoWorker import SensorInfoFileWorker
 import time
 
 class Work_with_data:
@@ -23,14 +22,14 @@ class Work_with_data:
 
     def reading_and_processing_data():
          while 1:
-            li_sensors=TSensorInfoFileWorker.ReadData()
+            li_sensors=SensorInfoFileWorker.ReadData()
             #для комнаты, которая есть сейчас
             s_value=Work_with_data.get_sensor_value(li_sensors[3])
             SmartLight.Update(float(s_value))
             time.sleep(0.1)  
 
     def reading_and_processing_data_without_cycle():
-            li_sensors=TSensorInfoFileWorker.ReadData()
+            li_sensors=SensorInfoFileWorker.ReadData()
             #для комнаты, которая есть сейчас
             s_value=Work_with_data.get_sensor_value(li_sensors[3])
             SmartLight.Update(float(s_value))

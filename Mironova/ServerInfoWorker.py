@@ -1,10 +1,4 @@
-class IServerInfoWorker:
-    def ReadData():
-        raise NotImplementedError()
-    def SaveData():
-        raise NotImplementedError()
-
-class TServerInfoFileWorker(IServerInfoWorker):
+class ServerInfoFileWorker:
     def ReadData():
         f=open('D:\\ITLab\\ItLab_SmartHouse\\Uglinskiy\\SmartHouse\\smart_lamp.txt','r')
         s=f.readlines()

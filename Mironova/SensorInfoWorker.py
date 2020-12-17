@@ -1,10 +1,4 @@
-class ISensorInfoWorker:
-    def ReadData():
-        raise NotImplementedError()
-    def SaveData():
-        raise NotImplementedError()
-
-class TSensorInfoFileWorker(ISensorInfoWorker):
+class SensorInfoFileWorker:
     def ReadData():
         f=open('D:\\ITLab\\ItLab_SmartHouse\\Uglinskiy\\SmartHouse\\Total_sensors_data.txt','r')
         s=f.readlines()

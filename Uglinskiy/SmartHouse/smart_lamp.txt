@@ -1,3 +1,5 @@
 lamp_1_BR=0;
 lamp_1_BR=1;
 lamp_1_BR=2;
+lamp_1_BR=3;
+lamp_1_BR=4;
