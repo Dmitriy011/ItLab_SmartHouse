@@ -1,6 +1,6 @@
 class ServerInfoFileWorker:
     def ReadData():
-        f=open('D:\\ITLab\\ItLab_SmartHouse\\Uglinskiy\\SmartHouse\\smart_lamp.txt','r')
+        f=open('..\\Uglinskiy\\SmartHouse\\smart_lamp.txt','r')
         s=f.readlines()
         last_string=s[len(s)-1]
         i=10
@@ -11,7 +11,7 @@ class ServerInfoFileWorker:
         return int(lamp_state)
     
     def SaveData(value):
-        f=open('D:\\ITLab\\ItLab_SmartHouse\\Uglinskiy\\SmartHouse\\smart_lamp.txt','r+')
+        f=open('..\\Uglinskiy\\SmartHouse\\smart_lamp.txt','r+')
         f.readlines()
         f.write("\nlamp_1_BR="+str(value)+";")
         f.close()

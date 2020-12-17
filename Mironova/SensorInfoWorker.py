@@ -1,6 +1,6 @@
 class SensorInfoFileWorker:
     def ReadData():
-        f=open('D:\\ITLab\\ItLab_SmartHouse\\Uglinskiy\\SmartHouse\\Total_sensors_data.txt','r')
+        f=open('..\\Uglinskiy\\SmartHouse\\Total_sensors_data.txt','r')
         s=f.readlines()
         li_sensors = [0]*4
         for n in range (len(s)):
