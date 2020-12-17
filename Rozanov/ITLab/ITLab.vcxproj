@@ -149,7 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Intilization_value.cpp" />
+    <ClCompile Include="Intilization.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -158,10 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Intilization_value.h" />
+    <ClInclude Include="Intilization.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MyRoom.h" />
+    <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

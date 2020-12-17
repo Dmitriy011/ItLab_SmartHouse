@@ -3,11 +3,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include <glew.h>
 #include <glfw3.h>
-
 #include <SOIL.h>
+
+#include "Model.h"
 
 float vertices[] =
 {
@@ -66,11 +66,10 @@ class MyRoom
 public:
 	GLuint  VBO, objectVAO, EBO;
 	GLuint lightVAO;
-	GLuint diffuseMap;																				//6)Создание текстур	
+	GLuint diffuseMap;																	
 
-	void create_RoomAndLight()
+	void create_cube_room()
 	{
-		
 		glGenBuffers(1, &VBO);															//Создаем VBO через эту функцию,											
 		glGenVertexArrays(1, &objectVAO);														//VAO
 		glGenBuffers(1, &EBO);															//EBO
@@ -86,14 +85,20 @@ public:
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));	//5)Атрибут расположения текстуры
 		glEnableVertexAttribArray(2);																			//5)Вкл					
 		glBindVertexArray(0);																					//Отвязываем Vao (далее можно снова привязать "glBindVertexArray(VAO);" и необх снова отвязать)
-	
+	}
+
+	void create_cube_light()
+	{
 		glGenVertexArrays(1, &lightVAO);
 		glBindVertexArray(lightVAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
+	}
 
-		glBindVertexArray(0);																			
+	void crete_texture_cube_room(Shader ObjectShader)
+	{
+		glBindVertexArray(0);
 		// Texture 1
 		glGenTextures(1, &diffuseMap);																	//6)Создание текстуры (1ый арг - колличество текстур, 2ой - массив идентификаторов текстур)
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);															//Привяз
@@ -107,6 +112,72 @@ public:
 		glGenerateMipmap(GL_TEXTURE_2D);																//Генерация мипмапов
 		SOIL_free_image_data(image);																	//Освобожд уч.памяти под изображ	
 		glBindTexture(GL_TEXTURE_2D, 0);
+		ObjectShader.Use();
+		glUniform1i(glGetUniformLocation(ObjectShader.Program, "material.diffuse"), 0);
+	}
+
+	void Draw(Utils utils, Shader ObjectShader, Shader LampShader, GLFWwindow* window)
+	{
+		Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
+
+		while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
+		{
+			GLfloat currentFrame = glfwGetTime();
+			intilizaton.deltaTime = currentFrame - intilizaton.lastFrame;
+			intilizaton.lastFrame = currentFrame;
+
+			glfwPollEvents();															//Проверяем события и вызываем функции обратного вызова(вроде ввода с клавиатуры или перемещение мыши) и вызывает установленные функции
+			utils.movement();
+
+			glClearColor(0.5f, 0.3f, 1.0f, 1.0f);										//Цвет окна
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);							//GlClear(<какие биты очистить>) - очистить буфер (GL_COLOR_BUFFER_BIT - цветовой,  GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT )Как только мы вызываем glClear весь буфер будет заполнен указанным 	цветом.glClearColor — это функция устанавливающая состояние, а glClear — это функция использующая состояние
+
+		//Команды отрисовки ...
+
+			ObjectShader.Use();
+			utils.brightnes(ObjectShader);
+			ObjectShader.setVec3("light.position", intilizaton.GetlightPos());
+			ObjectShader.setVec3("viewPos", camera.Position);
+			ObjectShader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
+			ObjectShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+			ObjectShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+			ObjectShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+			ObjectShader.setFloat("material.shininess", 64.0f);
+			glm::mat4 projection = glm::perspective(45.0f, (float)intilizaton.GetWidht() / (float)intilizaton.GetWidht(), 0.1f, 100.0f);
+			glm::mat4 view = camera.GetViewMatrix();
+			ObjectShader.setMat4("projection", projection);
+			ObjectShader.setMat4("view", view);
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::scale(model, glm::vec3(2.0f, 1.5f, 2.5f));
+			ObjectShader.setMat4("model", model);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, diffuseMap);
+			glBindVertexArray(objectVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+
+			model = glm::mat4(1.0f);
+
+			model = glm::translate(model, glm::vec3(-1.4f, -0.55f, 0.6f));
+			model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			ObjectShader.setMat4("model", model);
+			Door.Draw(ObjectShader);
+
+			LampShader.Use();
+			LampShader.setMat4("projection", projection);
+			LampShader.setMat4("view", view);
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, intilizaton.GetlightPos());
+			model = glm::rotate(model, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(2.0, 0.1, 0.1));
+			LampShader.setMat4("model", model);
+			glBindVertexArray(lightVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			glBindVertexArray(0);
+			//Конец.
+
+			glfwSwapBuffers(window);												//заменяет цветовой буфер, который использовался для отрисовки во время текущей итерации и показывает результат на экране.
+		}
+		glfwTerminate();															//*очистить выделенные рессурсы
 	}
 
 	~MyRoom()
