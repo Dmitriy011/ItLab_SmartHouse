@@ -1,2 +1,4 @@
 C:\Users\Kek\source\repos\SmartHouse\Debug\SmartHouse.exe
 C:\Users\Kek\source\repos\SmartHouse\Debug\SmartHouse.pdb
+C:\Users\Kek\source\repos\SmartHouse - копия\Debug\SmartHouse.exe
+C:\Users\Kek\source\repos\SmartHouse - копия\Debug\SmartHouse.pdb

@@ -1,12 +1,10 @@
-Wed Dec 16 13:58:39 2020
+Thu Dec 17 19:24:17 2020
 
 lamp_1
 B=123 BR=12 G=0 R=0 
 lamp_2
 B=0 BR=11 G=165 R=255 
-
 jalousie_1
-DEG=0 
+DEG=130 
 jalousie_2
-DEG=0 
-li_sensor_BATH=0.000000;li_sensor_BED=0.000000;li_sensor_K=0.000000;li_sensor_L=12.000000;
+DEG=0 li_sensor_BATH=0;li_sensor_BED=0;li_sensor_K=0;li_sensor_L=18;

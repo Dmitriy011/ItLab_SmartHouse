@@ -4,4 +4,4 @@ lamp_2_G=165;
 lamp_2_R=255;
 lamp_2_BR=11;
 lamp_1_BR=12;
-jls_1_DEG=125;
+jls_1_DEG=130;
