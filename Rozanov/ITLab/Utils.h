@@ -16,11 +16,13 @@
 #include "Camera.h"
 #include "Shader.h"
 
-#include "Intilization_value.h"
+#include "Intilization.h"
+
+#include "ReadFile.h"
 
 using namespace std;
 
-extern Intilization_value intilize;
+extern Intilization intilizaton;
 extern Camera camera;
 
 class Utils
@@ -28,7 +30,7 @@ class Utils
 public:
 	void movement();
 
-	void brighness(Shader& shader);
+	void brightnes(Shader& shader);
 };
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);

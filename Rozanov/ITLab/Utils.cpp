@@ -9,74 +9,32 @@
 
 void Utils::movement()
 {
-    if (intilize.keys[GLFW_KEY_W])
+    if (intilizaton.keys[GLFW_KEY_W])
     {
-        camera.ProcessKeyboard(FORWARD, intilize.deltaTime);
+        camera.ProcessKeyboard(FORWARD, intilizaton.deltaTime);
     }
-    if (intilize.keys[GLFW_KEY_S])
+    if (intilizaton.keys[GLFW_KEY_S])
     {
-        camera.ProcessKeyboard(BACKWARD, intilize.deltaTime);
+        camera.ProcessKeyboard(BACKWARD, intilizaton.deltaTime);
     }
-    if (intilize.keys[GLFW_KEY_A])
+    if (intilizaton.keys[GLFW_KEY_A])
     {
-        camera.ProcessKeyboard(LEFT, intilize.deltaTime);
+        camera.ProcessKeyboard(LEFT, intilizaton.deltaTime);
     }
-    if (intilize.keys[GLFW_KEY_D])
+    if (intilizaton.keys[GLFW_KEY_D])
     {
-        camera.ProcessKeyboard(RIGHT, intilize.deltaTime);
+        camera.ProcessKeyboard(RIGHT, intilizaton.deltaTime);
     }
 }
 
-void Utils::brighness(Shader& shader)
+void Utils::brightnes(Shader& shader)
 {
-    string filename = "../test/test.txt";
-    ifstream fin;
-    fin.open(filename);
-    if (fin.is_open())
-    {
-        fin.seekg(-1, ios_base::end);
+    ReadTxt brightnes;
+    brightnes.read();
 
-        bool tmp = true;
-        while (tmp)
-        {
-            char ch;
-            fin.get(ch);
+    string tmp = brightnes.GetValue();
 
-            if ((int)fin.tellg() <= 1)
-            {
-                fin.seekg(0);
-                tmp = false;
-            }
-            else
-            {
-                if (ch == '\n')
-                {
-                    tmp = false;
-                }
-                else
-                {
-                    fin.seekg(-2, ios_base::cur);
-                }
-            }
-
-        }
-    }
-    string lastLine;
-    getline(fin, lastLine);
-
-    string temp;
-
-    if (lastLine.find_last_of(';') == 18)
-    {
-        temp.push_back(lastLine[16]);
-        temp.push_back(lastLine[17]);
-    }
-    if (lastLine.find_last_of(';') == 17)
-    {
-        temp.push_back(lastLine[16]);
-    }
-
-    switch (stoi(temp))
+    switch (stoi(tmp))
     {
     case 0:
     {
@@ -167,18 +125,18 @@ void Utils::brighness(Shader& shader)
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    if (intilize.firstMouse)
+    if (intilizaton.firstMouse)
     {
-        intilize.lastX = xpos;
-        intilize.lastY = ypos;
-        intilize.firstMouse = false;
+        intilizaton.lastX = xpos;
+        intilizaton.lastY = ypos;
+        intilizaton.firstMouse = false;
     }
 
-    GLfloat xoffset = xpos - intilize.lastX;
-    GLfloat yoffset = intilize.lastY - ypos;
+    GLfloat xoffset = xpos - intilizaton.lastX;
+    GLfloat yoffset = intilizaton.lastY - ypos;
 
-    intilize.lastX = xpos;
-    intilize.lastY = ypos;
+    intilizaton.lastX = xpos;
+    intilizaton.lastY = ypos;
 
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
@@ -195,14 +153,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         if (action == GLFW_PRESS)
         {
 
-            intilize.keys[key] = true;
+            intilizaton.keys[key] = true;
         }
         else
         {
             if (action == GLFW_RELEASE)
             {
 
-                intilize.keys[key] = false;
+                intilizaton.keys[key] = false;
             }
         }
     }
