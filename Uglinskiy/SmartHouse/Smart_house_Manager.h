@@ -179,7 +179,7 @@ class IServerInfoWorker
     virtual void save_data(string string_to_file) = 0;
 };
 
-class FileInfoWorker : public IServerInfoWorker
+class ServerInfoFileWorker : public IServerInfoWorker
 {
 public:
     string read_data() override
@@ -219,7 +219,7 @@ private:
     SmartLamp SL;
     SmartJalousie SJ;
 
-    FileInfoWorker FW;
+    ServerInfoFileWorker FW;
 
 public:
     /*  string convert_data_from_file_to_string(std::ifstream& in)
