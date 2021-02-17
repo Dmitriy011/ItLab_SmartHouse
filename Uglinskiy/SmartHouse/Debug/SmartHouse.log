@@ -1,7 +1,11 @@
 ﻿  SmartHouse.cpp
-C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(48,28): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(252,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(336,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(337,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(56,28): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(276,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(282,41): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(282,83): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(349,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(350,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(393,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Kek\source\repos\SmartHouse - копия\Smart_house_Manager.h(397,27): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Kek\source\repos\SmartHouse - копия\SmartHouse.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   SmartHouse.vcxproj -> C:\Users\Kek\source\repos\SmartHouse - копия\Debug\SmartHouse.exe

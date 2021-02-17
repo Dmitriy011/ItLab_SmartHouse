@@ -8,36 +8,44 @@
 #include <fstream>
 #include <map>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
 //интерфейс датчики
 class ISensors
 {
-    virtual string get_string() = 0;
-    virtual void set_parameter(string what, int value) = 0;
-    virtual float get_parameter(string what) = 0;
+    virtual string get_string() = 0;//составить и получить строку с текущими значениями датчиков
+    virtual void set_parameter(string what, int value) = 0;//установить значение поля по ключу
+    virtual float get_parameter(string what) = 0;//получить значение поля по ключу
 };
 
 //класс датчики
 class Sensors : public ISensors
 {
 protected:
-    map<string, int> sensors;
-
+     map<string, int> sensors;
 public:
+
     string get_string() override
     {
         string tmp_string = "\0";
         map<string, int>::iterator it;
+
         it = sensors.begin();
+
         while (it != sensors.end())
         {
-            tmp_string += it->first + "=" + to_string(it->second) + ';';
-            it++;
+            tmp_string += it->first + "=" + to_string(it->second) + ',';
+            ++it;
+            if (it == sensors.end())
+            {
+                tmp_string.erase(tmp_string.size() - 1);//вроде работает,но выглядит не очень 
+            }
         }
         return tmp_string;
     }
+
     void set_parameter(string what, int value) override
     {
         sensors[what] = value;
@@ -53,12 +61,14 @@ public:
 class LightSensors : public Sensors
 {
 public:
+
     LightSensors()
     {
-        sensors.insert(make_pair("li_sensor_BATH", 0));
-        sensors.insert(make_pair("li_sensor_BED", 0));
-        sensors.insert(make_pair("li_sensor_L", 0));
-        sensors.insert(make_pair("li_sensor_K", 0));
+        sensors.insert(make_pair("BATH", 0));
+        sensors.insert(make_pair("BED", 0));
+        sensors.insert(make_pair("L", 0));
+        sensors.insert(make_pair("K", 0));
+        sensors.insert(make_pair("OUT", 0));
     }
 };
 
@@ -66,12 +76,13 @@ public:
 class TemperatureSensors : public Sensors
 {
 public:
+
     TemperatureSensors()
     {
-        sensors.insert(make_pair("tp_sensor_BATH", 0));
-        sensors.insert(make_pair("tp_sensor_BED", 0));
-        sensors.insert(make_pair("tp_sensor_K", 0));
-        sensors.insert(make_pair("tp_sensor_L", 0));
+        sensors.insert(make_pair("BATH", 0));
+        sensors.insert(make_pair("BED", 0));
+        sensors.insert(make_pair("K", 0));
+        sensors.insert(make_pair("L", 0));
     }
 };
 
@@ -79,58 +90,57 @@ public:
 class HumiditySensors : public Sensors
 {
 public:
+
     HumiditySensors()
     {
-        sensors.insert(make_pair("hm_sensor_BATH", 0));
-        sensors.insert(make_pair("hm_sensor_BED", 0));
-        sensors.insert(make_pair("hm_sensor_K", 0));
-        sensors.insert(make_pair("hm_sensor_L", 0));
+        sensors.insert(make_pair("BATH", 0));
+        sensors.insert(make_pair("BED", 0));
+        sensors.insert(make_pair("K", 0));
+        sensors.insert(make_pair("L", 0));
     }
 };
+
 
 //интерфейс умный предмет
 class ISmartItem
 {
 public:
-    virtual void set_parameter(string, string, int) = 0;
-    virtual int get_parameter(string, string) = 0;
-    virtual string get_string() = 0;
+    virtual void set_parameter(string, int) = 0;//установить значение поля  по ключу
+    virtual int get_parameter(string) = 0;//получить значения поля по ключу
+    virtual string get_string() = 0;//составить и вернуть строку с текущими значениями полей
 };
 
 //Класс умный свет
 class SmartLight : public ISmartItem
 {
 protected:
-    map<string, map<string, int>> smart_thing_char;
+    map<string, int> smart_thing_char;
 
 public:
-    void set_parameter(string which_one, string what, int value) override
+    void set_parameter(string what, int value) override
     {
-        smart_thing_char[which_one][what] = value;
+        smart_thing_char[what] = value;
     }
 
-    int get_parameter(string which_one, string what) override
+    int get_parameter(string what) override
     {
-        return smart_thing_char[which_one][what];
+        return smart_thing_char[what];
     }
     string get_string() override
     {
         string return_string = "\0";
 
-        map<string, map<string, int>>::iterator it;
+        map<string, int>::iterator it;
         it = smart_thing_char.begin();
 
-        map<string, int>::iterator it2;
         while (it != smart_thing_char.end())
-        {
-            it2 = it->second.begin();
-            return_string = return_string + '\n' + it->first + '\n';
-            while (it2 != it->second.end())
-            {
-                return_string = return_string + it2->first + "=" + to_string(it2->second) + ' ';
-                it2++;
-            }
-            it++;
+        {              
+                return_string +=it->first + "=" + to_string(it->second) + ',';
+                ++it; 
+                if(it == smart_thing_char.end())
+                {
+                    return_string.erase(return_string.size() - 1);//вроде работает,но выглядит не очень 
+                }
         }
         return return_string;
     }
@@ -140,18 +150,14 @@ public:
 class SmartLamp : public SmartLight
 {
 private:
-    map<string, int> RGBB;
-
+ 
 public:
     SmartLamp()
     {
-        RGBB.insert(make_pair("R", 0));
-        RGBB.insert(make_pair("G", 0));
-        RGBB.insert(make_pair("B", 0));
-        RGBB.insert(make_pair("BR", 5));
-
-        smart_thing_char.insert(make_pair("lamp_1", RGBB));
-        smart_thing_char.insert(make_pair("lamp_2", RGBB));
+        smart_thing_char.insert(make_pair("R", 0));
+        smart_thing_char.insert(make_pair("G", 0));
+        smart_thing_char.insert(make_pair("B", 0));
+        smart_thing_char.insert(make_pair("BR", 5));    
     }
 };
 
@@ -159,19 +165,17 @@ public:
 class SmartJalousie : public SmartLight
 {
 private:
-    map<string, int> DEG;
 
 public:
     SmartJalousie()
     {
-        DEG.insert(make_pair("DEG", 0));
-
-        smart_thing_char.insert(make_pair("jalousie_1", DEG));
-        smart_thing_char.insert(make_pair("jalousie_2", DEG));
+        smart_thing_char.insert(make_pair("DEG", 0));
     }
-
-public:
 };
+
+
+
+//
 
 class IServerInfoWorker
 {
@@ -215,21 +219,12 @@ private:
     LightSensors LS;
     TemperatureSensors TS;
     HumiditySensors HS;
-
-    SmartLamp SL;
-    SmartJalousie SJ;
+   
+    vector<SmartLamp> smart_lamps_vec;
+    vector<SmartJalousie> smart_jalousie_vec;
 
     ServerInfoFileWorker FW;
 
-public:
-    /*  string convert_data_from_file_to_string(std::ifstream& in)
-    {
-        std::stringstream sstr;
-        sstr << in.rdbuf();
-        return sstr.str();
-    }*/
-
-    //Парсер
     int parse_value(int start_index, string value_from_datafile)
     {
         int i = start_index;
@@ -244,86 +239,104 @@ public:
         return stoi(tmp_value);
     }
 
+    void exception_out_of_range()
+    {
+        cout <<"ERROR: the number of smart things received from the server is greater than it really exists : the program is closing"<<"\n";
+        exit(1);
+    }
+
+public:
+    SmartHouseManager(int lenght_lamps = 1, int lenght_jalousie = 1)
+    {
+        smart_lamps_vec.resize(lenght_lamps);
+        smart_jalousie_vec.resize(lenght_jalousie);
+       
+    }
+ 
+    void make_vector(int size_SL,int size_SJ)
+    {
+        cout << smart_lamps_vec.size();
+
+       /* smart_lamps.resize(size_SL);
+        smart_jalousie.resize(size_SJ);*/
+    }
+
+  /*  void foo()
+    {
+        smart_lamps[0].set_parameter("R", 255);
+        cout << smart_lamps[0].get_parameter("R");
+    }*/
+
+    //Парсер
     void parse_string()
     {
         int i = 0;
-        int tmp = 0;
+        int item_number = 0;
         string data_from_file = FW.read_data();
         while (i < data_from_file.size())
         {
             if ((data_from_file[i] == 'l') && (data_from_file[i + 1] == 'a'))
-            {
-                i += 5;
-                if ((data_from_file[i] == '1'))
-                {
-                    i += 2;
-                    if ((data_from_file[i] == 'B') && (data_from_file[i + 1] == 'R'))
+            {              
+                   i += 5;
+                   item_number = parse_value(i, data_from_file)-1;
+                   if ((item_number + 1 > smart_lamps_vec.size()) || (item_number > smart_jalousie_vec.size()))
+                   {                    
+                       exception_out_of_range();
+                   }
+
+                   i = data_from_file.find(':', i) + 1;
+                    while (data_from_file[i] != ';')
                     {
-                        i += 1 + 2;
-                        SL.set_parameter("lamp_1", "BR", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
+                        if ((data_from_file[i] == 'B') && (data_from_file[i + 1] == 'R'))
+                        {
+                            i += 1 + 2;
+                            smart_lamps_vec[item_number].set_parameter("BR", parse_value(i, data_from_file));
+                            i = data_from_file.find(',', i - 1)+1;
+                        }
+                        if (data_from_file[i] == 'R')
+                        {
+                            i += 0 + 2;
+                            smart_lamps_vec[item_number].set_parameter("R", parse_value(i, data_from_file));
+                            i = data_from_file.find(',', i - 1) + 1;
+                        }
+                        if (data_from_file[i] == 'G')
+                        {
+                            i += 0 + 2;
+                            smart_lamps_vec[item_number].set_parameter("G", parse_value(i, data_from_file));
+                            i = data_from_file.find(',', i - 1) + 1;
+                        }
+                        if ((data_from_file[i] == 'B') && (data_from_file[i + 1] != 'R'))
+                        {
+                            i += 0 + 2;
+                            smart_lamps_vec[item_number].set_parameter("B", parse_value(i, data_from_file));
+                            i = data_from_file.find(';', i - 1);
+                        }
+                        else
+                        { 
+                            i++; 
+                        }
+                    
                     }
-                    else if (data_from_file[i] == 'R')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_1", "R ", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                    else if (data_from_file[i] == 'G')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_1", "G ", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                    else if (data_from_file[i] == 'B')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_1", "B", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                }
-                if ((data_from_file[i] == '2'))
-                {
-                    i += 2;
-                    if ((data_from_file[i] == 'B') && (data_from_file[i + 1] == 'R'))
-                    {
-                        i += 1 + 2;
-                        SL.set_parameter("lamp_2", "BR", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                    else if (data_from_file[i] == 'R')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_2", "R", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                    else if (data_from_file[i] == 'G')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_2", "G", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                    else if (data_from_file[i] == 'B')
-                    {
-                        i += 0 + 2;
-                        SL.set_parameter("lamp_2", "B", parse_value(i, data_from_file));
-                        i = data_from_file.find(';', i - 1);
-                    }
-                }
             }
-            else if ((data_from_file[i] == 'j') && (data_from_file[i + 1] == 'l'))
+            else if ((data_from_file[i] == 'j') && (data_from_file[i + 1] == 'a'))
             {
-                i += 4;
-                if ((data_from_file[i] == '1'))
-                {
-                    i += 2;
-                    if (data_from_file[i] == 'D')
+                   i += 9;
+                   item_number = parse_value(i, data_from_file)-1;
+                  
+                   i = data_from_file.find(':', i) + 1;
+                    while (data_from_file[i] != ';') 
                     {
+                      if (data_from_file[i] == 'D')
+                      {
                         i += 2 + 2;
-                        SJ.set_parameter("jalousie_1", "DEG", parse_value(i, data_from_file));
+                        smart_jalousie_vec[item_number].set_parameter("DEG", parse_value(i, data_from_file));
                         i = data_from_file.find(';', i - 1);
+                      }
+                      else
+                      {
+                        i++;
+                      }
                     }
-                }
             }
             ++i;
         }
@@ -333,27 +346,32 @@ public:
     void set_sensors_data()
     {
         float tmp = 0;
-        tmp = SL.get_parameter("lamp_1", "BR") + 0.05 * SJ.get_parameter("jalousie_1", "DEG");
-        LS.set_parameter("li_sensor_L", tmp);
+        tmp = smart_lamps_vec[0].get_parameter("BR") + 0.05 * smart_jalousie_vec[0].get_parameter("DEG");
+        LS.set_parameter("L", tmp);
     }
 
     //Запись данных с умных вещей в файл
-    //void write_smart_things_data_in_file()
-    //{
-    //    time_t now = time(NULL);
+  
+  /*  void write_smart_things_data_in_file()
+    {
+        time_t now = time(NULL);
 
-    //    ofstream in_file("Total_sensors_data.txt");
-    //    if (in_file.is_open())
-    //    {
-
-    //        in_file << asctime(localtime(&now));
-    //        cout << asctime(localtime(&now)) ;
-    //        in_file << SL.get_string() << endl;
-    //        in_file << SJ.get_string() << endl;
-    //        cout << SL.get_string() << "\n" << SJ.get_string() << endl;
-    //    }
-    //    in_file.close();
-    //}
+        ofstream in_file("Total_sensors_data.txt");
+        if (in_file.is_open())
+        {
+            in_file << asctime(localtime(&now));
+            cout << asctime(localtime(&now)) ;
+            for (int i = 0; i < smart_lamps_vec.size(); i++)
+            {
+                in_file << "lamp_" << i << ":" << smart_lamps_vec[i].get_string() << endl;
+            }
+            for (int i = 0; i < smart_jalousie_vec.size(); i++)
+            {
+                in_file << "jalousie_" << i << ":"<<smart_jalousie_vec[i].get_string() << endl;
+            }        
+        }
+        in_file.close();
+    }*/
 
     /*   void write_sensors_data_in_file()
     {
@@ -372,9 +390,15 @@ public:
     string collect_all_data()
     {
         string all_data = "\0";
-        all_data += SL.get_string();
-        all_data += SJ.get_string();
-        all_data += LS.get_string();
+        for (int i = 0; i < smart_lamps_vec.size(); i++)
+        {
+            all_data += "lamp_"+to_string(i+1)+":"+smart_lamps_vec[i].get_string()+";\n";
+        }     
+        for (int i = 0; i < smart_jalousie_vec.size(); i++)
+        {
+            all_data += "jalousie_"+ to_string(i+1)+ ":" +smart_jalousie_vec[i].get_string() + ";\n";
+        }
+        all_data +="li_sensor:" + LS.get_string()+";\n"+ "tm_sensors:"+TS.get_string()+ ";\n"+"hm_sensors"+ HS.get_string()+ ";\n";
 
         return all_data;
     }

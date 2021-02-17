@@ -1,10 +1,8 @@
-Thu Dec 24 18:35:57 2020
+Wed Feb 17 17:12:48 2021
+lamp_1:B=222,BR=0,G=143,R=123;
+lamp_2:B=222,BR=333,G=143,R=123;
+jalousie_1:DEG=75;
+li_sensor:BATH=0,BED=0,K=0,L=3,OUT=0;
+tm_sensors:BATH=0,BED=0,K=0,L=0;
+hm_sensorsBATH=0,BED=0,K=0,L=0;
 
-lamp_1
-B=123 BR=12 G=0 R=0 
-lamp_2
-B=0 BR=11 G=165 R=255 
-jalousie_1
-DEG=130 
-jalousie_2
-DEG=0 li_sensor_BATH=0;li_sensor_BED=0;li_sensor_K=0;li_sensor_L=18;
