@@ -1,5 +1,0 @@
-Thu Dec  3 18:20:46 2020
-
-lamp_1
-B=123 BR=12 G=165 R=255 
-li_sensor_BATH=0;li_sensor_BED=0;li_sensor_K=0;li_sensor_L=12;

@@ -1,4 +1,0 @@
-﻿  CleverThings.cpp
-C:\Users\Kek\source\repos\CleverThings\CleverThings\ClassCleverThings_0.2.h(413,13): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Kek\source\repos\CleverThings\CleverThings\CleverThings.cpp(15,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  CleverThings.vcxproj -> C:\Users\Kek\source\repos\CleverThings\Debug\CleverThings.exe
