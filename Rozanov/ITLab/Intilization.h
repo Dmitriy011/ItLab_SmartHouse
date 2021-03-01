@@ -43,6 +43,11 @@ public:
 	GLuint GetWidht();
 	GLuint GetHeight();
 	
+	void set_lightPos(glm::vec3)
+	{
+		this->lightPos = glm::vec3(0.0f, 0.0f, 0.0f);
+	}
+
 private:
 	glm::vec3 lightPos;
 	GLuint WIDTH;

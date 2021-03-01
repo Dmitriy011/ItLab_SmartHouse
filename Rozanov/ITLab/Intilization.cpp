@@ -2,7 +2,7 @@
 
 Intilization::Intilization()
 {
-	lightPos = glm::vec3(-2.0f, 0.0f, -1.5f);
+	lightPos = glm::vec3(0.0f, 0.0f, 0.0f);
 	WIDTH = 800;												//размер окна
 	HEIGHT = 600;												//размер окна
 	lastX = 400;

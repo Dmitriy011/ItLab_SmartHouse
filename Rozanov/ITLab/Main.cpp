@@ -40,7 +40,7 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	
 	Utils utils;
 	glfwSetKeyCallback(window, key_callback);									//Передаем сущ-ие ф-ии в GLWF
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);					//Захват курсора мыши для окна.
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);				//Захват курсора мыши для окна.
 	glfwSetCursorPosCallback(window, mouse_callback);							//Передаем сущ-ие ф-ии в GLWF
 	
 	Shader ObjectShader("../Shader/Vertex/Vertex_model.txt", "../Shader/Fragment/fragment_model.txt ");

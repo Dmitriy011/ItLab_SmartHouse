@@ -11,52 +11,21 @@ public:
 	void read()
 	{
         string filename = "..\\Uglinskiy\\SmartHouse\\smart_lamp.txt";
-        //string filename = "../test/test.txt";
+        //string filename = "D:\\labs\\ItLab\\ItLab_SmartHouse\\Rozanov\\test\\test.txt";
+        
         ifstream fin;
-        fin.open(filename);
-        if (fin.is_open())
+        string lastLine = "";
+        string buf;
+        fin.open(filename); 
+        while (std::getline(fin, buf, '\n'))
         {
-            fin.seekg(-1, ios_base::end);
-
-            bool tmp = true;
-            while (tmp)
-            {
-                char ch;
-                fin.get(ch);
-
-                if ((int)fin.tellg() <= 1)
-                {
-                    fin.seekg(0);
-                    tmp = false;
-                }
-                else
-                {
-                    if (ch == '\n')
-                    {
-                        tmp = false;
-                    }
-                    else
-                    {
-                        fin.seekg(-2, ios_base::cur);
-                    }
-                }
-
-            }
+            lastLine = buf;
         }
-        string lastLine;
-        getline(fin, lastLine);
 
-        /*
-        if (lastLine.find_last_of(';') == 18)
+        if (lastLine == "")
         {
-            value.push_back(lastLine[16]);
-            value.push_back(lastLine[17]);
+            cout << "EMPTY STR";
         }
-        if (lastLine.find_last_of(';') == 17)
-        {
-            value.push_back(lastLine[16]);
-        }
-        */
 
         if (lastLine.find_last_of(';') == 12)
         {
@@ -67,6 +36,7 @@ public:
         {
             value.push_back(lastLine[10]);
         }
+        
 	}
 
     string GetValue()

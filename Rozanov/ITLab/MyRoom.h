@@ -118,6 +118,7 @@ public:
 
 	void Draw(Utils utils, Shader ObjectShader, Shader LampShader, GLFWwindow* window)
 	{
+		Model Bed(const_cast<GLchar*>("../Models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj"));
 		Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
 
 		while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
@@ -133,35 +134,55 @@ public:
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);							//GlClear(<какие биты очистить>) - очистить буфер (GL_COLOR_BUFFER_BIT - цветовой,  GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT )Как только мы вызываем glClear весь буфер будет заполнен указанным 	цветом.glClearColor — это функция устанавливающая состояние, а glClear — это функция использующая состояние
 
 		//Команды отрисовки ...
-
+			
 			ObjectShader.Use();
 			utils.brightnes(ObjectShader);
 			ObjectShader.setVec3("light.position", intilizaton.GetlightPos());
+			//ObjectShader.setVec3("light.position", camera.Position);
 			ObjectShader.setVec3("viewPos", camera.Position);
-			ObjectShader.setVec3("light.ambient", 0.5f, 0.5f, 0.5f);
-			ObjectShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+			ObjectShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+			ObjectShader.setVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
 			ObjectShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 			ObjectShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
 			ObjectShader.setFloat("material.shininess", 64.0f);
+
 			glm::mat4 projection = glm::perspective(45.0f, (float)intilizaton.GetWidht() / (float)intilizaton.GetWidht(), 0.1f, 100.0f);
 			glm::mat4 view = camera.GetViewMatrix();
-			ObjectShader.setMat4("projection", projection);
+			ObjectShader.setMat4("projection", projection);	
 			ObjectShader.setMat4("view", view);
 			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::scale(model, glm::vec3(2.0f, 1.5f, 2.5f));
+			model = glm::scale(model, glm::vec3(3.0f, 2.0f, 4.0f));
 			ObjectShader.setMat4("model", model);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, diffuseMap);
 			glBindVertexArray(objectVAO);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 
-			model = glm::mat4(1.0f);
 
-			model = glm::translate(model, glm::vec3(-1.4f, -0.55f, 0.6f));
-			model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(-3.0f, -1.3f, 6.0f));
+			model = glm::rotate(model, 90.0f, glm::vec3(0.0f, 1.0f, 1.0f));
+			model = glm::scale(model, glm::vec3(0.12, 0.12, 0.12));
+			ObjectShader.setMat4("model", model);
+			Bed.Draw(ObjectShader);
+
+			/*
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(0.0f, -7.8f, 0.0f));
+			model = glm::rotate(model, 90.0f, glm::vec3(0.0f, 1.0f, 1.0f));
+			model = glm::scale(model, glm::vec3(1.1, 1.1, 1.1));
+			ObjectShader.setMat4("model", model);
+			Grass.Draw(ObjectShader);
+			*/
+
+			model = glm::mat4(1.0f);
+			model = glm::scale(model, glm::vec3(1.2, 1.3, 1.2));
+			//model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::translate(model, glm::vec3(1.0f, -0.8f, -3.05f));
 			ObjectShader.setMat4("model", model);
 			Door.Draw(ObjectShader);
 
+			/*
 			LampShader.Use();
 			LampShader.setMat4("projection", projection);
 			LampShader.setMat4("view", view);
@@ -174,6 +195,7 @@ public:
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 			glBindVertexArray(0);
 			//Конец.
+			*/
 
 			glfwSwapBuffers(window);												//заменяет цветовой буфер, который использовался для отрисовки во время текущей итерации и показывает результат на экране.
 		}
