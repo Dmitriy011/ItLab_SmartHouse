@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #pragma warning(disable : 4996)
 
@@ -12,52 +12,52 @@
 
 using namespace std;
 
-//��������� �������
+//интерфейс датчики
 class ISensors
 {
-    virtual string get_string() = 0;//��������� � �������� ������ � �������� ���������� ��������
-    virtual void set_parameter(string what, int value) = 0;//���������� �������� ���� �� �����
-    virtual float get_parameter(string what) = 0;//�������� �������� ���� �� �����
+    virtual string get_string() = 0;//составить и получить строку с текущими значениями датчиков
+    virtual void set_parameter(string what, int value) = 0;//установить значение поля по ключу
+    virtual float get_parameter(string what) = 0;//получить значение поля по ключу
 };
 
-//����� �������
+//класс датчики
 class Sensors : public ISensors
 {
 protected:
-     map<string, int> sensors;
+     map<string, int> sensors;//мапа сенсоров
 public:
 
     string get_string() override
     {
-        string tmp_string = "\0";
-        map<string, int>::iterator it;
+        string tmp_string = "\0";//создаём пустую строку
+        map<string, int>::iterator it;//создаём итератор
 
-        it = sensors.begin();
+        it = sensors.begin();//устанавливаем итератор в начало
 
-        while (it != sensors.end())
+        while (it != sensors.end())//Цикл: пока не достигнем конца мапы
         {
-            tmp_string += it->first + "=" + to_string(it->second) + ',';
+            tmp_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
             ++it;
-            if (it == sensors.end())
+            if (it == sensors.end())//убираем последнюю ненужную запятую
             {
-                tmp_string.erase(tmp_string.size() - 1);//����� ��������,�� �������� �� ����� 
+                tmp_string.erase(tmp_string.size() - 1);//вроде работает,но выглядит не очень 
             }
         }
         return tmp_string;
     }
 
-    void set_parameter(string what, int value) override
+    void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
     {
         sensors[what] = value;
     }
 
-    float get_parameter(string what) override
+    float get_parameter(string what) override//получаем  значение  по ключу what
     {
         return sensors[what];
     }
 };
 
-//����� ������� �����
+//класс датчики света
 class LightSensors : public Sensors
 {
 public:
@@ -72,7 +72,7 @@ public:
     }
 };
 
-//����� ������� �����������
+//класс датчики температуры
 class TemperatureSensors : public Sensors
 {
 public:
@@ -86,7 +86,7 @@ public:
     }
 };
 
-//����� ������� ���������
+//класс датчики влажности
 class HumiditySensors : public Sensors
 {
 public:
@@ -101,52 +101,52 @@ public:
 };
 
 
-//��������� ����� �������
+//интерфейс умный предмет
 class ISmartItem
 {
 public:
-    virtual void set_parameter(string, int) = 0;//���������� �������� ����  �� �����
-    virtual int get_parameter(string) = 0;//�������� �������� ���� �� �����
-    virtual string get_string() = 0;//��������� � ������� ������ � �������� ���������� �����
+    virtual void set_parameter(string, int) = 0;//установить значение поля  по ключу
+    virtual int get_parameter(string) = 0;//получить значения поля по ключу
+    virtual string get_string() = 0;//составить и вернуть строку с текущими значениями полей
 };
 
-//����� ����� ����
+//Класс умный свет
 class SmartLight : public ISmartItem
 {
 protected:
-    map<string, int> smart_thing_char;
+    map<string, int> smart_thing_char;// мапа-характеристики умной вещи
 
 public:
-    void set_parameter(string what, int value) override
+    void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
     {
         smart_thing_char[what] = value;
     }
 
-    int get_parameter(string what) override
+    int get_parameter(string what) override//получаем  значение  по ключу what
     {
         return smart_thing_char[what];
     }
     string get_string() override
     {
-        string return_string = "\0";
+        string return_string = "\0";//создаём пустую строку
 
-        map<string, int>::iterator it;
-        it = smart_thing_char.begin();
+        map<string, int>::iterator it;//создаём итератор 
+        it = smart_thing_char.begin();//устанавливаем итератор в начало мапы
 
-        while (it != smart_thing_char.end())
+        while (it != smart_thing_char.end())//Цикл: пока не достигнем конца мапы
         {              
-                return_string +=it->first + "=" + to_string(it->second) + ',';
+                return_string +=it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
                 ++it; 
-                if(it == smart_thing_char.end())
+                if(it == smart_thing_char.end())//убираем последнюю ненужную запятую
                 {
-                    return_string.erase(return_string.size() - 1);//����� ��������,�� �������� �� ����� 
+                    return_string.erase(return_string.size() - 1);//вроде работает,но выглядит не очень 
                 }
         }
         return return_string;
     }
 };
 
-//����� ����� ��������
+//Класс умная лампочка
 class SmartLamp : public SmartLight
 {
 private:
@@ -161,7 +161,7 @@ public:
     }
 };
 
-//����� ����� ������
+//класс умное жалюзи
 class SmartJalousie : public SmartLight
 {
 private:
@@ -186,45 +186,52 @@ class IServerInfoWorker
 class ServerInfoFileWorker : public IServerInfoWorker
 {
 public:
+    //Чтение данных из файла
     string read_data() override
     {
-        ifstream in("smart_lamp.txt", ios::in); // �������� ���� ��� ������
+        ifstream in("smart_lamp.txt", ios::in); // окрываем файл для чтения
 
         std::stringstream sstr;
         sstr << in.rdbuf();
         return sstr.str();
     }
+    //Запись данных в файл
     void save_data(string string_to_file) override
     {
-        time_t now = time(NULL);
+        time_t now = time(NULL);//созда1м переменую времени
 
         ofstream in_file("Total_sensors_data.txt");
         if (in_file.is_open())
         {
 
-            in_file << asctime(localtime(&now));
+            in_file << asctime(localtime(&now));//Записываем текущее время
             cout << asctime(localtime(&now));
-            in_file << string_to_file << endl;
+            in_file << string_to_file << endl;//записываем данные из принятой строки в файл
 
             cout << string_to_file << endl;
         }
-        in_file.close();
+        in_file.close();//закрываем файл
     }
 };
 
-//����� ��������
+//Класс Менеджер
 class SmartHouseManager
 {
 private:
+    //создаём классы сенсоры
     LightSensors LS;
     TemperatureSensors TS;
     HumiditySensors HS;
    
+    //создаём векторы умных вещеё
     vector<SmartLamp> smart_lamps_vec;
     vector<SmartJalousie> smart_jalousie_vec;
 
+    //создаём класс работы с файлами
     ServerInfoFileWorker FW;
 
+   
+    //Распарсивание строки цифр в число,например (string)"123"->(int)123
     int parse_value(int start_index, string value_from_datafile)
     {
         int i = start_index;
@@ -239,6 +246,7 @@ private:
         return stoi(tmp_value);
     }
 
+    //Ошибка:количество данных принятых с сервера больше чем количество умных вещей
     void exception_out_of_range()
     {
         cout <<"ERROR: the number of smart things received from the server is greater than it really exists : the program is closing"<<"\n";
@@ -246,19 +254,12 @@ private:
     }
 
 public:
-    SmartHouseManager(int lenght_lamps = 1, int lenght_jalousie = 1)
+    SmartHouseManager(int lenght_lamps = 1, int lenght_jalousie = 1)//конструктор 
     {
+        //инициализация количесва умных вещей
         smart_lamps_vec.resize(lenght_lamps);
         smart_jalousie_vec.resize(lenght_jalousie);
-       
-    }
- 
-    void make_vector(int size_SL,int size_SJ)
-    {
-        cout << smart_lamps_vec.size();
-
-       /* smart_lamps.resize(size_SL);
-        smart_jalousie.resize(size_SJ);*/
+             
     }
 
   /*  void foo()
@@ -267,7 +268,7 @@ public:
         cout << smart_lamps[0].get_parameter("R");
     }*/
 
-    //������
+    //Парсер
     void parse_string()
     {
         int i = 0;
@@ -279,7 +280,8 @@ public:
             {              
                    i += 5;
                    item_number = parse_value(i, data_from_file)-1;
-                   if ((item_number + 1 > smart_lamps_vec.size()) || (item_number > smart_jalousie_vec.size()))
+                   
+                   if (item_number + 1 > smart_lamps_vec.size())
                    {                    
                        exception_out_of_range();
                    }
@@ -322,6 +324,11 @@ public:
             {
                    i += 9;
                    item_number = parse_value(i, data_from_file)-1;
+                   
+                   if(item_number + 1 > smart_jalousie_vec.size())
+                   {
+                       exception_out_of_range();
+                   }
                   
                    i = data_from_file.find(':', i) + 1;
                     while (data_from_file[i] != ';') 
@@ -342,51 +349,41 @@ public:
         }
     }
 
-    //������ �������� �������� � ����������� �� ������ ����� �����
+    //Обсчёт значений датчиков в зависимости от работы умных вещей
     void set_sensors_data()
     {
+        float E = 0, Ia = 0, S=10;
         float tmp = 0;
-        tmp = smart_lamps_vec[0].get_parameter("BR") + 0.05 * smart_jalousie_vec[0].get_parameter("DEG");
-        LS.set_parameter("L", tmp);
+        float sun_brightness = 7;
+        int tmp2 = 0;
+      /*Ia - сила света в направлении от источника на заданную точку рабочей поверхности 
+        ( определяют по кривым силы света или по таблицам выбранного типа светильника),
+        S-Плоащадь комнаты  */
+      
+        for (int i = 0; i < smart_lamps_vec.size(); i++)
+        {
+            Ia += smart_lamps_vec[i].get_parameter("BR");
+        }
+        Ia = Ia / smart_lamps_vec.size();
+        E = (Ia* smart_lamps_vec.size())/S;         
+        for (int i = 0; i < smart_jalousie_vec.size(); i++)
+        {
+            if (smart_jalousie_vec[i].get_parameter("DEG") <= 90)
+            {
+                tmp2 = smart_jalousie_vec[i].get_parameter("DEG");
+            }
+            else
+            { 
+                tmp2 = 90 - ((smart_jalousie_vec[i].get_parameter("DEG")) % 90);
+            }
+            
+            tmp += sun_brightness *((float)tmp2  /  90);
+        }
+        E += tmp;
+        LS.set_parameter("L", E);
     }
 
-    //������ ������ � ����� ����� � ����
-  
-  /*  void write_smart_things_data_in_file()
-    {
-        time_t now = time(NULL);
-
-        ofstream in_file("Total_sensors_data.txt");
-        if (in_file.is_open())
-        {
-            in_file << asctime(localtime(&now));
-            cout << asctime(localtime(&now)) ;
-            for (int i = 0; i < smart_lamps_vec.size(); i++)
-            {
-                in_file << "lamp_" << i << ":" << smart_lamps_vec[i].get_string() << endl;
-            }
-            for (int i = 0; i < smart_jalousie_vec.size(); i++)
-            {
-                in_file << "jalousie_" << i << ":"<<smart_jalousie_vec[i].get_string() << endl;
-            }        
-        }
-        in_file.close();
-    }*/
-
-    /*   void write_sensors_data_in_file()
-    {
-        time_t now = time(NULL);
-
-        ofstream in_file("Total_sensors_data.txt", std::ios_base::app);
-        if (in_file.is_open())
-        {
-            in_file << LS.get_string() << endl;
-            cout <<"\n" <<LS.get_string();
-
-        }
-        in_file.close();
-    }*/
-
+    //Собрать все данные в одну строку
     string collect_all_data()
     {
         string all_data = "\0";
@@ -403,6 +400,7 @@ public:
         return all_data;
     }
 
+    //Один цикл программы
     void one_cycle()
     {
         parse_string();

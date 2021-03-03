@@ -1,8 +1,9 @@
-Wed Feb 17 17:12:48 2021
+Wed Mar  3 14:00:02 2021
 lamp_1:B=222,BR=0,G=143,R=123;
 lamp_2:B=222,BR=333,G=143,R=123;
-jalousie_1:DEG=75;
-li_sensor:BATH=0,BED=0,K=0,L=3,OUT=0;
+jalousie_1:DEG=105;
+jalousie_2:DEG=105;
+li_sensor:BATH=0,BED=0,K=0,L=44,OUT=0;
 tm_sensors:BATH=0,BED=0,K=0,L=0;
 hm_sensorsBATH=0,BED=0,K=0,L=0;
 
