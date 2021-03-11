@@ -2,48 +2,20 @@
 
 #include <fstream> 
 #include <sstream> 
+#include <iostream>
 
 using namespace std;
 
-class ReadTxt
+class ReadFile
 {
 public:
-	void read()
-	{
-        string filename = "..\\Uglinskiy\\SmartHouse\\smart_lamp.txt";
-        //string filename = "D:\\labs\\ItLab\\ItLab_SmartHouse\\Rozanov\\test\\test.txt";
-        
-        ifstream fin;
-        string lastLine = "";
-        string buf;
-        fin.open(filename); 
-        while (std::getline(fin, buf, '\n'))
-        {
-            lastLine = buf;
-        }
+    void read_txt();
 
-        if (lastLine == "")
-        {
-            cout << "EMPTY STR";
-        }
+    string GetValue();
 
-        if (lastLine.find_last_of(';') == 12)
-        {
-            value.push_back(lastLine[10]);
-            value.push_back(lastLine[11]);
-        }
-        if (lastLine.find_last_of(';') == 11)
-        {
-            value.push_back(lastLine[10]);
-        }
-        
-	}
-
-    string GetValue()
-    {
-        return value;
-    }
+    size_t Get_numbers_lamp();
 
 private:
     string value;
+    size_t number_lamps;
 };

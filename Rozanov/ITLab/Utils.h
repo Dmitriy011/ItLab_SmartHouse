@@ -29,8 +29,6 @@ class Utils
 {
 public:
 	void movement();
-
-	void brightnes(Shader& shader);
 };
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);

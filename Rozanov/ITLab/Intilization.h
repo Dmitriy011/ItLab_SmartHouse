@@ -39,17 +39,10 @@ public:
 		glEnable(GL_DEPTH_TEST);														//¬кл, чтобы OpenGL  выполн€л проверку глубины, включа€ парамтер параметр GL_DEPTH_TEST	
 	}
 
-	glm::vec3 GetlightPos();
 	GLuint GetWidht();
 	GLuint GetHeight();
-	
-	void set_lightPos(glm::vec3)
-	{
-		this->lightPos = glm::vec3(0.0f, 0.0f, 0.0f);
-	}
 
 private:
-	glm::vec3 lightPos;
 	GLuint WIDTH;
 	GLuint HEIGHT;
 };

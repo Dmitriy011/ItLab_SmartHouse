@@ -2,7 +2,6 @@
 
 Intilization::Intilization()
 {
-	lightPos = glm::vec3(0.0f, 0.0f, 0.0f);
 	WIDTH = 800;												//размер окна
 	HEIGHT = 600;												//размер окна
 	lastX = 400;
@@ -22,11 +21,6 @@ void Intilization::intilization_libs()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glViewport(0, 0, WIDTH, HEIGHT);												//Сообщить Opengl размер окна - glViewport(<позиция нижнего левого угла экрана1>, <позиция нижнего левого угла экрана2>, <ширина>, <высота>);
 
-}
-
-glm::vec3 Intilization::GetlightPos()
-{
-	return lightPos;
 }
 
 GLuint Intilization::GetWidht()

@@ -24,6 +24,7 @@ using namespace std;
 Intilization intilizaton;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
+
 int main(int argc, char** argv)														//argc число аргументов, argv массив аргументов
 {
 	intilizaton.intilization_libs();
