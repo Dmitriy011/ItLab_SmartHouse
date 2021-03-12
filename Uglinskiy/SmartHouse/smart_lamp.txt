@@ -1,5 +1,10 @@
-lamp_1_BR=0;
-lamp_1_BR=1;
-lamp_1_BR=2;
-lamp_1_BR=3;
-lamp_1_BR=4;
+lamp_1_SR:BR=0,R=123,G=143,B=222;
+lamp_2_LR:BR=10,R=123,G=143,B=222;
+jalousie_1_SR:DEG=95;
+jalousie_2_LR:DEG=105;
+jalousie_1_SR:DEG=105;
+jalousie_1_SR:DEG=115;
+jalousie_1_SR:DEG=125;
+lamp_1_SR:BR=1,R=123,G=143,B=222;
+lamp_1_SR:BR=2,R=123,G=143,B=222;
+lamp_1_SR:BR=3,R=123,G=143,B=222;

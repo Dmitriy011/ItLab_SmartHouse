@@ -1,38 +1,40 @@
 from SmartThing import SmartLight
-from SensorInfoWorker import SensorInfoFileWorker
 import time
-
+from SensorInfoWorker import SensorInfoFileWorker
 class Work_with_data:
-    def get_sensor_name(s):
-        i=0
-        while s[i]!='=':
-            i+=1
-        name=s[0:i]
-        return name
     
-    def get_sensor_value(s):
-        i=0
-        while s[i]!='=':
-            i+=1
-        j=i+1
-        while s[j]!=';':
-            j+=1
-        value=s[i+1:j]
-        return value
+    def get_li_sensors():
+        s=SensorInfoFileWorker.ReadData();
+        li_sensors = [0]*6
+        for n in range (len(s)):
+            if s[n][0:9]=="li_sensor":
+                i,j=0,0
+                for k in range(6):
+                    while (s[n][i]!='=')and(s[n][i]!=':'):
+                        i+=1
+                    if s[n][i]=='=':
+                        j=i+1
+                        while (s[n][i]!=',')and(s[n][i]!=';'):
+                            i+=1
+                    li_sensors[k]=s[n][j:i]
+                    j=i+1
+                    i+=1
+        return li_sensors
 
     def reading_and_processing_data():
-         while 1:
-            li_sensors=SensorInfoFileWorker.ReadData()
+        while 1:
             #для комнаты, которая есть сейчас
-            s_value=Work_with_data.get_sensor_value(li_sensors[3])
-            SmartLight.Update(float(s_value))
+            rooms=["BT","SR","KN","LR"]
+            li_sensors=Work_with_data.get_li_sensors()
+            SmartLight.Update(int(li_sensors[5]),int(li_sensors[2]),rooms[1])
             time.sleep(0.1)  
 
     def reading_and_processing_data_without_cycle():
-            li_sensors=SensorInfoFileWorker.ReadData()
-            #для комнаты, которая есть сейчас
-            s_value=Work_with_data.get_sensor_value(li_sensors[3])
-            SmartLight.Update(float(s_value))
+            rooms=["BT","SR","KN","LR"]
+            li_sensors=Work_with_data.get_li_sensors()
+            SmartLight.Update(int(li_sensors[5]),int(li_sensors[2]),rooms[1])
+  
+ 
  
 
          
