@@ -10,7 +10,7 @@
 #include <sstream>
 #include <vector>
 #include<Windows.h>
-#define MAX_LAMP_LUMEN_FLOW 700
+#define MAX_LAMP_LUMEN_FLOW 1200
 #define MAX_LAMP_POWER 12
 
 using namespace std;
@@ -18,13 +18,13 @@ using namespace std;
 //интерфейс датчики
 class ISensors
 {
-	virtual string get_string() = 0;//составить и получить строку с текущими значениями датчиков
-	virtual void set_parameter(string what, int value) = 0;//установить значение поля по ключу
-	virtual float get_parameter(string what) = 0;//получить значение поля по ключу
+	virtual string get_string() = 0;							//составить и получить строку с текущими значениями датчиков
+	virtual void set_parameter(string what, int value) = 0;		//установить значение поля по ключу
+	virtual float get_parameter(string what) = 0;				//получить значение поля по ключу
 };
 
 //класс датчики
-class Sensors : public ISensors
+class TSensors : public ISensors
 {
 protected:
 	map<string, int> sensors;//мапа сенсоров
@@ -37,18 +37,18 @@ public:
 		sensors[what] = value;
 	}
 
-	float get_parameter(string what) override//получаем  значение  по ключу what
+	float get_parameter(string what) override			//получаем  значение  по ключу what
 	{
 		return sensors[what];
 	}
 };
 
 //класс датчики света
-class LightSensors : public Sensors
+class TLightSensors : public TSensors
 {
 public:
-
-	LightSensors()
+	//конструктор
+	TLightSensors()
 	{
 		sensors.insert(make_pair("BT", 0));
 		sensors.insert(make_pair("SR", 0));
@@ -59,11 +59,11 @@ public:
 };
 
 //класс датчики температуры
-class TemperatureSensors : public Sensors
+class TTemperatureSensors : public TSensors
 {
 public:
-
-	TemperatureSensors()
+	//конструктор
+	TTemperatureSensors()
 	{
 		sensors.insert(make_pair("BT", 0));
 		sensors.insert(make_pair("SR", 0));
@@ -73,11 +73,11 @@ public:
 };
 
 //класс датчики влажности
-class HumiditySensors : public Sensors
+class THumiditySensors : public TSensors
 {
 public:
-
-	HumiditySensors()
+	//конструктор
+	THumiditySensors()
 	{
 		sensors.insert(make_pair("BT", 0));
 		sensors.insert(make_pair("SR", 0));
@@ -101,7 +101,7 @@ public:
 };
 
 //Класс умный свет
-class SmartLight : public ISmartItem
+class TSmartLight : public ISmartItem
 {
 protected:
 	map<string, int> smart_thing_char;// мапа-характеристики умной вещи
@@ -113,6 +113,7 @@ public:
 	{
 		smart_thing_char[what] = value;
 	}
+	//Сеттеры и геттеры
 	void set_location(string loc) override
 	{
 		location = loc;
@@ -141,23 +142,24 @@ public:
 
 };
 
-class TheSun : public SmartLight
+class TTheSun : public TSmartLight
 {
 public:
-	TheSun()
+	TTheSun()
 	{
 	smart_thing_char.insert(make_pair("BR", 0));
 	}
+	//расчёт яркости в зависимости от времени суток
 	int calculate_brightness(void);
 };
 
 //Класс умная лампочка
-class SmartLamp : public SmartLight
+class TSmartLamp : public TSmartLight
 {
 private:
 
 public:
-	SmartLamp()
+	TSmartLamp()
 	{
 		smart_thing_char.insert(make_pair("R", 0));
 		smart_thing_char.insert(make_pair("G", 0));
@@ -167,37 +169,77 @@ public:
 };
 
 //класс умное жалюзи
-class SmartJalousie : public SmartLight
+class TSmartJalousie : public TSmartLight
 {
 private:
 
 public:
-	SmartJalousie()
+	TSmartJalousie()
 	{
 		smart_thing_char.insert(make_pair("DEG", 0));
 	}
 };
 
 //Класс терморегуляционных приборов
-class SmartTemperatureRegulationThigs : public ISmartItem
+class TSmartTemperatureRegulationThigs : public ISmartItem
 {
 
 };
 
 //Класс умная батарея
-class SmartBatterey : public SmartTemperatureRegulationThigs
+class TSmartBatterey : public TSmartTemperatureRegulationThigs
 {
 
 };
 
+//Класс Комната
+class TRoom
+{
+private:
+	float S = 1;//площадь
+	float sun_energy_percentage=1;//коэффициент отвечающий за то ,сколько света(энергии солнца) доходит до комнаты
+	string name = "\0";//имя
+public:
+	TRoom(float Sq = 1,float s_e_p=1,string nm="room")
+	{
+		S = Sq;
+		sun_energy_percentage = s_e_p;
+		name = nm;
+	}
+	//получить площаль
+	float get_S()
+	{
+		return S;
+	}
+	//получить коэффициент солнечной энергии
+	float get_sun_en_per()
+	{
+		return sun_energy_percentage;
+	}
+	//получить имя комнаты
+	string get_name()
+	{
+		return name;
+	}
+
+	////под вопросом нужны ли сэттеры
+	void set_S(float Sq)
+	{
+		S = Sq;
+	}
+	void set_sun_en_per(float s_e_p)
+	{
+		sun_energy_percentage = s_e_p;
+	}
+};
 
 class IServerInfoWorker
 {
-	virtual string read_data() = 0;
-	virtual void save_data(string string_to_file) = 0;
+	virtual string read_data() = 0;						//Чтение данных из файла
+	virtual void save_data(string string_to_file) = 0;  //Запись данных в файл
 };
 
-class ServerInfoFileWorker : public IServerInfoWorker
+class TServerInfoFileWorker : public IServerInfoWorker
 {
 public:
 	//Чтение данных из файла
@@ -208,21 +250,26 @@ public:
 };
 
 //Класс Менеджер
-class SmartHouseManager
+class TSmartHouseManager
 {
 private:
 	//создаём классы сенсоры
-	LightSensors LS;
-	TemperatureSensors TS;
-	HumiditySensors HS;
+	TLightSensors LS;
+	TTemperatureSensors TS;
+	THumiditySensors HS;
 
-	//создаём векторы умных вещеё
-	vector<SmartLamp> smart_lamps_vec;
-	vector<SmartJalousie> smart_jalousie_vec;
+	//создаём векторы умных вещей
+	vector<TSmartLamp> smart_lamps_vec;//умные лампочки
+	vector<TSmartJalousie> smart_jalousie_vec;//умные жалюзи
+	
+	//комнаты
+	vector<TRoom> rooms_vec;
 
-	TheSun SUN;
+	//Солнце
+	TTheSun SUN;
+
 	//создаём класс работы с файлами
-	ServerInfoFileWorker FW;
+	TServerInfoFileWorker FW;
 
 	//Распарсивание строки цифр в число,например (string)"123"->(int)123
 	int parse_value(int start_index, string value_from_datafile);
@@ -230,12 +277,23 @@ private:
 	//Ошибка:количество данных принятых с сервера больше чем количество умных вещей
 	void exception_out_of_range();
 	
+	
 public:
-	SmartHouseManager(int lenght_lamps = 1, int lenght_jalousie = 1)//конструктор 
+	TSmartHouseManager(int number_of_rooms,int lenght_lamps = 1, int lenght_jalousie = 1)//конструктор 
 	{
 		//инициализация количесва умных вещей
 		smart_lamps_vec.resize(lenght_lamps);
 		smart_jalousie_vec.resize(lenght_jalousie);
+		//инициализация комнат
+		TRoom KN(18, 0.8, "KN");
+		TRoom LR(25, 1, "LR");
+		TRoom SR(20, 0.7, "SR");
+		TRoom BT(12, 0, "BT");
+
+		rooms_vec.push_back(KN);
+		rooms_vec.push_back(LR);
+		rooms_vec.push_back(SR);
+		rooms_vec.push_back(BT);	
 	}
 	
 
