@@ -1,5 +1,5 @@
-#pragma once
-//интерфейс умный предмет
+п»ї#pragma once
+//РёРЅС‚РµСЂС„РµР№СЃ СѓРјРЅС‹Р№ РїСЂРµРґРјРµС‚
 #include <string>
 #include <map>
 
@@ -10,12 +10,12 @@ using std::string;
 class ISmartItem
 {
 public:
-	virtual void set_parameter(string what, int value) = 0;//установить значение поля  по ключу
-	virtual void set_location(string loc) = 0;		//установить местонахождения объекта
-	virtual void set_item_number(int nmb) = 0;		//установить номер объекта
-	virtual int get_parameter(string what) = 0;		//получить значения поля по ключу
-	virtual string get_location() = 0;			//получить местонахождение объекта
-	virtual int get_item_number() = 0;			//получть номер объекта
-	virtual string get_string() = 0;			//составить и вернуть строку с текущими значениями полей
+	virtual void set_parameter(string what, int value) = 0;//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ  РїРѕ РєР»СЋС‡Сѓ
+	virtual void set_location(string loc) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёСЏ РѕР±СЉРµРєС‚Р°
+	virtual void set_item_number(int nmb) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р°
+	virtual int get_parameter(string what) = 0;		//РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
+	virtual string get_location() = 0;			//РїРѕР»СѓС‡РёС‚СЊ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ РѕР±СЉРµРєС‚Р°
+	virtual int get_item_number() = 0;			//РїРѕР»СѓС‡С‚СЊ РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р°
+	virtual string get_string() = 0;			//СЃРѕСЃС‚Р°РІРёС‚СЊ Рё РІРµСЂРЅСѓС‚СЊ СЃС‚СЂРѕРєСѓ СЃ С‚РµРєСѓС‰РёРјРё Р·РЅР°С‡РµРЅРёСЏРјРё РїРѕР»РµР№
 };
 

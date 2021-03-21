@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -10,6 +10,6 @@ using namespace std;
 
 class IServerInfoWorker
 {
-	virtual string read_data() = 0;						//Чтение данных из файла
-	virtual void save_data(string string_to_file) = 0;  //Запись данных в файл
+	virtual string read_data() = 0;						//Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
+	virtual void save_data(string string_to_file) = 0;  //Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
 };

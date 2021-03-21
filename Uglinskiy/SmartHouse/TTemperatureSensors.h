@@ -1,10 +1,10 @@
-#pragma once
+п»ї#pragma once
 #include "TSensors.h"
-//класс датчики температуры
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё С‚РµРјРїРµСЂР°С‚СѓСЂС‹
 class TTemperatureSensors : public TSensors
 {
 public:
-	//конструктор
+	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	TTemperatureSensors()
 	{
 		sensors.insert(make_pair("BT", 0));

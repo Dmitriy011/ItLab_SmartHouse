@@ -1,13 +1,13 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 using std::string;
-//Класс Комната
+//РљР»Р°СЃСЃ РљРѕРјРЅР°С‚Р°
 class TRoom
 {
 private:
-	float S = 1;//площадь
-	float sun_energy_percentage=1;//коэффициент отвечающий за то ,сколько света(энергии солнца) доходит до комнаты
-	string name = "\0";//имя
+	float S = 1;//РїР»РѕС‰Р°РґСЊ
+	float sun_energy_percentage=1;//РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° С‚Рѕ ,СЃРєРѕР»СЊРєРѕ СЃРІРµС‚Р°(СЌРЅРµСЂРіРёРё СЃРѕР»РЅС†Р°) РґРѕС…РѕРґРёС‚ РґРѕ РєРѕРјРЅР°С‚С‹
+	string name = "\0";//РёРјСЏ
 public:
 	TRoom(float Sq = 1,float s_e_p=1,string nm="room")
 	{
@@ -15,23 +15,23 @@ public:
 		sun_energy_percentage = s_e_p;
 		name = nm;
 	}
-	//получить площаль
+	//РїРѕР»СѓС‡РёС‚СЊ РїР»РѕС‰Р°Р»СЊ
 	float get_S()
 	{
 		return S;
 	}
-	//получить коэффициент солнечной энергии
+	//РїРѕР»СѓС‡РёС‚СЊ РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРѕР»РЅРµС‡РЅРѕР№ СЌРЅРµСЂРіРёРё
 	float get_sun_en_per()
 	{
 		return sun_energy_percentage;
 	}
-	//получить имя комнаты
+	//РїРѕР»СѓС‡РёС‚СЊ РёРјСЏ РєРѕРјРЅР°С‚С‹
 	string get_name()
 	{
 		return name;
 	}
 
-	////под вопросом нужны ли сэттеры
+	////РїРѕРґ РІРѕРїСЂРѕСЃРѕРј РЅСѓР¶РЅС‹ Р»Рё СЃСЌС‚С‚РµСЂС‹
 	void set_S(float Sq)
 	{
 		S = Sq;

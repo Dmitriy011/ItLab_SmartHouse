@@ -1,6 +1,6 @@
-#pragma once
+п»ї#pragma once
 #include "TSmartLight.h"
-//Класс умная лампочка
+//РљР»Р°СЃСЃ СѓРјРЅР°СЏ Р»Р°РјРїРѕС‡РєР°
 class TSmartLamp : public TSmartLight
 {
 private:

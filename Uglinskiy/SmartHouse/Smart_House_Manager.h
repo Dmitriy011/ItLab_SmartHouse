@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 #pragma warning(disable : 4996)
 
@@ -33,39 +33,39 @@
 
 using namespace std;
 
-//интерфейс датчики
+//РёРЅС‚РµСЂС„РµР№СЃ РґР°С‚С‡РёРєРё
 //class ISensors
 //{
-//	virtual string get_string() = 0;							//составить и получить строку с текущими значениями датчиков
-//	virtual void set_parameter(string what, int value) = 0;		//установить значение поля по ключу
-//	virtual float get_parameter(string what) = 0;				//получить значение поля по ключу
+//	virtual string get_string() = 0;							//СЃРѕСЃС‚Р°РІРёС‚СЊ Рё РїРѕР»СѓС‡РёС‚СЊ СЃС‚СЂРѕРєСѓ СЃ С‚РµРєСѓС‰РёРјРё Р·РЅР°С‡РµРЅРёСЏРјРё РґР°С‚С‡РёРєРѕРІ
+//	virtual void set_parameter(string what, int value) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
+//	virtual float get_parameter(string what) = 0;				//РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
 //};
 
-//класс датчики
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё
 //class TSensors : public ISensors
 //{
 //protected:
-//	map<string, int> sensors;//мапа сенсоров
+//	map<string, int> sensors;//РјР°РїР° СЃРµРЅСЃРѕСЂРѕРІ
 //public:
 //
 //	string get_string() override;
 //
-//	void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
+//	void set_parameter(string what, int value) override//СѓСЃС‚Р°РЅРІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ value  РїРѕ РєР»СЋС‡Сѓ what
 //	{
 //		sensors[what] = value;
 //	}
 //
-//	float get_parameter(string what) override			//получаем  значение  по ключу what
+//	float get_parameter(string what) override			//РїРѕР»СѓС‡Р°РµРј  Р·РЅР°С‡РµРЅРёРµ  РїРѕ РєР»СЋС‡Сѓ what
 //	{
 //		return sensors[what];
 //	}
 //};
 
-//класс датчики света
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё СЃРІРµС‚Р°
 //class TLightSensors : public TSensors
 //{
 //public:
-//	//конструктор
+//	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 //	TLightSensors()
 //	{
 //		sensors.insert(make_pair("BT", 0));
@@ -76,11 +76,11 @@ using namespace std;
 //	}
 //};
 
-//класс датчики температуры
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё С‚РµРјРїРµСЂР°С‚СѓСЂС‹
 //class TTemperatureSensors : public TSensors
 //{
 //public:
-//	//конструктор
+//	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 //	TTemperatureSensors()
 //	{
 //		sensors.insert(make_pair("BT", 0));
@@ -90,11 +90,11 @@ using namespace std;
 //	}
 //};
 
-//класс датчики влажности
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё РІР»Р°Р¶РЅРѕСЃС‚Рё
 //class THumiditySensors : public TSensors
 //{
 //public:
-//	//конструктор
+//	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 //	THumiditySensors()
 //	{
 //		sensors.insert(make_pair("BT", 0));
@@ -105,33 +105,33 @@ using namespace std;
 //};
 
 
-//интерфейс умный предмет
+//РёРЅС‚РµСЂС„РµР№СЃ СѓРјРЅС‹Р№ РїСЂРµРґРјРµС‚
 //class ISmartItem
 //{
 //public:
-//	virtual void set_parameter(string, int) = 0;//установить значение поля  по ключу
-//	virtual void set_location(string) = 0;		//установить местонахождения объекта
-//	virtual void set_item_number(int) = 0;		//установить номер объекта
-//	virtual int get_parameter(string) = 0;		//получить значения поля по ключу
-//	virtual string get_location() = 0;			//получить местонахождение объекта
-//	virtual int get_item_number() = 0;			//получть номер объекта
-//	virtual string get_string() = 0;			//составить и вернуть строку с текущими значениями полей
+//	virtual void set_parameter(string, int) = 0;//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ  РїРѕ РєР»СЋС‡Сѓ
+//	virtual void set_location(string) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёСЏ РѕР±СЉРµРєС‚Р°
+//	virtual void set_item_number(int) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р°
+//	virtual int get_parameter(string) = 0;		//РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
+//	virtual string get_location() = 0;			//РїРѕР»СѓС‡РёС‚СЊ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ РѕР±СЉРµРєС‚Р°
+//	virtual int get_item_number() = 0;			//РїРѕР»СѓС‡С‚СЊ РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р°
+//	virtual string get_string() = 0;			//СЃРѕСЃС‚Р°РІРёС‚СЊ Рё РІРµСЂРЅСѓС‚СЊ СЃС‚СЂРѕРєСѓ СЃ С‚РµРєСѓС‰РёРјРё Р·РЅР°С‡РµРЅРёСЏРјРё РїРѕР»РµР№
 //};
 
-//Класс умный свет
+//РљР»Р°СЃСЃ СѓРјРЅС‹Р№ СЃРІРµС‚
 //class TSmartLight : public ISmartItem
 //{
 //protected:
-//	map<string, int> smart_thing_char;	// мапа-характеристики умной вещи
-//	string location = "\0";				//местонахождение объекта
-//	int number = 0;						//номер объекта 
+//	map<string, int> smart_thing_char;	// РјР°РїР°-С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё СѓРјРЅРѕР№ РІРµС‰Рё
+//	string location = "\0";				//РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ РѕР±СЉРµРєС‚Р°
+//	int number = 0;						//РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р° 
 //
 //public:
-//	void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
+//	void set_parameter(string what, int value) override//СѓСЃС‚Р°РЅРІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ value  РїРѕ РєР»СЋС‡Сѓ what
 //	{
 //		smart_thing_char[what] = value;
 //	}
-//	//Сеттеры и геттеры
+//	//РЎРµС‚С‚РµСЂС‹ Рё РіРµС‚С‚РµСЂС‹
 //	void set_location(string loc) override
 //	{
 //		location = loc;
@@ -152,7 +152,7 @@ using namespace std;
 //		return number;
 //	}
 //
-//	int get_parameter(string what) override//получаем  значение  по ключу what
+//	int get_parameter(string what) override//РїРѕР»СѓС‡Р°РµРј  Р·РЅР°С‡РµРЅРёРµ  РїРѕ РєР»СЋС‡Сѓ what
 //	{
 //		return smart_thing_char[what];
 //	}
@@ -167,11 +167,11 @@ using namespace std;
 //	{
 //	smart_thing_char.insert(make_pair("BR", 0));
 //	}
-//	//расчёт яркости в зависимости от времени суток
+//	//СЂР°СЃС‡С‘С‚ СЏСЂРєРѕСЃС‚Рё РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІСЂРµРјРµРЅРё СЃСѓС‚РѕРє
 //	int calculate_brightness(void);
 //};
 
-//Класс умная лампочка
+//РљР»Р°СЃСЃ СѓРјРЅР°СЏ Р»Р°РјРїРѕС‡РєР°
 //class TSmartLamp : public TSmartLight
 //{
 //private:
@@ -186,7 +186,7 @@ using namespace std;
 //	}
 //};
 
-//класс умное жалюзи
+//РєР»Р°СЃСЃ СѓРјРЅРѕРµ Р¶Р°Р»СЋР·Рё
 //class TSmartJalousie : public TSmartLight
 //{
 //private:
@@ -198,25 +198,25 @@ using namespace std;
 //	}
 //};
 
-//Класс терморегуляционных приборов
+//РљР»Р°СЃСЃ С‚РµСЂРјРѕСЂРµРіСѓР»СЏС†РёРѕРЅРЅС‹С… РїСЂРёР±РѕСЂРѕРІ
 //class TSmartTemperatureRegulationThigs : public ISmartItem
 //{
 //
 //};
 //
-////Класс умная батарея
+////РљР»Р°СЃСЃ СѓРјРЅР°СЏ Р±Р°С‚Р°СЂРµСЏ
 //class TSmartBatterey : public TSmartTemperatureRegulationThigs
 //{
 //
 //};
 
-//Класс Комната
+//РљР»Р°СЃСЃ РљРѕРјРЅР°С‚Р°
 //class TRoom
 //{
 //private:
-//	float S = 1;//площадь
-//	float sun_energy_percentage=1;//коэффициент отвечающий за то ,сколько света(энергии солнца) доходит до комнаты
-//	string name = "\0";//имя
+//	float S = 1;//РїР»РѕС‰Р°РґСЊ
+//	float sun_energy_percentage=1;//РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° С‚Рѕ ,СЃРєРѕР»СЊРєРѕ СЃРІРµС‚Р°(СЌРЅРµСЂРіРёРё СЃРѕР»РЅС†Р°) РґРѕС…РѕРґРёС‚ РґРѕ РєРѕРјРЅР°С‚С‹
+//	string name = "\0";//РёРјСЏ
 //public:
 //	TRoom(float Sq = 1,float s_e_p=1,string nm="room")
 //	{
@@ -224,23 +224,23 @@ using namespace std;
 //		sun_energy_percentage = s_e_p;
 //		name = nm;
 //	}
-//	//получить площаль
+//	//РїРѕР»СѓС‡РёС‚СЊ РїР»РѕС‰Р°Р»СЊ
 //	float get_S()
 //	{
 //		return S;
 //	}
-//	//получить коэффициент солнечной энергии
+//	//РїРѕР»СѓС‡РёС‚СЊ РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРѕР»РЅРµС‡РЅРѕР№ СЌРЅРµСЂРіРёРё
 //	float get_sun_en_per()
 //	{
 //		return sun_energy_percentage;
 //	}
-//	//получить имя комнаты
+//	//РїРѕР»СѓС‡РёС‚СЊ РёРјСЏ РєРѕРјРЅР°С‚С‹
 //	string get_name()
 //	{
 //		return name;
 //	}
 //
-//	////под вопросом нужны ли сэттеры
+//	////РїРѕРґ РІРѕРїСЂРѕСЃРѕРј РЅСѓР¶РЅС‹ Р»Рё СЃСЌС‚С‚РµСЂС‹
 //	void set_S(float Sq)
 //	{
 //		S = Sq;
@@ -253,59 +253,59 @@ using namespace std;
 
 //class IServerInfoWorker
 //{
-//	virtual string read_data() = 0;						//Чтение данных из файла
-//	virtual void save_data(string string_to_file) = 0;  //Запись данных в файл
+//	virtual string read_data() = 0;						//Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
+//	virtual void save_data(string string_to_file) = 0;  //Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
 //};
 
 //class TServerInfoFileWorker : public IServerInfoWorker
 //{
 //public:
-//	//Чтение данных из файла
+//	//Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
 //	string read_data() override;
 //
-//	//Запись данных в файл
+//	//Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
 //	void save_data(string string_to_file) override;
 //};
 
-//Класс Менеджер
+//РљР»Р°СЃСЃ РњРµРЅРµРґР¶РµСЂ
 class TSmartHouseManager
 {
 private:
-	//создаём классы сенсоры
+	//СЃРѕР·РґР°С‘Рј РєР»Р°СЃСЃС‹ СЃРµРЅСЃРѕСЂС‹
 	TLightSensors LS;
 	TTemperatureSensors TS;
 	THumiditySensors HS;
 
-	//создаём векторы умных вещей
-	vector<TSmartLamp> smart_lamps_vec;//умные лампочки
-	vector<TSmartJalousie> smart_jalousie_vec;//умные жалюзи
+	//СЃРѕР·РґР°С‘Рј РІРµРєС‚РѕСЂС‹ СѓРјРЅС‹С… РІРµС‰РµР№
+	vector<TSmartLamp> smart_lamps_vec;//СѓРјРЅС‹Рµ Р»Р°РјРїРѕС‡РєРё
+	vector<TSmartJalousie> smart_jalousie_vec;//СѓРјРЅС‹Рµ Р¶Р°Р»СЋР·Рё
 	
-	//комнаты
+	//РєРѕРјРЅР°С‚С‹
 	vector<TRoom> rooms_vec;
 
-	//Солнце
+	//РЎРѕР»РЅС†Рµ
 	TTheSun SUN;
 
-	//создаём класс работы с файлами
+	//СЃРѕР·РґР°С‘Рј РєР»Р°СЃСЃ СЂР°Р±РѕС‚С‹ СЃ С„Р°Р№Р»Р°РјРё
 	TServerInfoFileWorker FW;
 
-	//Распарсивание строки цифр в число,например (string)"123"->(int)123
+	//Р Р°СЃРїР°СЂСЃРёРІР°РЅРёРµ СЃС‚СЂРѕРєРё С†РёС„СЂ РІ С‡РёСЃР»Рѕ,РЅР°РїСЂРёРјРµСЂ (string)"123"->(int)123
 	int parse_value(int start_index, string value_from_datafile);
 	
-	//Ошибка:количество данных принятых с сервера больше чем количество умных вещей
+	//РћС€РёР±РєР°:РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РЅРЅС‹С… РїСЂРёРЅСЏС‚С‹С… СЃ СЃРµСЂРІРµСЂР° Р±РѕР»СЊС€Рµ С‡РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ СѓРјРЅС‹С… РІРµС‰РµР№
 	void exception_out_of_range();
 	
 	
 public:
-	TSmartHouseManager(int number_of_rooms,int lenght_lamps = 1, int lenght_jalousie = 1)//конструктор 
+	TSmartHouseManager(int number_of_rooms,int lenght_lamps = 1, int lenght_jalousie = 1)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ 
 	{
-		//инициализация солнца
+		//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРѕР»РЅС†Р°
 		SUN.set_item_number(lenght_lamps+1);
-		//инициализация количесва умных вещей
+		//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕР»РёС‡РµСЃРІР° СѓРјРЅС‹С… РІРµС‰РµР№
 		smart_lamps_vec.resize(lenght_lamps);
 		smart_jalousie_vec.resize(lenght_jalousie);
 
-		//инициализация комнат
+		//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРјРЅР°С‚
 		TRoom KN(18, 0.8, "KN");
 		TRoom LR(25, 1, "LR");
 		TRoom SR(20, 0.7, "SR");
@@ -318,16 +318,16 @@ public:
 	}
 	
 
-	 //Парсер
+	 //РџР°СЂСЃРµСЂ
 	void parse_string();
 	
-	//Обсчёт значений датчиков в зависимости от работы умных вещей и солнца 
+	//РћР±СЃС‡С‘С‚ Р·РЅР°С‡РµРЅРёР№ РґР°С‚С‡РёРєРѕРІ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЂР°Р±РѕС‚С‹ СѓРјРЅС‹С… РІРµС‰РµР№ Рё СЃРѕР»РЅС†Р° 
 	void set_sensors_data();
 
-	//Собрать все данные в одну строку
+	//РЎРѕР±СЂР°С‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ РІ РѕРґРЅСѓ СЃС‚СЂРѕРєСѓ
 	string collect_all_data();
 	
-	//Один цикл программы
+	//РћРґРёРЅ С†РёРєР» РїСЂРѕРіСЂР°РјРјС‹
 	void one_cycle();
 	
 };

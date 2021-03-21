@@ -1,11 +1,11 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 #include <map>
 using std::string;
-//интерфейс датчики
+//РёРЅС‚РµСЂС„РµР№СЃ РґР°С‚С‡РёРєРё
 class ISensors
 {
-	virtual string get_string() = 0;							//составить и получить строку с текущими значениями датчиков
-	virtual void set_parameter(string what, int value) = 0;		//установить значение поля по ключу
-	virtual float get_parameter(string what) = 0;				//получить значение поля по ключу
+	virtual string get_string() = 0;							//СЃРѕСЃС‚Р°РІРёС‚СЊ Рё РїРѕР»СѓС‡РёС‚СЊ СЃС‚СЂРѕРєСѓ СЃ С‚РµРєСѓС‰РёРјРё Р·РЅР°С‡РµРЅРёСЏРјРё РґР°С‚С‡РёРєРѕРІ
+	virtual void set_parameter(string what, int value) = 0;		//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
+	virtual float get_parameter(string what) = 0;				//РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РїРѕ РєР»СЋС‡Сѓ
 };

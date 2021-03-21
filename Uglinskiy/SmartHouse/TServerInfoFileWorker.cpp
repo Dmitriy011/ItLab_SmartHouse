@@ -1,29 +1,29 @@
-#include "TServerInfoFileWorker.h"
+п»ї#include "TServerInfoFileWorker.h"
 #pragma warning(disable : 4996)
-//прочесть данные из файла и вернуть их в виде строки
+//РїСЂРѕС‡РµСЃС‚СЊ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р° Рё РІРµСЂРЅСѓС‚СЊ РёС… РІ РІРёРґРµ СЃС‚СЂРѕРєРё
 string TServerInfoFileWorker::read_data()
 {
-	ifstream in("smart_lamp.txt", ios::in); // окрываем файл для чтения
+	ifstream in("smart_lamp.txt", ios::in); // РѕРєСЂС‹РІР°РµРј С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ
 
 	std::stringstream sstr;
 	sstr << in.rdbuf();
 	return sstr.str();
 }
 
-//сохранить данные в файл
+//СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»
 void TServerInfoFileWorker::save_data(string string_to_file)
 {
-	time_t now = time(NULL);//создаём переменую времени
+	time_t now = time(NULL);//СЃРѕР·РґР°С‘Рј РїРµСЂРµРјРµРЅСѓСЋ РІСЂРµРјРµРЅРё
 
 	ofstream in_file("Total_sensors_data.txt");
 	if (in_file.is_open())
 	{
 
-		in_file << asctime(localtime(&now));//Записываем текущее время
+		in_file << asctime(localtime(&now));//Р—Р°РїРёСЃС‹РІР°РµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
 		cout << asctime(localtime(&now));
-		in_file << string_to_file << endl;	//записываем данные из принятой строки в файл
+		in_file << string_to_file << endl;	//Р·Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ РёР· РїСЂРёРЅСЏС‚РѕР№ СЃС‚СЂРѕРєРё РІ С„Р°Р№Р»
 
 		cout << string_to_file << endl;
 	}
-	in_file.close();//закрываем файл
+	in_file.close();//Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 }

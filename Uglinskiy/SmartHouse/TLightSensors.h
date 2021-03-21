@@ -1,10 +1,10 @@
-#pragma once
+п»ї#pragma once
 #include "TSensors.h"
-//класс датчики света
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё СЃРІРµС‚Р°
 class TLightSensors : public TSensors
 {
 public:
-	//конструктор
+	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	TLightSensors()
 	{
 		sensors.insert(make_pair("BT", 0));

@@ -1,21 +1,21 @@
-#include "TSmartLight.h"
+п»ї#include "TSmartLight.h"
 
 
-//собрать все имеющиеся данные в строку в виде "ключ"="значение",
+//СЃРѕР±СЂР°С‚СЊ РІСЃРµ РёРјРµСЋС‰РёРµСЃСЏ РґР°РЅРЅС‹Рµ РІ СЃС‚СЂРѕРєСѓ РІ РІРёРґРµ "РєР»СЋС‡"="Р·РЅР°С‡РµРЅРёРµ",
 string TSmartLight::get_string()
 {
-	string return_string = "\0";	//создаём пустую строку
+	string return_string = "\0";	//СЃРѕР·РґР°С‘Рј РїСѓСЃС‚СѓСЋ СЃС‚СЂРѕРєСѓ
 
-	map<string, int>::iterator it;	//создаём итератор 
-	it = smart_thing_char.begin();	//устанавливаем итератор в начало мапы
+	map<string, int>::iterator it;	//СЃРѕР·РґР°С‘Рј РёС‚РµСЂР°С‚РѕСЂ 
+	it = smart_thing_char.begin();	//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёС‚РµСЂР°С‚РѕСЂ РІ РЅР°С‡Р°Р»Рѕ РјР°РїС‹
 
-	while (it != smart_thing_char.end())//Цикл: пока не достигнем конца мапы
+	while (it != smart_thing_char.end())//Р¦РёРєР»: РїРѕРєР° РЅРµ РґРѕСЃС‚РёРіРЅРµРј РєРѕРЅС†Р° РјР°РїС‹
 	{
-		return_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
+		return_string += it->first + "=" + to_string(it->second) + ',';//РґРѕР±Р°РІР»СЏРµРј Рє С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРµ: "РєР»СЋС‡ = Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р°,"
 		++it;
-		if (it == smart_thing_char.end())//убираем последнюю ненужную запятую
+		if (it == smart_thing_char.end())//СѓР±РёСЂР°РµРј РїРѕСЃР»РµРґРЅСЋСЋ РЅРµРЅСѓР¶РЅСѓСЋ Р·Р°РїСЏС‚СѓСЋ
 		{
-			return_string.erase(return_string.size() - 1);//вроде работает,но выглядит не очень 
+			return_string.erase(return_string.size() - 1);//РІСЂРѕРґРµ СЂР°Р±РѕС‚Р°РµС‚,РЅРѕ РІС‹РіР»СЏРґРёС‚ РЅРµ РѕС‡РµРЅСЊ 
 		}
 	}
 	return return_string;

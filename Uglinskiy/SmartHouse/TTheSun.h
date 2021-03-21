@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "TSmartLight.h"
 class TTheSun : public TSmartLight
 {
@@ -8,6 +8,6 @@ public:
 	smart_thing_char.insert(make_pair("BR", 0));
 	location = "SU";
 	}
-	//расчёт яркости в зависимости от времени суток
+	//СЂР°СЃС‡С‘С‚ СЏСЂРєРѕСЃС‚Рё РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІСЂРµРјРµРЅРё СЃСѓС‚РѕРє
 	int calculate_brightness(void);
 };

@@ -1,6 +1,6 @@
-#pragma once
+п»ї#pragma once
 #include "TSmartLight.h"
-//класс умное жалюзи
+//РєР»Р°СЃСЃ СѓРјРЅРѕРµ Р¶Р°Р»СЋР·Рё
 class TSmartJalousie : public TSmartLight
 {
 private:

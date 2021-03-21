@@ -1,10 +1,10 @@
-#pragma once
+п»ї#pragma once
 #include "TSensors.h"
-//класс датчики влажности
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё РІР»Р°Р¶РЅРѕСЃС‚Рё
 class THumiditySensors : public TSensors
 {
 public:
-	//конструктор
+	//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	THumiditySensors()
 	{
 		sensors.insert(make_pair("BT", 0));

@@ -1,13 +1,13 @@
-#pragma once
+п»ї#pragma once
 #include "IServerInfoWorker.h"
 
 class TServerInfoFileWorker : public IServerInfoWorker
 {
 public:
-	//Чтение данных из файла
+	//Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
 	string read_data() override;
 
-	//Запись данных в файл
+	//Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
 	void save_data(string string_to_file) override;
 };
 

@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "ISensors.h"
 
 
@@ -6,21 +6,21 @@ using std::map;
 using std::string;
 using std::to_string;
 
-//класс датчики
+//РєР»Р°СЃСЃ РґР°С‚С‡РёРєРё
 class TSensors : public ISensors
 {
 protected:
-	map<string, int> sensors;//мапа сенсоров
+	map<string, int> sensors;//РјР°РїР° СЃРµРЅСЃРѕСЂРѕРІ
 public:
 
 	string get_string() override;
 
-	void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
+	void set_parameter(string what, int value) override//СѓСЃС‚Р°РЅРІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ value  РїРѕ РєР»СЋС‡Сѓ what
 	{
 		sensors[what] = value;
 	}
 
-	float get_parameter(string what) override			//получаем  значение  по ключу what
+	float get_parameter(string what) override			//РїРѕР»СѓС‡Р°РµРј  Р·РЅР°С‡РµРЅРёРµ  РїРѕ РєР»СЋС‡Сѓ what
 	{
 		return sensors[what];
 	}

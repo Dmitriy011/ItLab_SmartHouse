@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "ISmartItem.h"
 
 
@@ -6,20 +6,20 @@ using std::string;
 using std::map;
 using std::to_string;
 using std::make_pair;
-//Класс умный свет
+//РљР»Р°СЃСЃ СѓРјРЅС‹Р№ СЃРІРµС‚
 class TSmartLight : public ISmartItem
 {
 protected:
-	map<string, int> smart_thing_char;	// мапа-характеристики умной вещи
-	string location = "\0";				//местонахождение объекта
-	int number = 0;						//номер объекта 
+	map<string, int> smart_thing_char;	// РјР°РїР°-С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё СѓРјРЅРѕР№ РІРµС‰Рё
+	string location = "\0";				//РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ РѕР±СЉРµРєС‚Р°
+	int number = 0;						//РЅРѕРјРµСЂ РѕР±СЉРµРєС‚Р° 
 
 public:
-	void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
+	void set_parameter(string what, int value) override//СѓСЃС‚Р°РЅРІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ value  РїРѕ РєР»СЋС‡Сѓ what
 	{
 		smart_thing_char[what] = value;
 	}
-	//Сеттеры и геттеры
+	//РЎРµС‚С‚РµСЂС‹ Рё РіРµС‚С‚РµСЂС‹
 	void set_location(string loc) override
 	{
 		location = loc;
@@ -40,7 +40,7 @@ public:
 		return number;
 	}
 
-	int get_parameter(string what) override//получаем  значение  по ключу what
+	int get_parameter(string what) override//РїРѕР»СѓС‡Р°РµРј  Р·РЅР°С‡РµРЅРёРµ  РїРѕ РєР»СЋС‡Сѓ what
 	{
 		return smart_thing_char[what];
 	}
