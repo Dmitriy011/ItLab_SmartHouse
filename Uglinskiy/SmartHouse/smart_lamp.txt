@@ -1,12 +1,5 @@
-lamp_1_KN:BR=12,R=123,G=143,B=222;
-lamp_2_KN:BR=12,R=123,G=143,B=222;
-lamp_3_SR:BR=12,R=123,G=143,B=222;
-lamp_4_SR:BR=12,R=123,G=143,B=222;
-lamp_5_LR:BR=12,R=123,G=143,B=222;
-lamp_6_LR:BR=12,R=123,G=143,B=222;
-lamp_7_LR:BR=12,R=123,G=143,B=222;
-lamp_8_LR:BR=12,R=123,G=143,B=222;
-lamp_9_BT:BR=12,R=123,G=143,B=222;
+lamp_1_LR:BR=12,R=123,G=143,B=222;
+lamp_2_LR:BR=12,R=123,G=143,B=222;
+lamp_3_LR:BR=12,R=123,G=143,B=222;
 jalousie_1_LR:DEG=90;
 jalousie_2_LR:DEG=90;
-jalousie_3_SR:DEG=90;

@@ -7,7 +7,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
 
-	TSmartHouseManager Manager(4,9, 3);
+	TSmartHouseManager Manager(4,3,2);
 
 	//while (clock() / 1000 <30)
 	//{

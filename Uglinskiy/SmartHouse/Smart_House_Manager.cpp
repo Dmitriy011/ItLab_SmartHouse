@@ -1,105 +1,116 @@
 #include "Smart_House_Manager.h"
-
-
-//собрать все имеющиеся данные в строку в виде "ключ"="значение",
+/*
 string TSensors::get_string()
-{
-
-	string tmp_string = "\0";		//создаём пустую строку
-	map<string, int>::iterator it;	//создаём итератор
-
-	it = sensors.begin();			//устанавливаем итератор в начало
-
-	while (it != sensors.end())//Цикл: пока не достигнем конца мапы
-	{
-		tmp_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
-		++it;
-		if (it == sensors.end())//убираем последнюю ненужную запятую
-		{
-			tmp_string.erase(tmp_string.size() - 1);//вроде работает,но выглядит не очень 
-		}
-	}
-	return tmp_string;//возвращаем полученную строку
-}
-
-//собрать все имеющиеся данные в строку в виде "ключ"="значение",
 string TSmartLight::get_string()
-{
-	string return_string = "\0";	//создаём пустую строку
-
-	map<string, int>::iterator it;	//создаём итератор 
-	it = smart_thing_char.begin();	//устанавливаем итератор в начало мапы
-
-	while (it != smart_thing_char.end())//Цикл: пока не достигнем конца мапы
-	{
-		return_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
-		++it;
-		if (it == smart_thing_char.end())//убираем последнюю ненужную запятую
-		{
-			return_string.erase(return_string.size() - 1);//вроде работает,но выглядит не очень 
-		}
-	}
-	return return_string;
-}
-
-//расчёт яркости солнца в зависимости от лонца
 int TTheSun::calculate_brightness()
-{
-	int day_lenght = 15, half_day_lenght = 0;		//создаём переменные продолжительность суток и продолжительность половины суток в секундах	
-	int day_time = (clock() / 1000) % (day_lenght);	//создаём переменную ,отвечаующую за текущее время суток в секундах
-	//оно высчитывается по следующей формуле:Берётся время прошедшее от начала программы в секундах
-	//и от него берём остаток от деления на продолжительность суток
-	//Благодаря этому добиваемся зацикливания суток на протяжении работы программы.Один цикл равен day_lenght
-	int time_to_night = 0;//переменная отвечающая за ближайшее количество секунд до 00:00.Не может быть больше half_day_lenght
-	float sun_brightness_to_daytime_koeff = 0;		//коэффициент отвачающий за то,сколько времени должно пройти чтобы изменить яркость солнца на 1 у.е.
-	half_day_lenght = day_lenght / 2;				//высчитываем половину суток
-
-	if (day_time <= half_day_lenght)//если время меньше полудня то просто записываем значение day_time  в  time_to_night
-	{
-		time_to_night = day_time;
-	}
-	else//иначе высчитываем сколько времени остаётся до наступления 00:00
-	{
-		if (day_time != 0)
-		{
-			time_to_night = day_lenght - day_time;
-		}
-		else
-		{
-			time_to_night = 0;
-		}
-	}
-	sun_brightness_to_daytime_koeff = (float)half_day_lenght / MAX_LAMP_POWER;
-	return (time_to_night / sun_brightness_to_daytime_koeff);//возвращаем яркость в у.е.
-}
-
-//прочесть данные из файла и вернуть их в виде строки
 string TServerInfoFileWorker::read_data()
-{
-	ifstream in("smart_lamp.txt", ios::in); // окрываем файл для чтения
-
-	std::stringstream sstr;
-	sstr << in.rdbuf();
-	return sstr.str();
-}
-
-//сохранить данные в файл
 void TServerInfoFileWorker::save_data(string string_to_file)
-{
-	time_t now = time(NULL);//создаём переменую времени
+void TSmartHouseManager::parse_string()
+void TSmartHouseManager::set_sensors_data()
+string TSmartHouseManager::collect_all_data()
+void TSmartHouseManager::one_cycle()
+*/
 
-	ofstream in_file("Total_sensors_data.txt");
-	if (in_file.is_open())
-	{
 
-		in_file << asctime(localtime(&now));//Записываем текущее время
-		cout << asctime(localtime(&now));
-		in_file << string_to_file << endl;	//записываем данные из принятой строки в файл
-
-		cout << string_to_file << endl;
-	}
-	in_file.close();//закрываем файл
-}
+////собрать все имеющиеся данные в строку в виде "ключ"="значение",
+//string TSensors::get_string()
+//{
+//
+//	string tmp_string = "\0";		//создаём пустую строку
+//	map<string, int>::iterator it;	//создаём итератор
+//
+//	it = sensors.begin();			//устанавливаем итератор в начало
+//
+//	while (it != sensors.end())//Цикл: пока не достигнем конца мапы
+//	{
+//		tmp_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
+//		++it;
+//		if (it == sensors.end())//убираем последнюю ненужную запятую
+//		{
+//			tmp_string.erase(tmp_string.size() - 1);//вроде работает,но выглядит не очень 
+//		}
+//	}
+//	return tmp_string;//возвращаем полученную строку
+//}
+//
+////собрать все имеющиеся данные в строку в виде "ключ"="значение",
+//string TSmartLight::get_string()
+//{
+//	string return_string = "\0";	//создаём пустую строку
+//
+//	map<string, int>::iterator it;	//создаём итератор 
+//	it = smart_thing_char.begin();	//устанавливаем итератор в начало мапы
+//
+//	while (it != smart_thing_char.end())//Цикл: пока не достигнем конца мапы
+//	{
+//		return_string += it->first + "=" + to_string(it->second) + ',';//добавляем к текущей строке: "ключ = значение ключа,"
+//		++it;
+//		if (it == smart_thing_char.end())//убираем последнюю ненужную запятую
+//		{
+//			return_string.erase(return_string.size() - 1);//вроде работает,но выглядит не очень 
+//		}
+//	}
+//	return return_string;
+//}
+//
+////расчёт яркости солнца в зависимости от лонца
+//int TTheSun::calculate_brightness()
+//{
+//	int day_lenght = 15, half_day_lenght = 0;		//создаём переменные продолжительность суток и продолжительность половины суток в секундах	
+//	int day_time = (clock() / 1000) % (day_lenght);	//создаём переменную ,отвечаующую за текущее время суток в секундах
+//	//оно высчитывается по следующей формуле:Берётся время прошедшее от начала программы в секундах
+//	//и от него берём остаток от деления на продолжительность суток
+//	//Благодаря этому добиваемся зацикливания суток на протяжении работы программы.Один цикл равен day_lenght
+//	int time_to_night = 0;//переменная отвечающая за ближайшее количество секунд до 00:00.Не может быть больше half_day_lenght
+//	float sun_brightness_to_daytime_koeff = 0;		//коэффициент отвачающий за то,сколько времени должно пройти чтобы изменить яркость солнца на 1 у.е.
+//	half_day_lenght = day_lenght / 2;				//высчитываем половину суток
+//
+//	if (day_time <= half_day_lenght)//если время меньше полудня то просто записываем значение day_time  в  time_to_night
+//	{
+//		time_to_night = day_time;
+//	}
+//	else//иначе высчитываем сколько времени остаётся до наступления 00:00
+//	{
+//		if (day_time != 0)
+//		{
+//			time_to_night = day_lenght - day_time;
+//		}
+//		else
+//		{
+//			time_to_night = 0;
+//		}
+//	}
+//	sun_brightness_to_daytime_koeff = (float)half_day_lenght / MAX_LAMP_POWER;
+//	return (time_to_night / sun_brightness_to_daytime_koeff);//возвращаем яркость в у.е.
+//}
+//
+////прочесть данные из файла и вернуть их в виде строки
+//string TServerInfoFileWorker::read_data()
+//{
+//	ifstream in("smart_lamp.txt", ios::in); // окрываем файл для чтения
+//
+//	std::stringstream sstr;
+//	sstr << in.rdbuf();
+//	return sstr.str();
+//}
+//
+////сохранить данные в файл
+//void TServerInfoFileWorker::save_data(string string_to_file)
+//{
+//	time_t now = time(NULL);//создаём переменую времени
+//
+//	ofstream in_file("Total_sensors_data.txt");
+//	if (in_file.is_open())
+//	{
+//
+//		in_file << asctime(localtime(&now));//Записываем текущее время
+//		cout << asctime(localtime(&now));
+//		in_file << string_to_file << endl;	//записываем данные из принятой строки в файл
+//
+//		cout << string_to_file << endl;
+//	}
+//	in_file.close();//закрываем файл
+//}
 
 //Ошибка:количество данных принятых с сервера больше чем количество умных вещей
 void TSmartHouseManager::exception_out_of_range()
@@ -310,7 +321,7 @@ void TSmartHouseManager::set_sensors_data()
 string TSmartHouseManager::collect_all_data()
 {
 	string all_data = "\0";						//создаём строку куда будем записывать
-	all_data += "SUN:" +SUN.get_string()+ ";\n";//Записываем информацию о солнце
+	
 
 	//в цикле проходим все умные вещи
 	for (int i = 0; i < smart_lamps_vec.size(); i++)
@@ -319,6 +330,7 @@ string TSmartHouseManager::collect_all_data()
 		all_data += "lamp_" +to_string(smart_lamps_vec[i].get_item_number()) +"_"+ smart_lamps_vec[i].get_location() + ":" 
 			+ smart_lamps_vec[i].get_string() + ";\n";
 	}
+	all_data += "lamp_" + to_string(SUN.get_item_number()) + +"_" + SUN.get_location() + ":" +SUN.get_string() + ";\n";//Записываем информацию о солнце
 	for (int i = 0; i < smart_jalousie_vec.size(); i++)
 	{
 		all_data += "jalousie_" + to_string(smart_jalousie_vec[i].get_item_number())+"_"+ smart_jalousie_vec[i].get_location() + ":"
