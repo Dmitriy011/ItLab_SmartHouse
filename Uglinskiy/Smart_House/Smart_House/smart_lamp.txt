@@ -1,0 +1,5 @@
+lamp_1_LR:BR=12,R=123,G=143,B=222;
+lamp_2_LR:BR=12,R=123,G=143,B=222;
+lamp_3_LR:BR=12,R=123,G=143,B=222;
+jalousie_1_LR:DEG=90;
+jalousie_2_LR:DEG=90;
