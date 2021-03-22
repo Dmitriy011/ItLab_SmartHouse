@@ -8,7 +8,7 @@ ReadFile::ReadFile()
 
 void ReadFile::read_txt()
 {
-    string filename = "..\\..\\Uglinskiy\\SmartHouse\\smart_lamp.txt";
+    string filename = "..\\..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
     //string filename = "D:\\labs\\ItLab\\ItLab_SmartHouse\\Rozanov\\MyInfo\\myInfo.txt";
 
     string tmp = "";

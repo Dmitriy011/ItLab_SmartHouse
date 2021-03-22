@@ -1,3 +1,0 @@
-lamp_1_LR:B=0;
-lamp_1_LR:B=0;
-lamp_2_LR:B=0;
