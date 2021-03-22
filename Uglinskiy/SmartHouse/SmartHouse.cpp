@@ -8,9 +8,8 @@ int main()
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
 
-	SmartHouseManager Manager(2,1);
-	//Manager.parse_string();
-	//cout << Manager.collect_all_data();
+	SmartHouseManager Manager(2,2);
+	
 	Manager.one_cycle();
 
 	return 0;
