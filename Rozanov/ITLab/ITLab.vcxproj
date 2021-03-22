@@ -148,26 +148,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Intilization.cpp" />
-    <ClCompile Include="Lamp.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ReadFile.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="cpp\Camera.cpp" />
+    <ClCompile Include="cpp\Intilization.cpp" />
+    <ClCompile Include="cpp\Lamp.cpp" />
+    <ClCompile Include="cpp\Main.cpp" />
+    <ClCompile Include="cpp\Mesh.cpp" />
+    <ClCompile Include="cpp\Model.cpp" />
+    <ClCompile Include="cpp\ReadFile.cpp" />
+    <ClCompile Include="cpp\Shader.cpp" />
+    <ClCompile Include="cpp\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Intilization.h" />
-    <ClInclude Include="Lamp.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="MyRoom.h" />
-    <ClInclude Include="ReadFile.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="..\Include\Camera.h" />
+    <ClInclude Include="..\Include\Intilization.h" />
+    <ClInclude Include="..\Include\Jalousie.h" />
+    <ClInclude Include="..\Include\Lamp.h" />
+    <ClInclude Include="..\Include\Mesh.h" />
+    <ClInclude Include="..\Include\Model.h" />
+    <ClInclude Include="..\Include\MyRoom.h" />
+    <ClInclude Include="..\Include\ReadFile.h" />
+    <ClInclude Include="..\Include\Shader.h" />
+    <ClInclude Include="..\Include\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

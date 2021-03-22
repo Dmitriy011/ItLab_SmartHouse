@@ -1,0 +1,7 @@
+lamp_2_LR:B=11;
+jalousie_2:DEG=0;
+jalousie_1:DEG=0;
+jalousie_2:DEG=0;
+jalousie_1:DEG=90;
+jalousie_1:DEG=90;
+jalousie_2:DEG=0;
