@@ -1,19 +1,9 @@
 class SensorInfoFileWorker:
     def ReadData():
-        f=open('..\\Uglinskiy\\SmartHouse\\Total_sensors_data.txt','r')
+        f=open('..\\Uglinskiy\\Smart_House\\Smart_House\\Total_sensors_data.txt','r')
         s=f.readlines()
-        li_sensors = [0]*4
-        for n in range (len(s)):
-            if s[n][0:9]=="li_sensor":
-                i,j=0,0
-                for k in range(4):
-                    while s[n][i]!=';':
-                        i+=1
-                    li_sensors[k]=s[n][j:i+1]
-                    j=i+1
-                    i+=1
         f.close()
-        return li_sensors
+        return s
     
     def SaveData():
         pass
