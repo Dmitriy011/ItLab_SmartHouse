@@ -3,8 +3,10 @@
 #include <fstream> 
 #include <sstream> 
 #include <iostream>
+#include <vector>
 
 using namespace std;
+
 
 class ReadFile
 {

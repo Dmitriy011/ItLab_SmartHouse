@@ -14,7 +14,7 @@ void Lamp::init_all_lamp(Shader& shader, vec3 pointLightPositions[])
     string tmp3;
     string tmp4;
 
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 13; i++)
     {
         tmp1 = "pointLights[";
         tmp2 = to_string(i);
@@ -49,8 +49,6 @@ void Lamp::brightness(Shader& shader)
     string tmp = brightnes.GetValueL();
     size_t numbers_lamp = brightnes.Get_numbers_lamp();
 
-    init_brightness_constants(numbers_lamp);
-
     switch (stoi(brightnes.GetValueL()))
     {
     case 0:
@@ -70,6 +68,7 @@ void Lamp::brightness(Shader& shader)
     }
     case 2:
     {
+
         shader.setFloat(light_const, 1.0f);
         shader.setFloat(light_linear, 0.22f);
         shader.setFloat(light_quadratic, 0.20f);
@@ -84,6 +83,7 @@ void Lamp::brightness(Shader& shader)
     }
     case 4:
     {
+
         shader.setFloat(light_const, 1.0f);
         shader.setFloat(light_linear, 0.09f);
         shader.setFloat(light_quadratic, 0.032f);
@@ -91,6 +91,7 @@ void Lamp::brightness(Shader& shader)
     }
     case 5:
     {
+
         shader.setFloat(light_const, 1.0f);
         shader.setFloat(light_linear, 0.07f);
         shader.setFloat(light_quadratic, 0.017f);
@@ -139,6 +140,8 @@ void Lamp::brightness(Shader& shader)
         break;
     }
     }
+
+    init_brightness_constants(numbers_lamp);
 }
 
 void Lamp::init_brightness_constants(size_t _number)
@@ -174,7 +177,7 @@ void Lamp::on_max_all_lamp(Shader& shader)
     string tmp3;
     string tmp4;
 
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 13; i++)
     {
         tmp1 = "pointLights[";
         tmp2 = to_string(i);
@@ -196,17 +199,46 @@ void Lamp::on_max_all_lamp(Shader& shader)
     }
 }
 
-string Lamp::get_light_const()
+void Lamp::on_min_all_lamp(Shader& shader)
+{
+    string tmp1;
+    string tmp2;
+    string tmp3;
+    string tmp4;
+
+    for (size_t i = 0; i < 13; i++)
+    {
+        tmp1 = "pointLights[";
+        tmp2 = to_string(i);
+        tmp1.append(tmp2);
+        tmp3 = "].constant";
+        tmp4 = tmp1;
+        tmp4.append(tmp3);
+        shader.setFloat(tmp4, 1.0f);
+
+        tmp3 = "].linear";
+        tmp4 = tmp1;
+        tmp4.append(tmp3);
+        shader.setFloat(tmp4, 0.7f);
+
+        tmp3 = "].quadratic";
+        tmp4 = tmp1;
+        tmp4.append(tmp3);
+        shader.setFloat(tmp4, 1.8f);
+    }
+}
+
+string Lamp::get_light_const() const
 {
     return light_const;
 }
 
-string Lamp::get_light_linear()
+string Lamp::get_light_linear() const
 {
     return light_linear;
 }
 
-string Lamp::get_light_quadratic()
+string Lamp::get_light_quadratic() const
 {
     return light_quadratic;
 }

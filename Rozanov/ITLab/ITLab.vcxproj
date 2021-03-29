@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="cpp\Camera.cpp" />
     <ClCompile Include="cpp\Intilization.cpp" />
+    <ClCompile Include="cpp\Jalousie.cpp" />
     <ClCompile Include="cpp\Lamp.cpp" />
     <ClCompile Include="cpp\Main.cpp" />
     <ClCompile Include="cpp\Mesh.cpp" />

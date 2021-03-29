@@ -44,12 +44,18 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	
 	Shader ObjectShader("../Shader/Vertex/Vertex_model.txt", "../Shader/Fragment/fragment_model.txt ");
 	Shader LampShader("../Shader/Vertex/Vertex_lamp.txt", "../Shader/Fragment/fragment_lamp.txt ");
+	Shader skyboxShader("../Shader/Vertex/Vertex_skybox.txt", "../Shader/Fragment/fragment_skybox.txt");
 
 	MyRoom room;
 	room.init_cube_room();
 	room.init_cube_light();
 	room.crete_texture_cube_room(ObjectShader);
-	room.Draw(utils, ObjectShader, LampShader, window);
+	room.Draw(utils, ObjectShader, LampShader, window, skyboxShader);
+
 
 	return 0;
 }
+
+
+
+

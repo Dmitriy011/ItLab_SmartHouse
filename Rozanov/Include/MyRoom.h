@@ -17,11 +17,23 @@ extern Intilization intilizaton;
 
 vec3 pointLightPositions[] =
 {
-	vec3(0.0f,  0.8f,  -0.5f),
-	vec3(-0.5f, 0.8f, -0.5f),
-	vec3(-1.0f,  0.8f, -0.5f),
-	//vec3(-4.0f,  5.0f, -5.0f)
-	vec3(0.0f, 2.0f, -13.0f)
+	vec3(0.0f,  0.8f,  -0.8f),
+	vec3(-0.5f, 0.8f, -0.8f),
+	vec3(-1.0f,  0.8f, -0.8f),
+
+	vec3(5.0f, 1.1f, -1.5f),
+	vec3(5.4f, 1.1f, -1.5f),
+	vec3(5.8f, 1.1f, -1.5f),
+
+	vec3(1.0f, 0.8f, 4.1f),
+	vec3(1.0f, 0.8f, 4.3f),
+	vec3(1.0f, 0.8f, 4.6f),
+
+	vec3(-1.0f, 0.8f, 6.0f),
+	vec3(-1.0f, 0.8f, 6.2f),
+	vec3(-1.0f, 0.8f, 6.4f),
+
+	vec3(0.0f, 5.0f, -13.0f)
 };
 
 float vertices[] =
@@ -76,12 +88,59 @@ GLuint indices[] =
 	1, 2, 3																		// 2ой треугольник
 };
 
+float skyboxVertices[] = {
+	// positions          
+	-1.0f,  1.0f, -1.0f,
+	-1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+
+	-1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f, -1.0f,
+	-1.0f,  1.0f,  1.0f,
+	-1.0f, -1.0f,  1.0f,
+
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+
+	-1.0f, -1.0f,  1.0f,
+	-1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f,  1.0f,
+
+	-1.0f,  1.0f, -1.0f,
+	 1.0f,  1.0f, -1.0f,
+	 1.0f,  1.0f,  1.0f,
+	 1.0f,  1.0f,  1.0f,
+	-1.0f,  1.0f,  1.0f,
+	-1.0f,  1.0f, -1.0f,
+
+	-1.0f, -1.0f, -1.0f,
+	-1.0f, -1.0f,  1.0f,
+	 1.0f, -1.0f, -1.0f,
+	 1.0f, -1.0f, -1.0f,
+	-1.0f, -1.0f,  1.0f,
+	 1.0f, -1.0f,  1.0f
+};
+
 class MyRoom
 {
 public:
 	GLuint  VBO, objectVAO, EBO;
 	GLuint lightVAO;
 	GLuint diffuseMap;
+	unsigned int skyboxVAO, skyboxVBO;
+
 
 	void init_cube_room()
 	{
@@ -99,7 +158,17 @@ public:
 		glEnableVertexAttribArray(1);																			//5)Вкл
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));	//5)Атрибут расположения текстуры
 		glEnableVertexAttribArray(2);																			//5)Вкл					
-		glBindVertexArray(0);																					//Отвязываем Vao (далее можно снова привязать "glBindVertexArray(VAO);" и необх снова отвязать)
+		glBindVertexArray(0);																					//Отвязываем Vao (далее можно снова привязать "glBindVertexArray(VAO);" и необх снова отвязат
+
+		//----//
+		glGenVertexArrays(1, &skyboxVAO);
+		glGenBuffers(1, &skyboxVBO);
+		glBindVertexArray(skyboxVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		//----//
 	}
 
 	void init_cube_light()
@@ -130,20 +199,40 @@ public:
 		glUniform1i(glGetUniformLocation(ObjectShader.Program, "material.diffuse"), 0);
 	}
 
-	void Draw(Utils utils, Shader ObjectShader, Shader LampShader, GLFWwindow* window)
+	void Draw(Utils utils, Shader ObjectShader, Shader LampShader, GLFWwindow* window, Shader skybox)
 	{
 		Lamp lamp;
 		Jalousie jalousie;
 
+		vector<std::string> faces
+		{
+			"../skybox2/right.jpg",
+			"../skybox2/left.jpg",
+			"../skybox2/top.jpg",
+			"../skybox2/bottom.jpg",
+			"../skybox2/front.jpg",
+			"../skybox2/back.jpg",
+		};
+		unsigned int cubemapTexture = utils.loadCubemap(faces);
+
+		LampShader.Use();
+		LampShader.setInt("skybox", 0);
+
 		ObjectShader.Use();
 
-		lamp.on_max_all_lamp(ObjectShader);
+		lamp.on_min_all_lamp(ObjectShader);
 		lamp.init_all_lamp(ObjectShader, pointLightPositions);
 
 		Model Bed(const_cast<GLchar*>("../Models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj"));
 		Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
 		Model Window(const_cast<GLchar*>("../Models/window/Window_Component_BI_Weight_Paint2.obj"));
-		Model clock(const_cast<GLchar*>("../Models/Clock_Constraints_for_Animations/Clock_fbx.fbx"));
+		Model grass(const_cast<GLchar*>("../Models/grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj"));
+		Model tree(const_cast<GLchar*>("../Models/Tree/Tree.obj"));
+		Model Refregarator(const_cast<GLchar*>("../Models/refregerator/Refrigerator.obj"));
+		Model Table_kitchen(const_cast<GLchar*>("../Models/table_Kitchen/Kitchen furniture.obj"));
+		Model Sofa(const_cast<GLchar*>("../Models/sofa/DesignSofa1.obj"));
+		Model Toilet(const_cast<GLchar*>("../Models/toilet/10778_Toilet_V2.obj"));
+		
 
 		while (!glfwWindowShouldClose(window))											//проверяет, не передано ли указание закончить работу 
 		{
@@ -163,10 +252,10 @@ public:
 			lamp.brightness(ObjectShader);
 
 			ObjectShader.setVec3("viewPos", camera.GetPosition());
-			ObjectShader.setFloat("material.shininess", 32.0f);
+			ObjectShader.setFloat("material.shininess", 64.0f);
 			
-			ObjectShader.setVec3("dirLight.direction", 0.0f, 2.0f, -13.0f);
-			ObjectShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
+			ObjectShader.setVec3("dirLight.direction", 0.0f, 5.0f, -13.0f);
+			ObjectShader.setVec3("dirLight.ambient", 0.005f, 0.005f, 0.005f);
 			ObjectShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
 			ObjectShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
 			/*
@@ -196,7 +285,7 @@ public:
 
 			model = mat4(1.0f);
 			model = scale(model, vec3(2.0f));
-			model = translate(model, vec3(0.3f, 0.0225f, 1.01f));
+			model = translate(model, vec3(0.45f, 0.0001f, 1.01f));
 			ObjectShader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -207,44 +296,61 @@ public:
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 
 			model = mat4(1.0f);
+			model = scale(model, vec3(2.5f, 2.0f, 2.5f));
+			model = translate(model, vec3(-0.27f, 0.0001f, 1.01f));
+			ObjectShader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+
+			model = mat4(1.0f);
 			model = translate(model, vec3(1.0f, -1.7f, 6.0f));
 			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 1.0f));
 			model = scale(model, vec3(0.1f));
 			ObjectShader.setMat4("model", model);
 			Bed.Draw(ObjectShader);
 
-			model = glm::mat4(1.0f);
-			model = glm::scale(model, glm::vec3(1.2f));
-			model = glm::translate(model, glm::vec3(1.0f, -0.8f, 1.49f));
+			model = mat4(1.0f);
+			model = scale(model, vec3(1.2f));
+			model = translate(model, vec3(1.0f, -0.8f, 1.49f));
 			ObjectShader.setMat4("model", model);
 			Door.Draw(ObjectShader);
 
 			model = mat4(1.0f);
-			model = scale(model, glm::vec3(1.2f));
-			model = rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-			model = translate(model, glm::vec3(0.75f, -0.75f, 1.625f));
+			model = scale(model, vec3(1.2f));
+			model = translate(model, vec3(-1.0f, -0.8f, 2.12f));
+			ObjectShader.setMat4("model", model);
+			Door.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(1.2f));
+			model = rotate(model, 45.0f, vec3(0.0f, 1.0f, 0.0f));
+			model = translate(model, vec3(0.75f, -0.75f, 1.625f));
 			ObjectShader.setMat4("model", model);
 			Door.Draw(ObjectShader);
 
 			model = mat4(1.0f);
 			model = translate(model, vec3(0.0f, -0.75f, -3.97f));
-			model = scale(model, glm::vec3(1.0f));
+			model = scale(model, vec3(1.0f));
 			ObjectShader.setMat4("model", model);
 			Window.Draw(ObjectShader);
 
 			model = mat4(1.0f);
-			model = translate(model, glm::vec3(3.25f, -0.5f, -1.97f));
-			model = scale(model, glm::vec3(1.0f));
+			model = translate(model, vec3(3.25f, -0.5f, -1.97f));
+			model = scale(model, vec3(1.0f));
 			ObjectShader.setMat4("model", model);
 			Window.Draw(ObjectShader);
 
 			model = mat4(1.0f);
-			model = translate(model, glm::vec3(1.1f, -0.5f, 4.05f));
-			model = glm::scale(model, glm::vec3(1.0f));
+			model = translate(model, vec3(1.1f, -0.5f, 4.05f));
+			model = scale(model, vec3(1.0f));
 			ObjectShader.setMat4("model", model);
 			Window.Draw(ObjectShader);
-			
-			
+
+			model = mat4(1.0f);
+			model = translate(model, vec3(-1.0f, -0.4f, 4.0f));
+			model = scale(model, vec3(1.0f));
+			ObjectShader.setMat4("model", model);
+			Window.Draw(ObjectShader);
+
 			glBindVertexArray(objectVAO);
 			jalousie.Mode();
 			switch (true)
@@ -271,11 +377,11 @@ public:
 					{
 						model = mat4(1.0f);
 						model = translate(model, vec3((-0.3 + i / 8), 0.0f, -5.66f));
-						//model = rotate(model, 90.0f, vec3(1.0f, 1.0f, 1.0f));
 						model = scale(model, vec3(0.2f, 1.4f, 0.35f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
 					}
+
 					break;
 				}
 				}
@@ -286,10 +392,10 @@ public:
 				{
 				case 0:
 				{
-					for (float i = 0.0f; i < 1.0f; i++)
+					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3(0.0f));
+						model = translate(model, vec3((5.2 - i/8), 0.1f, -3.0f));
 						model = scale(model, vec3(0.35f, 1.4f, 0.2f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -298,28 +404,129 @@ public:
 				}
 				case 90:
 				{
-					for (float i = 0.0f; i < 1.0f; i++)
+					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3(0.0f));
-						//model = rotate(model, 90.0f, vec3(1.0f, 1.0f, 1.0f));
+						model = translate(model, vec3((5.1 + i/8), 0.1f, -2.8f));
 						model = scale(model, vec3(0.2f, 1.4f, 0.35f));
+						ObjectShader.setMat4("model", model);
+						glDrawArrays(GL_TRIANGLES, 0, 36);
+					}
+
+					break;
+				}
+				}
+			}
+			case 3:
+			{
+				switch (jalousie.GetMode(3))
+				{
+				case 0:
+				{
+					for (float i = 0.0f; i < 7.0f; i++)
+					{
+						model = mat4(1.0f);
+						model = translate(model, vec3((2.1 - i/8), 0.2f, 6.6f));
+						model = scale(model, vec3(0.35f, 1.4f, 0.2f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
 					}
 					break;
 				}
+				case 90:
+				{
+					for (float i = 0.0f; i < 7.0f; i++)
+					{
+						model = mat4(1.0f);
+						model = translate(model, vec3((2.15 - i / 8), 0.2f, 5.9f));
+						model = scale(model, vec3(0.2f, 1.4f, 0.35f));
+						ObjectShader.setMat4("model", model);
+						glDrawArrays(GL_TRIANGLES, 0, 36);
+					}
+
+					break;
+				}
+				}
+			}
+			case 4:
+			{
+				switch (jalousie.GetMode(4))
+				{
+				case 0:
+				{
+					for (float i = 0.0f; i < 7.0f; i++)
+					{
+						model = mat4(1.0f);
+						model = translate(model, vec3(-1.0 - i/8, 0.25f, 6.5f));
+						model = scale(model, vec3(0.35f, 1.4f, 0.2f));
+						ObjectShader.setMat4("model", model);
+						glDrawArrays(GL_TRIANGLES, 0, 36);
+					}
+					break;
+				}
+				case 90:
+				{
+					for (float i = 0.0f; i < 7.0f; i++)
+					{
+						model = mat4(1.0f);
+						model = translate(model, vec3(-1.4 - i / 8, 0.25f, 5.7f));
+						model = scale(model, vec3(0.2f, 1.4f, 0.35f));
+						ObjectShader.setMat4("model", model);
+						glDrawArrays(GL_TRIANGLES, 0, 36);
+					}
+
+					break;
+				}
 				}
 				break;
 			}
-			}			
+			}		
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(0.5f));
+			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 1.0f));
+			model = translate(model, vec3(0.0f, -20.01f, 0.0f));
+			ObjectShader.setMat4("model", model);
+			grass.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(2.5f));
+			model = translate(model, vec3(-2.0f, -0.4f, 0.0f));
+			ObjectShader.setMat4("model", model);
+			tree.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(1.5f, 1.5f, 1.5f));
+			model = translate(model, vec3(1.4f, -0.2f, 0.35f));
+			ObjectShader.setMat4("model", model);
+			Refregarator.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(0.12f));
+			model = translate(model, vec3(60.4f, -13.9f, -20.0f));
+			ObjectShader.setMat4("model", model);
+			Table_kitchen.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = scale(model, vec3(0.9f));
+			model = translate(model, vec3(0.0f, -1.2f, -4.0f));
+			ObjectShader.setMat4("model", model);
+			Sofa.Draw(ObjectShader);
+			
+			model = mat4(1.0f);
+			model = scale(model, vec3(0.2f));
+			model = translate(model, vec3(-7.0f, -7.0f, 32.0f));
+			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 1.0f));
+			ObjectShader.setMat4("model", model);
+			Toilet.Draw(ObjectShader);
+
 			glBindVertexArray(0);
 
 			LampShader.Use();
 			glBindVertexArray(lightVAO);
 			LampShader.setMat4("projection", projection);
 			LampShader.setMat4("view", view);
-			for (size_t i = 0; i < 4; i++)
+			for (size_t i = 0; i < 13; i++)
 			{
 				model = mat4(1.0f);
 				model = translate(model, pointLightPositions[i]);
@@ -328,7 +535,23 @@ public:
 				glDrawArrays(GL_TRIANGLES, 0, 36);
 			}
 
-			//Конец.
+			glBindVertexArray(lightVAO);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			glBindVertexArray(0);
+			glDepthFunc(GL_LEQUAL);
+			skybox.Use();
+			view = mat4(glm::mat3(camera.GetViewMatrix()));
+			skybox.setMat4("view", view);
+			skybox.setMat4("projection", projection);
+			// skybox cube
+			glBindVertexArray(skyboxVAO);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			glBindVertexArray(0);
+			glDepthFunc(GL_LESS);
 
 			glfwSwapBuffers(window);												//заменяет цветовой буфер, который использовался для отрисовки во время текущей итерации и показывает результат на экране.
 		}
@@ -340,6 +563,8 @@ public:
 		glDeleteVertexArrays(1, &objectVAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+		glDeleteVertexArrays(1, &skyboxVAO);
+		glDeleteBuffers(1, &skyboxVAO);
 	}
 
 private:

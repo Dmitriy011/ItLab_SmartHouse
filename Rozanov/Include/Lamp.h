@@ -13,8 +13,11 @@
 #include <fstream> 
 #include <sstream>
 
+#include <vector>
+
 using namespace std;
 using namespace glm;
+
 
 class Lamp
 {
@@ -25,13 +28,15 @@ public:
 	void brightness(Shader& shader);
     void init_brightness_constants(size_t _number);
 	void on_max_all_lamp(Shader& shader);
+	void on_min_all_lamp(Shader& shader);
 
-	string get_light_const();
-	string get_light_linear();
-	string get_light_quadratic();
+	string get_light_const() const;
+	string get_light_linear() const;
+	string get_light_quadratic() const;
 
 private:
 	string light_const;
 	string light_linear;
 	string light_quadratic;
+
 };
