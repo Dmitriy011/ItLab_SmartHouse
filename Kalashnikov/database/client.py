@@ -140,3 +140,4 @@ def random_fill():
 
 if __name__ == "__main__":
     random_fill()
+    print("success")
