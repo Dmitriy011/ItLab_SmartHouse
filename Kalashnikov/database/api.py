@@ -53,7 +53,7 @@ class SensorData(Model):
 class SensorInsert:
     def on_post(self, req, resp):
         """
-        постим данные в виде словаря: { "name": "living/brightness/1", "time": "2020-11-19T00:00:00", "value": 0.1 }
+        постим данные в виде словаря: { "name": "living/power/1", "time": "2020-11-19T00:00:00", "value": 0.1 }
         не забываем добавить заголовок "Content-Type": "application/json"
         "time" можно опустить - будет вставлено текущее
         """
@@ -150,7 +150,7 @@ class SensorList:
 
 class LampData(Model):
     name = CharField(64, primary_key=True)  # одна лампа - одна строка (имя - первичный ключ)
-    brightness = IntegerField()
+    power = IntegerField()
     red = IntegerField()
     green = IntegerField()
     blue = IntegerField()
@@ -162,7 +162,7 @@ class LampData(Model):
 class LampUpsert:
     def on_post(self, req, resp):
         """
-        постим данные в виде словаря: { "name": "living/1", "brightness": 1, "red": 123, "green": 132, "blue": 321 }
+        постим данные в виде словаря: { "name": "living/1", "power": 1, "red": 123, "green": 132, "blue": 321 }
         не забываем добавить заголовок "Content-Type": "application/json"
         """
         request = req.media
@@ -171,7 +171,7 @@ class LampUpsert:
             force = not lamp
             lamp = LampData(
                 name=request["name"],
-                brightness=request["brightness"],
+                power=request["power"],
                 red=request["red"],
                 green=request["green"],
                 blue=request["blue"],
