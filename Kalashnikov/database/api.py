@@ -109,13 +109,17 @@ class SensorSelect:
 
 class SensorSelectLast:
     def on_get(self, req, resp):
+        request = req.media
         try:
             data = []
             sensors = SensorData.select(SensorData.name).distinct()
-            for sensor in sensors:
-                data.append(
-                    SensorData.select().where(SensorData.name == sensor.name).order_by(SensorData.time.desc()).get()
-                )
+            if request and request["name"]:
+                data.append(SensorData.select().where(SensorData.name == request["name"]).order_by(SensorData.time.desc()).get())
+            else:
+                for sensor in sensors:
+                    data.append(
+                        SensorData.select().where(SensorData.name == sensor.name).order_by(SensorData.time.desc()).get()
+                    )
             resp.body = json.dumps([d.__data__ for d in data], default=default)
             resp.status = falcon.HTTP_OK
         except Exception as ex:
