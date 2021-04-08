@@ -5,25 +5,17 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+#include "Shader.h"
+#include "Lamp.h"
+#include "jalousie.h"
 
+using namespace std;
 
 class ReadFile
 {
 public:
-    ReadFile();
+    ReadFile() {}
 
-    void read_txt();
+    void read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie);
 
-    string GetValueL();
-    string GetValueJ();
-
-    size_t Get_numbers_lamp();
-    size_t Get_number_jalousie();
-
-private:
-    string value_l;
-    string value_j;
-    size_t number_lamps;
-    size_t number_jalousie;
 };

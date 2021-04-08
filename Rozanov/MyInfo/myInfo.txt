@@ -1,7 +1,2 @@
 lamp_2_LR:B=11;
 jalousie_2:DEG=0;
-lamp_2_LR:B=0;
-jalousie_2:DEG=90;
-jalousie_4:DEG=90;
-lamp_1_LR:B=11;
-jalousie_4:DEG=0;

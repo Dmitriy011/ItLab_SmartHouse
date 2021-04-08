@@ -49,7 +49,7 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	MyRoom room;
 	room.init_cube_room();
 	room.init_cube_light();
-	room.crete_texture_cube_room(ObjectShader);
+	room.init_texture_cube_room(ObjectShader);
 	room.Draw(utils, ObjectShader, LampShader, window, skyboxShader);
 
 
