@@ -1,11 +1,22 @@
-Mon Mar 22 00:36:10 2021
-lamp_1_LR:B=222,BR=12,G=143,R=123;
-lamp_2_LR:B=222,BR=12,G=143,R=123;
-lamp_3_LR:B=222,BR=12,G=143,R=123;
-lamp_4_SU:BR=0;
+Fri Apr  9 16:24:09 2021
+lamp_1_LR:B=222,BR=0,G=143,R=123;
+lamp_2_LR:B=222,BR=0,G=143,R=123;
+lamp_3_LR:B=222,BR=0,G=143,R=123;
+lamp_4_SR:B=222,BR=0,G=143,R=123;
+lamp_5_SR:B=222,BR=0,G=143,R=123;
+lamp_6_SR:B=222,BR=0,G=143,R=123;
+lamp_7_KN:B=222,BR=0,G=143,R=123;
+lamp_8_KN:B=222,BR=0,G=143,R=123;
+lamp_9_KN:B=222,BR=0,G=143,R=123;
+lamp_10__B:B=222,BR=0,G=143,R=123;
+lamp_11__B:B=222,BR=0,G=143,R=123;
+lamp_12__B:B=222,BR=0,G=143,R=123;
+lamp_13_SU:BR=0;
 jalousie_1_LR:DEG=90;
-jalousie_2_LR:DEG=90;
-li_sensor:BT=0,KN=0,LR=192,OUT=1200,SR=0;
+jalousie_2_SR:DEG=90;
+jalousie_3_KN:DEG=90;
+jalousie_4_BT:DEG=90;
+li_sensor:BT=100,KN=66,LR=48,OUT=1200,SR=60;
 tm_sensors:BT=0,KN=0,LR=0,SR=0;
 hm_sensorsBT=0,KN=0,LR=0,SR=0;
 
