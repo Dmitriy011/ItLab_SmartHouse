@@ -5,7 +5,7 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     int changed_number = 0;
     int changed_value = 0;
 
-    string filename = "..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
+    string filename = "..\\..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
     //string filename = "D:\\to_add\\Rozanov\\MyInfo\\myInfo.txt";
     string tmp_changed_number = "";
     string tmp_changed_value = "";
@@ -63,16 +63,17 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     }
     case 'j':
     {
+
         tmp_changed_number.push_back(lastLine[9]);
 
-        if (lastLine.find_last_of(';') == 16)
+        if (lastLine.find_last_of(';') == 19)
         {
-            tmp_changed_value.push_back(lastLine[15]);
+            tmp_changed_value.push_back(lastLine[18]);
         }
-        if (lastLine.find_last_of(';') == 17)
+        if (lastLine.find_last_of(';') == 20)
         {
-            tmp_changed_value.push_back(lastLine[15]);
-            tmp_changed_value.push_back(lastLine[16]);
+            tmp_changed_value.push_back(lastLine[18]);
+            tmp_changed_value.push_back(lastLine[19]);
         }
 
         changed_number = stoi(tmp_changed_number);
