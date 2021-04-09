@@ -5,7 +5,7 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     int changed_number = 0;
     int changed_value = 0;
 
-    string filename = "..\\..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
+    string filename = "..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
     //string filename = "D:\\to_add\\Rozanov\\MyInfo\\myInfo.txt";
     string tmp_changed_number = "";
     string tmp_changed_value = "";
@@ -29,6 +29,20 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
             tmp_changed_number.push_back(lastLine[5]);
             tmp_changed_number.push_back(lastLine[6]);
 
+            if (lastLine.find_last_of(';') == 16)
+            {
+                tmp_changed_value.push_back(lastLine[14]);
+                tmp_changed_value.push_back(lastLine[15]);
+            }
+            if (lastLine.find_last_of(';') == 15)
+            {
+                tmp_changed_value.push_back(lastLine[14]);
+            }
+        }
+        else
+        {
+            tmp_changed_number.push_back(lastLine[5]);
+
             if (lastLine.find_last_of(';') == 15)
             {
                 tmp_changed_value.push_back(lastLine[13]);
@@ -37,20 +51,6 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
             if (lastLine.find_last_of(';') == 14)
             {
                 tmp_changed_value.push_back(lastLine[13]);
-            }
-        }
-        else
-        {
-            tmp_changed_number.push_back(lastLine[5]);
-
-            if (lastLine.find_last_of(';') == 14)
-            {
-                tmp_changed_value.push_back(lastLine[12]);
-                tmp_changed_value.push_back(lastLine[13]);
-            }
-            if (lastLine.find_last_of(';') == 13)
-            {
-                tmp_changed_value.push_back(lastLine[12]);
             }
         }
 
@@ -74,7 +74,6 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
             tmp_changed_value.push_back(lastLine[15]);
             tmp_changed_value.push_back(lastLine[16]);
         }
-
 
         changed_number = stoi(tmp_changed_number);
         changed_value = stoi(tmp_changed_value);
