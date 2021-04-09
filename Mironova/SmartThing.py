@@ -9,19 +9,14 @@ class SmartLamp:
     def __init__(self):  
         self.name = ""
         self.br = 0
-        self.r = 0
-        self.g = 0
-        self.b = 0
-
-    def update(self, name, br, r, g, b):  
+    
+    def update(self, name, br):  
         self.name = name  
         self.br = br
-        self.r = r
-        self.g = g
-        self.b = b
+      
 
     def get_str(self):
-        s=self.name+":BR="+str(int(self.br))+",R="+str(self.r)+",G="+str(self.g)+",B="+str(self.b)+";"
+        s=self.name+":BR="+str(self.br)+";"
         return s
         
 
@@ -46,7 +41,7 @@ class SmartLight(SmartLamp,Jalousie):
         for i in range (N_LAMPS):
             t=s[i][0]
             if (t[7:9])==room or(t[8:10])==room:
-                lamp.update(s[i][0],s[i][1],s[i][2],s[i][3],s[i][4])
+                lamp.update(s[i][0],s[i][1])
                 if value<NORMAL_ILLUMINATION:
                     if int(lamp.br)==0:
                         print("Включить лампочку")
@@ -78,12 +73,12 @@ class SmartLight(SmartLamp,Jalousie):
                 if value<NORMAL_ILLUMINATION:
                     if int(jal.value)<90:
                         print("Открыть жалюзи")
-                        jal.value=str(int(jal.value)+30)
+                        jal.value=str(int(jal.value)+90)
                         f=1
                 if value>NORMAL_ILLUMINATION:
                     if int(jal.value)>0:
                         print("Закрыть жалюзи")
-                        jal.value=str(int(jal.value)-30)
+                        jal.value=str(int(jal.value)-90)
                         f=1
                 if f==1:
                     st=Jalousie.get_str(jal)

@@ -26,13 +26,13 @@ class Work_with_data:
             #для комнаты, которая есть сейчас
             rooms=["BT","KN","LR","SR"]
             li_sensors=Work_with_data.get_li_sensors()
-            SmartLight.Update(int(li_sensors[4]),int(li_sensors[3]),rooms[3])
-            time.sleep(0.1)  
+            SmartLight.Update(int(li_sensors[4]),int(li_sensors[3]),rooms[2])
+            time.sleep(0.5)  
 
     def reading_and_processing_data_without_cycle():
-            rooms=["BT","SR","KN","LR"]
+            rooms=["BT","KN","LR","SR"]
             li_sensors=Work_with_data.get_li_sensors()
-            SmartLight.Update(int(li_sensors[4]),int(li_sensors[3]),rooms[3])
+            SmartLight.Update(int(li_sensors[4]),int(li_sensors[3]),rooms[2])
 
          
 
