@@ -1,4 +1,3 @@
-import numpy as np
 N_THINGS=16 #кол-во умных вещей
 
 class ServerInfoFileWorker:
