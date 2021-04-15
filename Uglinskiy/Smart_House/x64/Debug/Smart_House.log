@@ -1,0 +1,35 @@
+﻿  Smart_House.cpp
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\TSensors.h(25,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.h(76,1): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.h(78,1): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House.cpp(8,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Smart_House_Manager.cpp
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\TSensors.h(25,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.h(76,1): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.h(78,1): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(60,39): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(69,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(114,39): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(122,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(146,39): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(154,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(173,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(236,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(241,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(252,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(266,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(276,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(281,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(288,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House_Manager.cpp(297,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  TRoom.cpp
+  TSensors.cpp
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\TSensors.h(25,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  TServerInfoFileWorker.cpp
+  TSmartBattery.cpp
+  TSmartHeaters.cpp
+  TSmartLight.cpp
+  TTheSun.cpp
+D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\TTheSun.cpp(33,24): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Smart_House.vcxproj -> D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\x64\Debug\Smart_House.exe

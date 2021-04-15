@@ -2,7 +2,7 @@ N_THINGS=16 #кол-во умных вещей
 
 class ServerInfoFileWorker:
     def ReadData():
-        f=open('..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt','r')
+        f=open('..\\Uglinskiy\\Smart_House\\smart_lamp.txt','r')
         s=f.readlines()
         s_things = [[0] * 2 for i in range(N_THINGS)]
         kol=0
@@ -34,7 +34,7 @@ class ServerInfoFileWorker:
         return s_things
     
     def SaveData(s):
-        f=open('..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt','r+')
+        f=open('..\\Uglinskiy\\Smart_House\\smart_lamp.txt','r+')
         f.readlines()
         f.write("\n")
         f.write(s)

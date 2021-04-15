@@ -1,6 +1,0 @@
-﻿  Smart_House.cpp
-D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House\TSensors.h(25,22): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House\Smart_House_Manager.h(309,1): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House\Smart_House_Manager.h(311,1): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\Smart_House\Smart_House.cpp(8,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Smart_House.vcxproj -> D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\x64\Debug\Smart_House.exe

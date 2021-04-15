@@ -1,0 +1,22 @@
+Thu Apr 15 20:15:15 2021
+lamp_1_LR:BR=0;
+lamp_2_LR:BR=0;
+lamp_3_LR:BR=0;
+lamp_4_SR:BR=0;
+lamp_5_SR:BR=0;
+lamp_6_SR:BR=0;
+lamp_7_KN:BR=0;
+lamp_8_KN:BR=0;
+lamp_9_KN:BR=0;
+lamp_10__B:BR=0;
+lamp_11__B:BR=0;
+lamp_12__B:BR=0;
+lamp_13_SU:BR=0;
+jalousie_1_LR:DEG=90;
+jalousie_2_SR:DEG=90;
+jalousie_3_KN:DEG=90;
+jalousie_4_BT:DEG=90;
+li_sensor:BT=480,KN=266,LR=192,OUT=4800,SR=240;
+tm_sensors:BT=-39,KN=-39,LR=-39,OUT=-40,SR=-39;
+hm_sensorsBT=0,KN=0,LR=0,SR=0;
+
