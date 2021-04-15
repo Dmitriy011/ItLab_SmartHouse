@@ -1,3 +1,0 @@
-D:\Visual Studio 2019\Projects\Smart_House\x64\Debug\Smart_House.exe
-D:\ITLAB_repos\Itlab_SmartHouse_Uglinskiy\ItLab_SmartHouse\Uglinskiy\Smart_House\x64\Debug\Smart_House.exe
-D:\ITLAB_repos\ItLab_SmartHouse\Uglinskiy\Smart_House\x64\Debug\Smart_House.exe
