@@ -18,4 +18,6 @@ public:
 
     void read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie);
 
+    void read_bd(Shader& shader, Lamp& lamp, Jalousie& jalousie);
+
 };

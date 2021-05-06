@@ -166,7 +166,7 @@
     <ClInclude Include="..\Include\Lamp.h" />
     <ClInclude Include="..\Include\Mesh.h" />
     <ClInclude Include="..\Include\Model.h" />
-    <ClInclude Include="..\Include\MyRoom.h" />
+    <ClInclude Include="..\Include\MyHouse.h" />
     <ClInclude Include="..\Include\ReadFile.h" />
     <ClInclude Include="..\Include\Shader.h" />
     <ClInclude Include="..\Include\Utils.h" />

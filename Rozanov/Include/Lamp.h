@@ -20,6 +20,8 @@ using namespace glm;
 class Lamp
 {
 public:
+	vector<int> modes_lights;
+
     Lamp();
 
 	void init_all_lights(Shader& shader, vec3 pointLightPositions[]);
@@ -38,8 +40,11 @@ private:
 	string light_const;
 	string light_linear;
 	string light_quadratic;
+	vector<float> constant_lamp;
+	vector<float> linear_lamp;
+	vector<float> quadratic_lamp;
 
-	vector<int> modes_lights;
+	
 
 	void init_brightness_constants(size_t _number);
 };

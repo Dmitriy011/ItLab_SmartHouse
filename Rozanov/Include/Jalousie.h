@@ -18,6 +18,8 @@ using namespace std;
 class Jalousie
 {
 public:
+    vector<int> mode_j;
+
     Jalousie();
 
     int init_mode_jalousie(size_t number_jalousie, int value);
@@ -26,6 +28,6 @@ public:
     int GetMode(size_t _n) const;
 
 private:
-    vector<int> mode_j;
+    
 };
 

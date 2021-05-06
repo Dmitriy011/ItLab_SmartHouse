@@ -10,10 +10,8 @@
 #include "Utils.h"
 #include "Shader.h"
 #include "Camera.h"
-#include "Model.h"
-#include "Mesh.h"
 #include "Intilization.h"
-#include "MyRoom.h"
+#include "MyHouse.h"
 
 #include <iostream> 
 
@@ -26,7 +24,7 @@ Camera camera(vec3(0.0f, 0.0f, 3.0f));
 int main(int argc, char** argv)														//argc число аргументов, argv массив аргументов
 {
 	intilizaton.intilization_libs();
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Room1", nullptr, nullptr);		//ширина, высота. Возвращает указатель на объект типа GLFWwindow
+	GLFWwindow* window = glfwCreateWindow(1280, 1024, "Smart House", nullptr, nullptr);		//ширина, высота. Возвращает указатель на объект типа GLFWwindow
 	if (window == nullptr)															//проверка на создание
 	{
 		cout << "Failed to create GLFW window" << endl;
@@ -46,12 +44,12 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	Shader LampShader("../Shader/Vertex/Vertex_lamp.txt", "../Shader/Fragment/fragment_lamp.txt ");
 	Shader skyboxShader("../Shader/Vertex/Vertex_skybox.txt", "../Shader/Fragment/fragment_skybox.txt");
 
-	MyRoom room;
-	room.init_cube_room();
-	room.init_skybox();
-	room.init_cube_light();
-	room.init_texture_cube_room(ObjectShader);
-	room.Draw(utils, ObjectShader, LampShader, window, skyboxShader);
+	MyHouse house;
+	house.init_cube_room();
+	house.init_skybox();
+	house.init_cube_light();
+	house.init_texture_cube_room(ObjectShader);
+	house.Draw(utils, ObjectShader, LampShader, window, skyboxShader);
 
 
 	return 0;

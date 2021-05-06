@@ -6,6 +6,10 @@ Lamp::Lamp()
 	light_linear = "";
 	light_quadratic = "";
 
+    constant_lamp = { 1.0f };
+    linear_lamp = { 0.7f, 0.35f, 0.22f, 0.14f, 0.09f, 0.07f, 0.045f, 0.027f, 0.022f, 0.014f, 0.007f, 0.0014f };
+    quadratic_lamp = { 1.8f, 0.44f, 0.20f, 0.07f, 0.032f, 0.017f, 0.0075f, 0.0028f, 0.0019f, 0.0007f, 0.0002f, 0.000007f };
+
     for (int i = 0; i < 13; i++)
     {
         modes_lights.push_back(0);
@@ -48,97 +52,9 @@ void Lamp::init_all_lights(Shader& shader, vec3 pointLightPositions[])
 
 void Lamp::change_brightness_light(Shader& shader, int value, int number_lamp)
 {
-    switch (value)
-    {
-    case 0:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.7f);
-        shader.setFloat(light_quadratic, 1.8f);
-
-        break;
-    }
-    case 1:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.35f);
-        shader.setFloat(light_quadratic, 0.44f);
-        break;
-    }
-    case 2:
-    {
-
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.22f);
-        shader.setFloat(light_quadratic, 0.20f);
-        break;
-    }
-    case 3:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.14f);
-        shader.setFloat(light_quadratic, 0.07f);
-        break;
-    }
-    case 4:
-    {
-
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.09f);
-        shader.setFloat(light_quadratic, 0.032f);
-        break;
-    }
-    case 5:
-    {
-
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.07f);
-        shader.setFloat(light_quadratic, 0.017f);
-        break;
-    }
-    case 6:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.045f);
-        shader.setFloat(light_quadratic, 0.0075f);
-        break;
-    }
-    case 7:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.027f);
-        shader.setFloat(light_quadratic, 0.0028f);
-        break;
-    }
-    case 8:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.022f);
-        shader.setFloat(light_quadratic, 0.0019f);
-        break;
-    }
-    case 9:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.014f);
-        shader.setFloat(light_quadratic, 0.0007f);
-        break;
-    }
-    case 10:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.007f);
-        shader.setFloat(light_quadratic, 0.0002f);
-        break;
-    }
-    case 11:
-    {
-        shader.setFloat(light_const, 1.0f);
-        shader.setFloat(light_linear, 0.0014f);
-        shader.setFloat(light_quadratic, 0.000007f);
-        break;
-    }
-    }
+    shader.setFloat(light_const, linear_lamp[0]);
+    shader.setFloat(light_linear,linear_lamp[value]);
+    shader.setFloat(light_quadratic, quadratic_lamp[value]);
 
     modes_lights[number_lamp - 1] = value;
     init_brightness_constants(number_lamp);
@@ -150,55 +66,39 @@ void Lamp::change_brightness_depended_jalousie(Shader& shader, int count_close_j
     {
     case 1:
     {
-        shader.setFloat("pointLights[12].constant", 1.0f);
-        shader.setFloat("pointLights[12].linear", 0.022f);
-        shader.setFloat("pointLights[12].quadratic", 0.0019f);
-
         modes_lights[12] = 8;
 
         break;
     }
     case 2:
     {
-        shader.setFloat("pointLights[12].constant", 1.0f);
-        shader.setFloat("pointLights[12].linear", 0.045f);
-        shader.setFloat("pointLights[12].quadratic", 0.0075f);
-
         modes_lights[12] = 6;
 
         break;
     }
     case 3:
     {
-        shader.setFloat("pointLights[12].constant", 1.0f);
-        shader.setFloat("pointLights[12].linear", 0.14f);
-        shader.setFloat("pointLights[12].quadratic", 0.07f);
-
         modes_lights[12] = 3;
 
         break;
     }
     case 4:
     {
-        shader.setFloat("pointLights[12].constant", 1.0f);
-        shader.setFloat("pointLights[12].linear", 0.7f);
-        shader.setFloat("pointLights[12].quadratic", 1.8f);
-
         modes_lights[12] = 0;
 
         break;
     }
     case 0:
     {
-        shader.setFloat("pointLights[12].constant", 1.0f);
-        shader.setFloat("pointLights[12].linear", 0.0014f);
-        shader.setFloat("pointLights[12].quadratic", 0.000007f);
-
         modes_lights[12] = 11;
 
         break;
     }
     }
+
+    shader.setFloat(light_const, linear_lamp[0]);
+    shader.setFloat(light_linear, linear_lamp[modes_lights[12]]);
+    shader.setFloat(light_quadratic, quadratic_lamp[modes_lights[12]]);
 }
 
 void Lamp::on_max_all_lamp(Shader& shader)
@@ -216,22 +116,22 @@ void Lamp::on_max_all_lamp(Shader& shader)
         tmp3 = "].constant";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 1.0f);
+        shader.setFloat(tmp4, constant_lamp[0]);
 
         tmp3 = "].linear";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 0.0014f);
+        shader.setFloat(tmp4, linear_lamp[11]);
 
         tmp3 = "].quadratic";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 0.000007f);
+        shader.setFloat(tmp4, quadratic_lamp[11]);
     }
 
-    shader.setFloat("pointLights[12].constant", 1.8f);
-    shader.setFloat("pointLights[12].linear", 0.0014f);
-    shader.setFloat("pointLights[12].quadratic", 0.000007f);
+    shader.setFloat("pointLights[12].constant", constant_lamp[0]);
+    shader.setFloat("pointLights[12].linear", linear_lamp[11]);
+    shader.setFloat("pointLights[12].quadratic", quadratic_lamp[11]);
 }
 
 void Lamp::on_min_all_lamp(Shader& shader)
@@ -249,17 +149,17 @@ void Lamp::on_min_all_lamp(Shader& shader)
         tmp3 = "].constant";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 1.0f);
+        shader.setFloat(tmp4, constant_lamp[0]);
 
         tmp3 = "].linear";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 0.7f);
+        shader.setFloat(tmp4, linear_lamp[0]);
 
         tmp3 = "].quadratic";
         tmp4 = tmp1;
         tmp4.append(tmp3);
-        shader.setFloat(tmp4, 1.8f);
+        shader.setFloat(tmp4, quadratic_lamp[0]);
     }
 
     shader.setFloat("pointLights[12].constant", 1.8f);

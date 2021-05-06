@@ -4,23 +4,16 @@
 #define GLEW_STATIC
 #include <glew.h>
 #include <glfw3.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#include <fstream> 
-#include <sstream> 
-#include <time.h>
+#include <SOIL.h>
 
 #include "Camera.h"
 #include "Shader.h"
-
 #include "Intilization.h"
 
-#include "ReadFile.h"
 
-#include <SOIL.h>
 
 using namespace std;
 
@@ -35,8 +28,6 @@ public:
 	unsigned int loadTexture(char const* path);
 	unsigned int loadCubemap(vector<std::string> faces);
 };
-
-
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 

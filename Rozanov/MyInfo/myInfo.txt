@@ -1,2 +1,0 @@
-lamp_2_LR:BR=11;
-jalousie_2:DEG=0;
