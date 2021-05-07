@@ -15,6 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="py_client.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="py_client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

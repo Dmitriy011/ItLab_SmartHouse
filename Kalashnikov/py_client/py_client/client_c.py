@@ -206,20 +206,31 @@ def poop(_poop):
 
 
 def random_fill():
+    from random import randint, choice
+
     rooms = ["kitchen", "bath", "bed", "living"]
+    sensors = ["brightness", "temperature", "humidity"]
     for room in rooms:
-        dir_s = room + "/brightness"
-        sensor_insert(dir_s, randint(100, 300))
+        for sensor in sensors:
+            dir_s = room + "/" + sensor
+            if sensor == "brightness":
+                sensor_insert(dir_s, randint(100, 300))
+            elif sensor == "temperature":
+                sensor_insert(dir_s, randint(0, 50))
+            elif sensor == "humidity":
+                sensor_insert(dir_s, randint(0, 100))
         for i in range(3):
             dir_l = room + "/lamp" + str(i + 1)
             lamp_upsert(dir_l, randint(0, 11))
         dir_j = room + "/jalousie"
-        jalousie_upsert(dir_j, randint(0, 90))
+        jalousie_upsert(dir_j, choice([0, 60, 90]))
         dir_j = room + "/heater"
         heater_upsert(dir_j, randint(0, 100))
+        dir_j = room + "/humidifier"
+        humidifier_upsert(dir_j, randint(0, 100))
+    sensor_insert("electricity", 0)
+    sensor_insert("sun", 1200)
 
 
 if __name__ == "__main__":
     # random_fill()
-    # print("success")
-    print(jalousie_select('kitchen/jalousie'))

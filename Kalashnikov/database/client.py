@@ -204,9 +204,16 @@ def random_fill():
     from random import randint, choice
 
     rooms = ["kitchen", "bath", "bed", "living"]
+    sensors = ["brightness", "temperature", "humidity"]
     for room in rooms:
-        dir_s = room + "/brightness"
-        sensor_insert(dir_s, randint(100, 300))
+        for sensor in sensors:
+            dir_s = room + "/" + sensor
+            if sensor == "brightness":
+                sensor_insert(dir_s, randint(100, 300))
+            elif sensor == "temperature":
+                sensor_insert(dir_s, randint(0, 50))
+            elif sensor == "humidity":
+                sensor_insert(dir_s, randint(0, 100))
         for i in range(3):
             dir_l = room + "/lamp" + str(i + 1)
             lamp_upsert(dir_l, randint(0, 11))
@@ -216,13 +223,10 @@ def random_fill():
         heater_upsert(dir_j, randint(0, 100))
         dir_j = room + "/humidifier"
         humidifier_upsert(dir_j, randint(0, 100))
+    sensor_insert("electricity", 0)
+    sensor_insert("sun", 1200)
 
 
 if __name__ == "__main__":
     # random_fill()
-    info_sensor = sensor_select("kitchen/brightness")
-    print(info_sensor["value"])
-    info_lamp = lamp_select("kitchen/lamp/1")
-    print(info_lamp["power"])
-    info_jalousie = jalousie_select("kitchen/jalousie")
-    print(info_jalousie["rotation"])
+
