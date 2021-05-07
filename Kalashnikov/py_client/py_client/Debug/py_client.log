@@ -1,0 +1,6 @@
+﻿  py_client.cpp
+C:\Users\matve\source\repos\py_client\py_client\py_client.cpp(50,12): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\matve\source\repos\py_client\py_client\py_client.cpp(75,12): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\matve\source\repos\py_client\py_client\py_client.cpp(99,12): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\matve\source\repos\py_client\py_client\py_client.cpp(124,12): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  py_client.vcxproj -> C:\Users\matve\source\repos\py_client\Debug\py_client.exe
