@@ -116,7 +116,6 @@ def jalousie_select(name):
         data = json.loads(res.read())
         print("Response code:", res.status)
         return data[0]
-<<<<<<< HEAD
     except Exception as ex:
         print(ex)
 
@@ -194,8 +193,6 @@ def humidifier_select(name):
         print("Response code:", res.status)
         for row in data:
             print(row)
-=======
->>>>>>> fdea02c99043d68d83fb07333cb2da6df78c7503
     except Exception as ex:
         print(ex)
 
@@ -204,24 +201,15 @@ def humidifier_select(name):
 
 
 def random_fill():
-<<<<<<< HEAD
     from random import randint, choice
 
-=======
-    from random import randint
->>>>>>> fdea02c99043d68d83fb07333cb2da6df78c7503
     rooms = ["kitchen", "bath", "bed", "living"]
     for room in rooms:
         dir_s = room + "/brightness"
         sensor_insert(dir_s, randint(100, 300))
         for i in range(3):
-<<<<<<< HEAD
             dir_l = room + "/lamp" + str(i + 1)
             lamp_upsert(dir_l, randint(0, 11))
-=======
-            dir_l = room + "/lamp/" + str(i + 1)
-            lamp_upsert(dir_l, randint(0, 11), randint(0, 255), randint(0, 255), randint(0, 255))
->>>>>>> fdea02c99043d68d83fb07333cb2da6df78c7503
         dir_j = room + "/jalousie"
         jalousie_upsert(dir_j, choice([0, 60, 90]))
         dir_j = room + "/heater"
@@ -231,11 +219,6 @@ def random_fill():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    random_fill()
-    # print("success")
-    # print(jalousie_select('kitchen/jalousie'))
-=======
     # random_fill()
     info_sensor = sensor_select("kitchen/brightness")
     print(info_sensor["value"])
@@ -243,4 +226,3 @@ if __name__ == "__main__":
     print(info_lamp["power"])
     info_jalousie = jalousie_select("kitchen/jalousie")
     print(info_jalousie["rotation"])
->>>>>>> fdea02c99043d68d83fb07333cb2da6df78c7503
