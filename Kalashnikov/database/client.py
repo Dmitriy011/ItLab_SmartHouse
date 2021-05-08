@@ -49,11 +49,11 @@ def sensor_insert(name, value):
 # region lamps
 
 
-def lamp_upsert(name, power):
+def lamp_upsert(name, power, web):
     import http.client
 
     conn = http.client.HTTPConnection("localhost", port=8000)
-    data = {"name": name, "power": power}
+    data = {"name": name, "power": power, "web" : web}
     payload = json.dumps(data, default=default)
     headers = {"content-type": "application/json"}
     try:
@@ -87,11 +87,11 @@ def lamp_select(name):
 # region jalousie
 
 
-def jalousie_upsert(name, angle):
+def jalousie_upsert(name, angle, web):
     import http.client
 
     conn = http.client.HTTPConnection("localhost", port=8000)
-    data = {"name": name, "rotation": angle}
+    data = {"name": name, "rotation": angle, "web" : web}
     payload = json.dumps(data, default=default)
     headers = {"content-type": "application/json"}
     try:
@@ -125,11 +125,11 @@ def jalousie_select(name):
 # region heater
 
 
-def heater_upsert(name, warmth):
+def heater_upsert(name, warmth, web):
     import http.client
 
     conn = http.client.HTTPConnection("localhost", port=8000)
-    data = {"name": name, "warmth": warmth}
+    data = {"name": name, "warmth": warmth, "web" : web}
     payload = json.dumps(data, default=default)
     headers = {"content-type": "application/json"}
     try:
@@ -163,11 +163,11 @@ def heater_select(name):
 # region humidifier
 
 
-def humidifier_upsert(name, power):
+def humidifier_upsert(name, power, web):
     import http.client
 
     conn = http.client.HTTPConnection("localhost", port=8000)
-    data = {"name": name, "power": power}
+    data = {"name": name, "power": power, "web" : web}
     payload = json.dumps(data, default=default)
     headers = {"content-type": "application/json"}
     try:
@@ -216,17 +216,15 @@ def random_fill():
                 sensor_insert(dir_s, randint(0, 100))
         for i in range(3):
             dir_l = room + "/lamp" + str(i + 1)
-            lamp_upsert(dir_l, randint(0, 11))
+            lamp_upsert(dir_l, randint(0, 11), False)
         dir_j = room + "/jalousie"
-        jalousie_upsert(dir_j, choice([0, 60, 90]))
+        jalousie_upsert(dir_j, choice([0, 60, 90]), False)
         dir_j = room + "/heater"
-        heater_upsert(dir_j, randint(0, 100))
+        heater_upsert(dir_j, randint(0, 100), False)
         dir_j = room + "/humidifier"
-        humidifier_upsert(dir_j, randint(0, 100))
+        humidifier_upsert(dir_j, randint(0, 100), False)
     sensor_insert("electricity", 0)
     sensor_insert("sun", 1200)
 
-
-if __name__ == "__main__":
-    # random_fill()
+# random_fill()
 

@@ -231,6 +231,4 @@ def random_fill():
     sensor_insert("electricity", 0)
     sensor_insert("sun", 1200)
 
-
-if __name__ == "__main__":
-    # random_fill()
+# random_fill()

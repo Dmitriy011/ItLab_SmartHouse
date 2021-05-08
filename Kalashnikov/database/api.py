@@ -160,7 +160,7 @@ class LampData(Model):
     # одна лампа - одна строка (имя - первичный ключ)
     name = CharField(64, primary_key=True)
     power = IntegerField()
-    # web = BooleanField()
+    web = BooleanField()
 
     class Meta:
         database = db
@@ -179,7 +179,7 @@ class LampUpsert:
             lamp = LampData(
                 name=request["name"],
                 power=request["power"],
-                # web=request["web"],
+                web=request["web"],
             )
             lamp.save(force_insert=force)
             resp.body = json.dumps(lamp.__data__, default=default)
@@ -217,6 +217,7 @@ class JalousieData(Model):
     # одна жалюзя - одна строка (имя - первичный ключ)
     name = CharField(64, primary_key=True)
     rotation = IntegerField()
+    web = BooleanField()
 
     class Meta:
         database = db
@@ -236,6 +237,7 @@ class JalousieUpsert:
             jalousie = JalousieData(
                 name=request["name"],
                 rotation=request["rotation"],
+                web=request["web"],
             )
             jalousie.save(force_insert=force)
             resp.body = json.dumps(jalousie.__data__, default=default)
@@ -272,6 +274,7 @@ class HeaterData(Model):
     # одна батарея - одна строка (имя - первичный ключ)
     name = CharField(64, primary_key=True)
     warmth = IntegerField()
+    web = BooleanField()
 
     class Meta:
         database = db
@@ -291,6 +294,7 @@ class HeaterUpsert:
             heater = HeaterData(
                 name=request["name"],
                 warmth=request["warmth"],
+                web=request["web"],
             )
             heater.save(force_insert=force)
             resp.body = json.dumps(heater.__data__, default=default)
@@ -328,6 +332,7 @@ class HumidifierData(Model):
     # один увлажнитель - одна строка (имя - первичный ключ)
     name = CharField(64, primary_key=True)
     power = IntegerField()
+    web = BooleanField()
 
     class Meta:
         database = db
@@ -347,6 +352,7 @@ class HumidifierUpsert:
             humidifier = HumidifierData(
                 name=request["name"],
                 power=request["power"],
+                web=request["web"],
             )
             humidifier.save(force_insert=force)
             resp.body = json.dumps(humidifier.__data__, default=default)
