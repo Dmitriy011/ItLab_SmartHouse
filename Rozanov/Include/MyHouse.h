@@ -95,6 +95,7 @@ public:
 		glEnableVertexAttribArray(2);																			//5)¬кл					
 		glBindVertexArray(0);																					//ќтв€зываем Vao (далее можно снова прив€зать "glBindVertexArray(VAO);" и необх снова отв€зат
 	}
+
 	void init_skybox()
 	{
 		float skyboxVertices[] = 
@@ -160,7 +161,7 @@ public:
 		glEnableVertexAttribArray(0);
 	}
 
-	void init_texture_cube_room(Shader ObjectShader)
+	void init_texture(Shader ObjectShader, const char* path)
 	{
 		glBindVertexArray(0);
 		glGenTextures(1, &diffuseMap);																	//6)—оздание текстуры (1ый арг - колличество текстур, 2ой - массив идентификаторов текстур)
@@ -170,26 +171,7 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		int width, height;
-		unsigned char* image = SOIL_load_image("../Pics/floor.jpg", &width, &height, 0, SOIL_LOAD_RGB);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);		//1ый - текстурна€ цель(GL_TEXTURE_2D), 2ой - описывает уровень мипмапа дл€ которого мы хотим сгенерировать текстуру(0 - генераци€ на OPENGL),	3ий - каком формате хранить текстуру, 4ый - ширина, 5ый - высота, 6ой - утсаревший(всегд 0), 7ой - формат изображ(RGB), 8ой - тип данных изображени€(т.к. загружали изображение и хранили в байтах (cha)r - GL_UNSIGNED_BYTE), 9ый - изображение
-		glGenerateMipmap(GL_TEXTURE_2D);																//√енераци€ мипмапов
-		SOIL_free_image_data(image);																	//ќсвобожд уч.пам€ти под изображ	
-		glBindTexture(GL_TEXTURE_2D, 0);
-		ObjectShader.Use();
-		glUniform1i(glGetUniformLocation(ObjectShader.Program, "material.diffuse"), 0);
-	}
-
-	void init_texture(Shader ObjectShader, string path)
-	{
-		glBindVertexArray(0);
-		glGenTextures(1, &diffuseMap);																	//6)—оздание текстуры (1ый арг - колличество текстур, 2ой - массив идентификаторов текстур)
-		glBindTexture(GL_TEXTURE_2D, diffuseMap);															//ѕрив€з
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);									//1ый арг - к чему прив€заа текстура(2д - GL_TEXTURE_2D), 2ой арг - опци€ текстуры(WRAP)(WRAP_S - дл€ оси S), 3ий - метод wrapping(GL_MIRRORED_REPEAT)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);									//WRAP_T - дл€ оси T
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		int width, height;
-		unsigned char* image = SOIL_load_image("path", &width, &height, 0, SOIL_LOAD_RGB);
+		unsigned char* image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGB);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);		//1ый - текстурна€ цель(GL_TEXTURE_2D), 2ой - описывает уровень мипмапа дл€ которого мы хотим сгенерировать текстуру(0 - генераци€ на OPENGL),	3ий - каком формате хранить текстуру, 4ый - ширина, 5ый - высота, 6ой - утсаревший(всегд 0), 7ой - формат изображ(RGB), 8ой - тип данных изображени€(т.к. загружали изображение и хранили в байтах (cha)r - GL_UNSIGNED_BYTE), 9ый - изображение
 		glGenerateMipmap(GL_TEXTURE_2D);																//√енераци€ мипмапов
 		SOIL_free_image_data(image);																	//ќсвобожд уч.пам€ти под изображ	
@@ -225,14 +207,14 @@ public:
 			vec3(0.0f, 5.0f, -13.0f)
 		};
 
-		vector<std::string> faces
+		vector<string> faces
 		{
-			"../skybox2/right.jpg",
-			"../skybox2/left.jpg",
-			"../skybox2/top.jpg",
-			"../skybox2/bottom.jpg",
-			"../skybox2/front.jpg",
-			"../skybox2/back.jpg",
+			"../skybox/right.jpg",
+			"../skybox/left.jpg",
+			"../skybox/top.jpg",
+			"../skybox/bottom.jpg",
+			"../skybox/front.jpg",
+			"../skybox/back.jpg",
 		};
 
 		unsigned int cubemapTexture = utils.loadCubemap(faces);
@@ -244,18 +226,18 @@ public:
 		lamp.on_min_all_lamp(ObjectShader);
 		lamp.init_all_lights(ObjectShader, pointLightPositions);
 
-		Model Bed(const_cast<GLchar*>("../Models/bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj"));
+		Model Bed(const_cast<GLchar*>("../Models/Bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj"));
 		Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
-		Model Window(const_cast<GLchar*>("../Models/window/Window_Component_BI_Weight_Paint2.obj"));
-		Model grass(const_cast<GLchar*>("../Models/grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj"));
-		Model Refregarator(const_cast<GLchar*>("../Models/refregerator/Refrigerator.obj"));
-		Model Table_kitchen(const_cast<GLchar*>("../Models/table_Kitchen/Kitchen furniture.obj"));
-		Model Sofa(const_cast<GLchar*>("../Models/sofa/DesignSofa1.obj"));
-		Model Toilet(const_cast<GLchar*>("../Models/toilet/10778_Toilet_V2.obj"));
-		Model air(const_cast<GLchar*>("../Models/air/10780_AirConditioner_V4_LOD3.obj"));
-		Model fence(const_cast<GLchar*>("../Models/fence/13076_Gothic_Wood_Fence_Panel_v2_l3.obj"));
-		Model humidifier(const_cast<GLchar*>("../Models/1/Musa_highpoly.obj"));
-	
+		Model Window(const_cast<GLchar*>("../Models/Window/Window_Component_BI_Weight_Paint2.obj"));
+		Model Grass(const_cast<GLchar*>("../Models/Grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj"));
+		Model Refregarator(const_cast<GLchar*>("../Models/Refregerator/Refrigerator.obj"));
+		Model Table_kitchen(const_cast<GLchar*>("../Models/Table_kitchen/Kitchen furniture.obj"));
+		Model Sofa(const_cast<GLchar*>("../Models/Sofa/DesignSofa1.obj"));
+		Model Toilet(const_cast<GLchar*>("../Models/Toilet/10778_Toilet_V2.obj"));
+		Model OUTair(const_cast<GLchar*>("../Models/OUTair/10780_AirConditioner_V4_LOD3.obj"));
+		Model Fence(const_cast<GLchar*>("../Models/Fence/13076_Gothic_Wood_Fence_Panel_v2_l3.obj"));
+		Model INair(const_cast<GLchar*>("../Models/INair/zabyl.obj"));
+		Model Humidifier(const_cast<GLchar*>("../Models/Humidifier/humidifier.obj"));
 
 		while (!glfwWindowShouldClose(window))											//провер€ет, не передано ли указание закончить работу 
 		{
@@ -417,7 +399,20 @@ public:
 			ObjectShader.setMat4("model", model);
 			Window.Draw(ObjectShader);
 
-			txt.read_txt(ObjectShader, lamp, jalousie);
+			model = mat4(1.0f);
+			model = translate(model, vec3(0.0f, -0.5f, 6.52f));
+			model = scale(model, vec3(0.5f));
+			ObjectShader.setMat4("model", model);
+			Window.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = translate(model, vec3(0.0f));
+			model = scale(model, vec3(0.05f));
+			ObjectShader.setMat4("model", model);
+			Humidifier.Draw(ObjectShader);
+
+			//txt.read_txt(ObjectShader, lamp, jalousie);
+			txt.read_txt2(ObjectShader, lamp, jalousie);
 			
 			glBindVertexArray(objectVAO);
 			switch (true)
@@ -617,13 +612,7 @@ public:
 			model = scale(model, vec3(0.1f));
 			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 			ObjectShader.setMat4("model", model);
-			grass.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(1.8f, -1.0f, -3.5f));
-			model = scale(model, vec3(0.005f));
-			ObjectShader.setMat4("model", model);
-			humidifier.Draw(ObjectShader);
+			Grass.Draw(ObjectShader);
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -632,14 +621,14 @@ public:
 				model = scale(model, vec3(0.018, 0.005f, 0.018f));
 				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 				ObjectShader.setMat4("model", model);
-				fence.Draw(ObjectShader);
+				Fence.Draw(ObjectShader);
 
 				model = mat4(1.0f);
 				model = translate(model, vec3((2.9f - 3 * i), -1.0f, 8.5f));
 				model = scale(model, vec3(0.018, 0.005f, 0.018f));
 				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 				ObjectShader.setMat4("model", model);
-				fence.Draw(ObjectShader);
+				Fence.Draw(ObjectShader);
 			}
 			for (int i = 0; i < 4; i++)
 			{
@@ -649,7 +638,7 @@ public:
 				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 				model = rotate(model, 90.0f, vec3(0.0f, 0.0f, 1.0f));
 				ObjectShader.setMat4("model", model);
-				fence.Draw(ObjectShader);
+				Fence.Draw(ObjectShader);
 
 				model = mat4(1.0f);
 				model = translate(model, vec3(5.0f, -1.0f, (-2.7 + 3 * i)));
@@ -657,7 +646,7 @@ public:
 				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 				model = rotate(model, 90.0f, vec3(0.0f, 0.0f, 1.0f));
 				ObjectShader.setMat4("model", model);
-				fence.Draw(ObjectShader);
+				Fence.Draw(ObjectShader);
 			}
 
 			model = mat4(1.0f);
@@ -666,7 +655,14 @@ public:
 			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
 			model = rotate(model, 270.0f, vec3(0.0f, 0.0f, 1.0f));
 			ObjectShader.setMat4("model", model);
-			air.Draw(ObjectShader);
+			OUTair.Draw(ObjectShader);
+
+			model = mat4(1.0f);
+			model = translate(model, vec3(-2.0f, 0.7f, -2.0f));
+			model = scale(model, vec3(0.08f, 0.15f, 0.15f));
+			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 0.0f));
+			ObjectShader.setMat4("model", model);
+			INair.Draw(ObjectShader);
 
 			glBindVertexArray(0);
 			
@@ -701,7 +697,6 @@ public:
 			glBindVertexArray(0);
 			glDepthFunc(GL_LESS);
 			
-
 			glfwSwapBuffers(window);												//замен€ет цветовой буфер, который использовалс€ дл€ отрисовки во врем€ текущей итерации и показывает результат на экране.
 		}
 		glfwTerminate();															//*очистить выделенные рессурсы

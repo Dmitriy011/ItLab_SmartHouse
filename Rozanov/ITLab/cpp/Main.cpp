@@ -48,7 +48,7 @@ int main(int argc, char** argv)														//argc число аргументов, argv масси
 	house.init_cube_room();
 	house.init_skybox();
 	house.init_cube_light();
-	house.init_texture_cube_room(ObjectShader);
+	house.init_texture(ObjectShader, "../Pics/floor.jpg");
 	house.Draw(utils, ObjectShader, LampShader, window, skyboxShader);
 
 

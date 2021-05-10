@@ -5,8 +5,8 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     int changed_number = 0;
     int changed_value = 0;
 
-    string filename = "..\\..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
-    //string filename = "D:\\LEBEDEV\\to_git\\ItLab_SmartHouse\\Rozanov\\MyInfo\\smart_lamp.txt";
+    //string filename = "..\\..\\Uglinskiy\\Smart_House\\Smart_House\\smart_lamp.txt";
+    string filename = "D:\\LEBEDEV\\to_git\\ItLab_SmartHouse\\Rozanov\\MyInfo\\smart_lamp.txt";
     string tmp_changed_number = "";
     string tmp_changed_value = "";
    
@@ -86,68 +86,38 @@ void ReadFile::read_txt(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     }
 }
 
-void ReadFile::read_bd(Shader& shader, Lamp& lamp, Jalousie& jalousie)
+void ReadFile::read_txt2(Shader& shader, Lamp& lamp, Jalousie& jalousie)
 {
-    size_t power_current_lamp = 0;
-    size_t mode_jalousie = 0;
+    string str;
+    int count = 0;
+   // ifstream f("D:\\LEBEDEV\\to_git\\ItLab_SmartHouse\\Rozanov\\MyInfo\\test.txt");
+    ifstream f("D:\\LEBEDEV\\test\\ItLab_SmartHouse\\Rozanov\\cacher\\cache.txt");
 
-    for (size_t i = 1; i < 4; i++)
+    while (1)
     {
-        // {"living/lamp/i": "living/lamp/i", "power": 10}
-        //power_current_lamp = power;
-        if (lamp.modes_lights[i - 1] != power_current_lamp)
+        ++count;
+        getline(f, str);
+
+        if (count < 13)
         {
-            lamp.change_brightness_light(shader, power_current_lamp, i);
+            if (lamp.modes_lights[count - 1] != stoi(str))
+            {
+                lamp.change_brightness_light(shader, stoi(str), count);
+            }
+            cout << count << "  ";
         }
 
-        // {"bed/lamp/i": "bed/lamp/i", "power": 10}
-        //power_current_lamp = power;
-        if (lamp.modes_lights[3 + i - 1] != power_current_lamp)
+        if (count >= 13 && count < 17)
         {
-            lamp.change_brightness_light(shader, power_current_lamp, 3 + i);
+            if (jalousie.mode_j[3] != stoi(str))
+            {
+                jalousie.init_mode_jalousie(count - 12, stoi(str));
+            }
         }
 
-        // {"bath/lamp/i": "bath/lamp/i", "power": 10}
-        //power_current_lamp = power;
-        if (lamp.modes_lights[6 + i - 1] != power_current_lamp)
+        if (count == 17)
         {
-            lamp.change_brightness_light(shader, power_current_lamp, 6 + i);
-        }
-
-        // {"living/lamp/i": "living/lamp/1", "power": 10}
-        //power_current_lamp = power;
-        if (lamp.modes_lights[9 + i - 1] != power_current_lamp)
-        {
-            lamp.change_brightness_light(shader, power_current_lamp, 9 + i);
+            break;
         }
     }
-
-    //{"living/jalousie": "bed/jalousie, "mode"}
-    //mode_jalousie = mode;
-    if (jalousie.mode_j[0] != mode_jalousie)
-    {
-        jalousie.init_mode_jalousie(1, mode_jalousie);
-    }
-
-    //{"bed/jalousie": "bed/jalousie", "mode"}
-    //mode_jalousie = mode;
-    if (jalousie.mode_j[1] != mode_jalousie)
-    {
-        jalousie.init_mode_jalousie(2, mode_jalousie);
-    }
-
-    //{"kitchen/jalousie": "kitchen/jalousie", "mode"}
-    //mode_jalousie = mode;
-    if (jalousie.mode_j[2] != mode_jalousie)
-    {
-        jalousie.init_mode_jalousie(3, mode_jalousie);
-    }
-
-    //{"bath/jalousie": "bath/jalousie", "mode"}
-    //mode_jalousie = mode;
-    if (jalousie.mode_j[3] != mode_jalousie)
-    {
-        jalousie.init_mode_jalousie(4, mode_jalousie);
-    }
-
 }
