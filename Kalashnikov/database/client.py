@@ -191,8 +191,7 @@ def humidifier_select(name):
         res = conn.getresponse()
         data = json.loads(res.read())
         print("Response code:", res.status)
-        for row in data:
-            print(row)
+        return data[0]
     except Exception as ex:
         print(ex)
 
@@ -227,4 +226,3 @@ def random_fill():
     sensor_insert("sun", 1200)
 
 # random_fill()
-
