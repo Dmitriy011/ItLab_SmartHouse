@@ -274,7 +274,7 @@ public:
 			ObjectShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
 			ObjectShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 			*/
-			mat4 projection = perspective(45.0f, (float)intilizaton.GetWidht() / (float)intilizaton.GetWidht(), 0.1f, 100.0f);				//матрица проекции, определ€юща€ поле обзора: 45.0f - угол обзора = fov
+			mat4 projection = perspective(90.0f, (float)intilizaton.GetWidht() / (float)intilizaton.GetWidht(), 0.1f, 100.0f);				//матрица проекции, определ€юща€ поле обзора: 45.0f - угол обзора = fov
 			mat4 view = camera.GetViewMatrix();																								//матрица вида LookAt, составленна€ из позиции камеры, координаты цели и вектора направленнего вверх
 			ObjectShader.setMat4("projection", projection);
 			ObjectShader.setMat4("view", view);
@@ -412,7 +412,11 @@ public:
 			Humidifier.Draw(ObjectShader);
 
 			//txt.read_txt(ObjectShader, lamp, jalousie);
+		
 			txt.read_txt2(ObjectShader, lamp, jalousie);
+			
+
+
 			
 			glBindVertexArray(objectVAO);
 			switch (true)
@@ -658,7 +662,7 @@ public:
 			OUTair.Draw(ObjectShader);
 
 			model = mat4(1.0f);
-			model = translate(model, vec3(-2.0f, 0.7f, -2.0f));
+			model = translate(model, vec3(-1.9f, 0.7f, -2.0f));
 			model = scale(model, vec3(0.08f, 0.15f, 0.15f));
 			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 0.0f));
 			ObjectShader.setMat4("model", model);

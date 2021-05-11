@@ -91,7 +91,7 @@ void ReadFile::read_txt2(Shader& shader, Lamp& lamp, Jalousie& jalousie)
     string str;
     int count = 0;
    // ifstream f("D:\\LEBEDEV\\to_git\\ItLab_SmartHouse\\Rozanov\\MyInfo\\test.txt");
-    ifstream f("D:\\LEBEDEV\\test\\ItLab_SmartHouse\\Rozanov\\cacher\\cache.txt");
+    ifstream f("..\\cacher\\cache.txt");
 
     while (1)
     {
@@ -100,16 +100,15 @@ void ReadFile::read_txt2(Shader& shader, Lamp& lamp, Jalousie& jalousie)
 
         if (count < 13)
         {
-            if (lamp.modes_lights[count - 1] != stoi(str))
+            if (str != "" && (str.length() == 1 || str.length() == 2) && lamp.modes_lights[count - 1] != stoi(str))
             {
                 lamp.change_brightness_light(shader, stoi(str), count);
             }
-            cout << count << "  ";
         }
 
         if (count >= 13 && count < 17)
         {
-            if (jalousie.mode_j[3] != stoi(str))
+            if (str != "" && (str.length() == 1 || str.length() == 2) && jalousie.mode_j[3] != stoi(str) )
             {
                 jalousie.init_mode_jalousie(count - 12, stoi(str));
             }

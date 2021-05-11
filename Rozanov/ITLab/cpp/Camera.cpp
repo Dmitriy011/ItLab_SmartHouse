@@ -32,16 +32,16 @@ void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean co
     Yaw += xoffset;                                                 //смещение для угла yaw
     Pitch += yoffset;                                               //смещение для угла pitch
 
-    //ограничения для угла поврота pitch (по y). предел +-89ю0, т.к. ф>90 cosф < 0 -> сможем смотреть вниз и вверх, но не более
+    //ограничения для угла поврота pitch (по y). предел +-89.0, т.к. ф>90 cosф < 0 -> сможем смотреть вниз и вверх, но не более
     if (constrainPitch)
     {
-        if (Pitch > 89.0f)
+        if (Pitch > 69.0f)
         {
-            Pitch = 89.0f;
+            Pitch = 69.0f;
         }
-        if (Pitch < -89.0f)
+        if (Pitch < -69.0f)
         {
-            Pitch = -89.0f;
+            Pitch = -69.0f;
         }
     }
     //ограничвать угол по х нет необх.
