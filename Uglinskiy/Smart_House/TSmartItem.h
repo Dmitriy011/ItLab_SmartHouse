@@ -6,14 +6,13 @@ using std::map;
 using std::to_string;
 using std::make_pair;
 
-class TSmartHeaters :
-    public ISmartItem
+
+class TSmartItem : public ISmartItem
 {
-	protected:
+protected:
 	map<string, int> smart_thing_char;	// мапа-характеристики умной вещи
 	string location = "\0";				//местонахождение объекта
 	int number = 0;						//номер объекта 
-	string name = "\0";
 public:
 	void set_parameter(string what, int value) override//устанвливаем значение value  по ключу what
 	{
@@ -27,18 +26,13 @@ public:
 
 	void set_item_number(int nmb) override
 	{
-		number = nmb;	
+		number = nmb;
 	}
 
 
 	string get_location() override
 	{
 		return location;
-	}
-
-	string get_name() override
-	{
-		return name;
 	}
 
 	int get_item_number() override

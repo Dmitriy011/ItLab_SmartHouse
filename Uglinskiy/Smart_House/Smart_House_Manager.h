@@ -12,12 +12,15 @@
 
 #include<Windows.h>
 
+#include "py_client.h"
+
 
 //#include "TSmartLight.h"
 #include "TTheSun.h"
 #include "TSmartLamp.h"
 #include "TSmartJalousie.h"
 #include "TSmartBattery.h"
+#include "TSmartHumidifier.h"
 
 
 //#include "TSensors.h"
@@ -46,6 +49,7 @@ private:
 	vector<TSmartLamp> smart_lamps_vec;//умные лампочки
 	vector<TSmartJalousie> smart_jalousie_vec;//умные жалюзи
 	vector<TSmartBattery> smart_battery_vec;
+	vector<TSmartHumidifier> smart_humidifier_vec;
 	//комнаты
 	vector<TRoom> rooms_vec;
 
@@ -64,19 +68,20 @@ private:
 	
 public:
 	//int number_of_rooms,int lenght_lamps = 1, int lenght_jalousie = 1,int lenght_battery=1
-	TSmartHouseManager(int number_of_rooms,int lenght_lamps = 1, int lenght_jalousie = 1,int lenght_battery=1)//конструктор 
+	TSmartHouseManager(int lenght_lamps = 1, int lenght_jalousie = 1,int lenght_battery=1,int lenght_humidifier = 1, int number_of_rooms=4)//конструктор 
 	{
-		//инициализация солнца
-		SUN.set_item_number(lenght_lamps+1);
+	
+		
 		//инициализация количесва умных вещей
 		smart_lamps_vec.resize(lenght_lamps);
 		smart_jalousie_vec.resize(lenght_jalousie);
 		smart_battery_vec.resize(lenght_battery);
+		smart_humidifier_vec.resize(lenght_humidifier);
 		//инициализация комнат
-		TRoom KN(18, 0.8, "KN");
-		TRoom LR(25, 1, "LR");
-		TRoom SR(20, 0.7, "SR");
-		TRoom BT(10, 0, "BT");
+		TRoom KN(18, 0.8, "kitchen");
+		TRoom LR(25, 1, "living");
+		TRoom SR(20, 0.7, "bed");
+		TRoom BT(10, 0, "bath");
 
 		rooms_vec.push_back(KN);
 		rooms_vec.push_back(LR);
@@ -85,9 +90,10 @@ public:
 	}
 	
 
-	 //Парсер
+	//чтение из базы данных
+	void read_db();
+	//Парсер
 	void parse_string();
-	
 	//Обсчёт значений датчиков в зависимости от работы умных вещей и солнца 
 	void set_sensors_data();
 
@@ -99,8 +105,9 @@ public:
 	void insert_smart_battery(TSmartBattery batt_to_ins, string where_to_ins = "\0");
 
 	//Собрать все данные в одну строку
+
 	string collect_all_data();
-	
+
 	//Один цикл программы
 	void one_cycle();
 	

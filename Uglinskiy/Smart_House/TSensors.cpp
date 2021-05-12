@@ -5,7 +5,7 @@ string TSensors::get_string()
 {
 
 	string tmp_string = "\0";		//создаём пустую строку
-	map<string, int>::iterator it;	//создаём итератор
+	map<string, long>::iterator it;	//создаём итератор
 
 	it = sensors.begin();			//устанавливаем итератор в начало
 	

@@ -1,7 +1,7 @@
-#include "TSmartHeaters.h"
+#include "TSmartItem.h"
 
 //собрать все имеющиеся данные в строку в виде "ключ"="значение",
-string TSmartHeaters::get_string()
+string TSmartItem::get_string()
 {
 	string return_string = "\0";	//создаём пустую строку
 

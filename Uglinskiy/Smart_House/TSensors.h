@@ -10,7 +10,7 @@ using std::to_string;
 class TSensors : public ISensors
 {
 protected:
-	map<string, int> sensors;//мапа сенсоров
+	map<string, long> sensors;//мапа сенсоров
 public:
 
 	string get_string() override;
@@ -20,7 +20,7 @@ public:
 		sensors[what] = value;
 	}
 
-	float get_parameter(string what) override			//получаем  значение  по ключу what
+	long get_parameter(string what) override			//получаем  значение  по ключу what
 	{
 		return sensors[what];
 	}

@@ -7,13 +7,13 @@ class TRoom
 private:
 	float S = 1;//площадь
 	float t = 0;
-	float sun_energy_percentage = 1;//коэффициент отвечающий за то ,сколько света(энергии солнца) доходит до комнаты
+	float medium_vapor_content = 12;//среднее содержание влаги 
 	string name = "\0";//имя
 public:
 	TRoom(float Sq = 1, float s_e_p = 1, string nm = "room")
 	{
 		S = Sq;
-		sun_energy_percentage = s_e_p;
+		
 		name = nm;
 	}
 	/*---Getters---*/
@@ -27,10 +27,10 @@ public:
 	{
 		return S;
 	}
-	//коэффициент солнечной энергии
-	float get_sun_en_per()
+	//среднее содержание влаги 
+	float get_med_vapor_content()
 	{
-		return sun_energy_percentage;
+		return medium_vapor_content;
 	}
 	//температура
 	float get_t()
@@ -38,9 +38,14 @@ public:
 		return t;
 	}
 	/*---Setters---*/
+	//температура
 	void set_t(float set_t = 1)
 	{
 		t = set_t;
 	}
-
+	//среднее содержание влаги 
+	void set_med_vapor_content(float new_content)
+	{
+		medium_vapor_content = new_content;
+	}
 };

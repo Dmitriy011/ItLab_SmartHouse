@@ -1,14 +1,13 @@
 ﻿#pragma once
-#include "TSmartLight.h"
+#include "TSmartItem.h"
 //класс умное жалюзи
-class TSmartJalousie : public TSmartLight
+class TSmartJalousie : public TSmartItem
 {
 private:
 
 public:
 	TSmartJalousie()
 	{
-		smart_thing_char.insert(make_pair("DEG", 0));
-		name = "jalousie";
+		smart_thing_char.insert(make_pair("rotation", 0));		
 	}
 };

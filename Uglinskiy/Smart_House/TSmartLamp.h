@@ -1,14 +1,13 @@
 ﻿#pragma once
-#include "TSmartLight.h"
+#include "TSmartItem.h"
 //Класс умная лампочка
-class TSmartLamp : public TSmartLight
+class TSmartLamp : public TSmartItem
 {
 private:
 
 public:
 	TSmartLamp()
 	{
-		smart_thing_char.insert(make_pair("BR", 5));
-		name = "lamp";
+		smart_thing_char.insert(make_pair("power", 5));
 	}
 };

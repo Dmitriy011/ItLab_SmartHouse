@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 class IServerInfoWorker
 {
 	virtual string read_data() = 0;						//Чтение данных из файла

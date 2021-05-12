@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include "Smart_House_Manager.h"
+#include "py_client.h"
 
 int main()
 {
@@ -7,20 +8,17 @@ int main()
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
 
-	TSmartHouseManager Manager(4,12,4,0);
+	setenv("PYTHONPATH", "D:\\ITLAB_repos\\ItLab_SmartHouse_Uglinskiy_db\\ItLab_SmartHouse\\Uglinskiy\\Smart_House", true);
+	TSmartHouseManager Manager(12, 4, 4, 4);
 
 	//while (clock() / 1000 <30)
 	//{
 	//	Manager.one_cycle();
 
 	//}
-	TSmartLamp Temp_SL;
-	TSmartBattery temp_SB;
-	TSmartJalousie temp_SJ;
+
 	
-	/*Manager.insert_smart_lamp(Temp_SL,"SR");
-	Manager.insert_smart_battery(temp_SB,"BT");
-	Manager.insert_smart_jalousie(temp_SJ,"LR");*/
+
 	Manager.one_cycle();
 	return 0;
 

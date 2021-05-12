@@ -1,14 +1,13 @@
 #pragma once
-#include "TSmartHeaters.h"
-#define ONE_BATTERY_MAX_POWER 6*200
+#include "TSmartItem.h"
+#define ONE_BATTERY_MAX_POWER 2500
 class TSmartBattery :
-    public TSmartHeaters
+    public TSmartItem
 {
 public:
 	TSmartBattery()
 	{
-		smart_thing_char.insert(make_pair("power", ONE_BATTERY_MAX_POWER));
-		name = "battery";
+		smart_thing_char.insert(make_pair("power", ONE_BATTERY_MAX_POWER));	
 	}
 };
 

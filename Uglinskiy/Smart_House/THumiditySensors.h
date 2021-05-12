@@ -7,9 +7,9 @@ public:
 	//конструктор
 	THumiditySensors()
 	{
-		sensors.insert(make_pair("BT", 0));
-		sensors.insert(make_pair("SR", 0));
-		sensors.insert(make_pair("KN", 0));
-		sensors.insert(make_pair("LR", 0));
+		sensors.insert(make_pair("bath", 0));
+		sensors.insert(make_pair("bed", 0));
+		sensors.insert(make_pair("kitchen", 0));
+		sensors.insert(make_pair("living", 0));
 	}
 };

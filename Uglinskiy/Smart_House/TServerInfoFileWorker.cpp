@@ -23,7 +23,7 @@ void TServerInfoFileWorker::save_data(string string_to_file)
 		cout << asctime(localtime(&now));
 		in_file << string_to_file << endl;	//записываем данные из принятой строки в файл
 
-		cout << string_to_file << endl;
+		//cout << string_to_file << endl;
 	}
 	in_file.close();//закрываем файл
 }

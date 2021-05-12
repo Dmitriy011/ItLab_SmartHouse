@@ -21,25 +21,19 @@
     <ClCompile Include="Smart_House_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TRoom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TSensors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TServerInfoFileWorker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TSmartLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TTheSun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TSmartHeaters.cpp">
+    <ClCompile Include="TSmartItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TSmartBattery.cpp">
+    <ClCompile Include="py_client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,19 +71,22 @@
     <ClInclude Include="TSmartLamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TSmartLight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TTemperatureSensors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TTheSun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TSmartHeaters.h">
+    <ClInclude Include="TSmartBattery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TSmartBattery.h">
+    <ClInclude Include="TSmartItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TSmartHumidifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="py_client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
