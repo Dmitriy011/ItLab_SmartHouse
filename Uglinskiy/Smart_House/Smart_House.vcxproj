@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -91,10 +91,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Python38-32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Python38-32\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -106,10 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files\Python38\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files\Python38\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,31 +155,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="py_client.cpp" />
     <ClCompile Include="Smart_House.cpp" />
     <ClCompile Include="Smart_House_Manager.cpp" />
-    <ClCompile Include="TRoom.cpp" />
     <ClCompile Include="TSensors.cpp" />
-    <ClCompile Include="TServerInfoFileWorker.cpp" />
-    <ClCompile Include="TSmartBattery.cpp" />
-    <ClCompile Include="TSmartHeaters.cpp" />
-    <ClCompile Include="TSmartLight.cpp" />
+    <ClCompile Include="TSmartItem.cpp" />
     <ClCompile Include="TTheSun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISensors.h" />
-    <ClInclude Include="IServerInfoWorker.h" />
     <ClInclude Include="ISmartItem.h" />
+    <ClInclude Include="py_client.h" />
     <ClInclude Include="Smart_House_Manager.h" />
     <ClInclude Include="THumiditySensors.h" />
     <ClInclude Include="TLightSensors.h" />
     <ClInclude Include="TRoom.h" />
     <ClInclude Include="TSensors.h" />
-    <ClInclude Include="TServerInfoFileWorker.h" />
     <ClInclude Include="TSmartBattery.h" />
-    <ClInclude Include="TSmartHeaters.h" />
+    <ClInclude Include="TSmartHumidifier.h" />
+    <ClInclude Include="TSmartItem.h" />
     <ClInclude Include="TSmartJalousie.h" />
     <ClInclude Include="TSmartLamp.h" />
-    <ClInclude Include="TSmartLight.h" />
     <ClInclude Include="TTemperatureSensors.h" />
     <ClInclude Include="TTheSun.h" />
   </ItemGroup>

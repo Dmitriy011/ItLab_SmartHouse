@@ -4,9 +4,7 @@
 #include <map>
 
 using std::string;
-#define MAX_LAMP_LUMEN_FLOW 1200
-#define MAX_LAMP_POWER 12
-#define OPTIMAL_METR_POWER 100
+
 
 class ISmartItem
 {
@@ -18,6 +16,5 @@ public:
 	virtual string get_location() = 0;			//получить местонахождение объекта
 	virtual int get_item_number() = 0;			//получть номер объекта
 	virtual string get_string() = 0;			//составить и вернуть строку с текущими значениями полей
-	virtual string get_name() = 0;
 };
 
