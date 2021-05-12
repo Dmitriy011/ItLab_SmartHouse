@@ -405,12 +405,6 @@ public:
 			ObjectShader.setMat4("model", model);
 			Window.Draw(ObjectShader);
 
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f));
-			model = scale(model, vec3(0.05f));
-			ObjectShader.setMat4("model", model);
-			Humidifier.Draw(ObjectShader);
-
 			//txt.read_txt(ObjectShader, lamp, jalousie);
 		
 			txt.read_txt2(ObjectShader, lamp, jalousie);
@@ -610,7 +604,19 @@ public:
 			}		
 
 			lamp.change_brightness_depended_jalousie(ObjectShader, jalousie.Get_count_closer_jalousie());
-			
+
+			for (int i = 0; i < 4; i++)
+			{
+				cout << jalousie.mode_j[i] << "  ";
+			}
+			cout << endl;
+
+			model = mat4(1.0f);
+			model = translate(model, vec3(0.0f));
+			model = scale(model, vec3(0.05f));
+			ObjectShader.setMat4("model", model);
+			Humidifier.Draw(ObjectShader);
+
 			model = mat4(1.0f);
 			model = translate(model, vec3(0.0f, -2.21f, 0.0f));
 			model = scale(model, vec3(0.1f));

@@ -108,7 +108,7 @@ void ReadFile::read_txt2(Shader& shader, Lamp& lamp, Jalousie& jalousie)
 
         if (count >= 13 && count < 17)
         {
-            if (str != "" && (str.length() == 1 || str.length() == 2) && jalousie.mode_j[3] != stoi(str) )
+            if (str != "" && (str.length() == 1 || str.length() == 2) && jalousie.mode_j[count - 13] != stoi(str) )
             {
                 jalousie.init_mode_jalousie(count - 12, stoi(str));
             }

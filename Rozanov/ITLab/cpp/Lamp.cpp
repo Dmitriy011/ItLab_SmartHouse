@@ -52,7 +52,7 @@ void Lamp::init_all_lights(Shader& shader, vec3 pointLightPositions[])
 
 void Lamp::change_brightness_light(Shader& shader, int value, int number_lamp)
 {
-    shader.setFloat(light_const, linear_lamp[0]);
+    shader.setFloat(light_const, constant_lamp[0]);
     shader.setFloat(light_linear,linear_lamp[value]);
     shader.setFloat(light_quadratic, quadratic_lamp[value]);
 
@@ -96,9 +96,11 @@ void Lamp::change_brightness_depended_jalousie(Shader& shader, int count_close_j
     }
     }
 
-    shader.setFloat(light_const, linear_lamp[0]);
+    shader.setFloat(light_const, constant_lamp[0]);
     shader.setFloat(light_linear, linear_lamp[modes_lights[12]]);
     shader.setFloat(light_quadratic, quadratic_lamp[modes_lights[12]]);
+
+    init_brightness_constants(13);
 }
 
 void Lamp::on_max_all_lamp(Shader& shader)
