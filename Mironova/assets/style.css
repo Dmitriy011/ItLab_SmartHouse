@@ -1,0 +1,140 @@
+html{
+    background-image: url("../images/header.png");
+    background-repeat:no-repeat;
+    background-size: 100%;
+}
+
+.current_room{
+  float:left;
+  width: 250px;
+  background-color:#9dc3e6;
+  border: 2px solid #2e75b6;
+  color:#1f4e79;
+  font-size:28px;
+  text-align: center;
+  line-height: 64px;
+  margin-top: 47px;
+}
+
+.f{
+  margin-left:50px;
+}
+
+.another_rooms{
+    float:left;
+    width: 250px;
+    background-color:#fff;
+    border: 2px solid #2e75b6;
+    text-align: center;
+    line-height: 60px;
+    margin-top: 47px;
+}
+
+.another_rooms:hover{
+    background-color:#9dc3e6;
+}
+
+.link{
+    text-decoration: none;
+    font-size:28px;
+    color:#1f4e79;
+}
+
+.section{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-weight:bold;
+    font-size:28px;
+    color:#1f4e79;
+    margin-top:100px;
+    margin-left: 50px;
+}
+
+.auto_light{
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-weight:bold;
+    font-size:24px;
+    color:#1f4e79;
+    margin-left:50px;
+    margin-top:-25px;
+}
+
+  .pic{
+    float:left;
+    margin-left: 10px;
+    width: 8%;
+    height: 8%;
+  }
+
+  .lamp_number{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-weight:bold;
+    font-size:24px;
+    color:#1f4e79;
+    margin-top:-5px;
+  }
+
+  .state{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-size:24px;
+    color:#706e6e;
+    margin-left:160px;
+  }
+
+  .change_state{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-size:24px;
+    color:black;
+    margin-top:7px;
+  }
+
+  .state-btn{
+    margin-top:20px;
+  }
+
+  .brightness{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-weight:bold;
+    font-size:28px;
+    color:#1f4e79;
+    margin-top:45px;
+    margin-left: 50px;
+  }
+
+  .current_brightness{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-size:24px;
+    color:#706e6e;
+    margin-top:10px;
+    margin-left:50px;
+  }
+
+  .change_brightness{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+    font-size:24px;
+    color:black;
+    margin-top:7px;
+    margin-left:50px;
+  }
+
+  .end{
+    margin-top:150px;
+  }
+
+  .pic_b{
+    float:left;
+    margin-left: 35px;
+    width: 5%;
+    height: 5%;
+    padding-right: 30px;
+  }
+
+  .pic_h{
+    float:left;
+    margin-left: 35px;
+    width: 7%;
+    height: 7%;
+    padding-right: 30px;
+  }
+
+
+ 
