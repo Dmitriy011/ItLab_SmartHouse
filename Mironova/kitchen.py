@@ -285,66 +285,6 @@ html.P(style={"margin-top":"20px"},children=[
         ])
     ])
 ]),
-html.Br(),
-html.P(style={"margin-top":"30px"},children=[
-    dcc.RadioItems(
-    id='my-input-auto-him',
-    options=[
-        {'label': 'Выкл', 'value': '0'},
-        {'label': 'Вкл', 'value': '1'},
-    ],
-    value='0',
-    labelStyle={'display': 'inline-block',"font-size":"20px"},
-    style={"margin-left":"630px"}
-),
-html.Div(id='my-output-auto-him',className="auto_light")
-]),
-html.P(style={"margin-top":"20px"},children=[
-    html.Div(children=[
-        html.Div(children=[
-            html.Img(
-                src="assets/images/himidifier.png",
-                className="pic_h"
-            ),
-            html.Div(
-                children='Увлажнитель',
-                className="lamp_number"
-            ),
-            html.Form(children=[
-                html.Div(
-                    children="Изменить мощность:",
-                    className="change_state"
-                ),
-                html.Div(
-                    dcc.Dropdown(
-                    id="my-input-him1",
-                        options=[
-                            {"label": "0", "value": "0"},
-                            {"label": "10", "value": "10"},
-                            {"label": "20", "value": "20"},
-                            {"label": "30", "value": "30"},
-                            {"label": "40", "value": "40"},
-                            {"label": "50", "value": "50"},
-                            {"label": "60", "value": "60"},
-                            {"label": "70", "value": "70"},
-                            {"label": "80", "value": "80"},
-                            {"label": "90", "value": "90"},
-                            {"label": "100", "value": "100"}
-                        ],
-                        placeholder="Выбрать",
-                        clearable=False,
-                    ),style={"margin-left":"420px","margin-top":"-30px","width":"100px"}),
-                html.Br(),
-                html.Div(
-                id='my-output-him1',
-                className="state"
-            )
-           ] 
-        )
-        ]),
-        html.Div(className="end")
-    ])
-]),
 html.Div(className="end")
 ])
 
@@ -418,26 +358,6 @@ def update_output_div(input_value):
     n=client.heater_select("kitchen/heater")
     n=n["warmth"]
     return 'Текущая мощность батареи: {}'.format(n)
-
-@kitchen.callback(
-    Output(component_id='my-output-auto-him', component_property='children'),
-    Input(component_id='my-input-auto-him', component_property='value')
-)
-def update_output_div(input_value):
-    print(input_value)
-    if input_value=='1':
-        SmartThing.Update_humidity((SensorInfoBaseWorker.ReadData("kitchen/humidity"))["value"],"kitchen")
-    return 'Включить автоматическое регулирование влажности?'
-
-@kitchen.callback(
-    Output(component_id='my-output-him1', component_property='children'),
-    Input(component_id='my-input-him1', component_property='value')
-)
-def update_output_div(input_value):
-    client.humidifier_upsert("kitchen/humidifier",input_value,True)
-    n=client.humidifier_select("kitchen/humidifier")
-    n=n["power"]
-    return 'Текущая мощность увлажнителя: {}'.format(n)
 
 
 if __name__ == '__main__':
