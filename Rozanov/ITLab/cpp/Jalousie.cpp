@@ -55,4 +55,3 @@ int Jalousie::GetMode(size_t _n) const
 {
     return mode_j[_n - 1];
 }
-

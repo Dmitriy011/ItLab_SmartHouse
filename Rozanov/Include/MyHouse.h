@@ -188,21 +188,21 @@ public:
 
 		vec3 pointLightPositions[] =
 		{
-			vec3(0.0f,  0.8f,  -0.8f),
-			vec3(-0.5f, 0.8f, -0.8f),
-			vec3(-1.0f,  0.8f, -0.8f),
+			vec3(0.7f,  1.3f,  -1.8f),
+			vec3(-0.5f, 1.3f, -0.8f),
+			vec3(-1.7f,  1.3f, -1.8f),
 
-			vec3(0.0f, 0.5f, 4.0f),
-			vec3(0.0f, 0.5f, 4.4f),
-			vec3(0.0f, 0.5f, 4.8f),
+			vec3(1.5f, 1.3f, 3.6f),
+			vec3(1.5f, 1.3f, 4.0f),
+			vec3(1.5f, 1.3f, 4.4f),
 
-			vec3(3.07f, 0.5f, 0.0f),
-			vec3(3.15f, 0.5f, 0.0f),
-			vec3(3.2f, 0.5f, 0.0f),
+			vec3(2.5f, 1.3f, 0.4f),
+			vec3(2.7f, 1.3f, 0.4f),
+			vec3(2.9f, 1.3f, 0.4f),
 
-			vec3(3.07f, 0.8f, -3.7f),
-			vec3(3.15f, 0.8f, -3.7f),
-			vec3(3.2f, 0.8f, -3.7f),
+			vec3(3.07f, 1.3f, -3.2f),
+			vec3(3.15f, 1.3f, -3.2f),
+			vec3(3.2f, 1.3f, -3.2f),
 
 			vec3(0.0f, 5.0f, -13.0f)
 		};
@@ -226,18 +226,7 @@ public:
 		lamp.on_min_all_lamp(ObjectShader);
 		lamp.init_all_lights(ObjectShader, pointLightPositions);
 
-		Model Bed(const_cast<GLchar*>("../Models/Bed/Full_Size_Bed_with_White_Sheets_Black_V1.obj"));
-		Model Door(const_cast<GLchar*>("../Models/Room-door/Door_Component_BI3.obj"));
-		Model Window(const_cast<GLchar*>("../Models/Window/Window_Component_BI_Weight_Paint2.obj"));
-		Model Grass(const_cast<GLchar*>("../Models/Grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj"));
-		Model Refregarator(const_cast<GLchar*>("../Models/Refregerator/Refrigerator.obj"));
-		Model Table_kitchen(const_cast<GLchar*>("../Models/Table_kitchen/Kitchen furniture.obj"));
-		Model Sofa(const_cast<GLchar*>("../Models/Sofa/DesignSofa1.obj"));
-		Model Toilet(const_cast<GLchar*>("../Models/Toilet/10778_Toilet_V2.obj"));
-		Model OUTair(const_cast<GLchar*>("../Models/OUTair/10780_AirConditioner_V4_LOD3.obj"));
-		Model Fence(const_cast<GLchar*>("../Models/Fence/13076_Gothic_Wood_Fence_Panel_v2_l3.obj"));
-		Model INair(const_cast<GLchar*>("../Models/INair/zabyl.obj"));
-		Model Humidifier(const_cast<GLchar*>("../Models/Humidifier/humidifier.obj"));
+		Model House(const_cast<GLchar*>("../Models/House/smarthouse.obj"));
 
 		while (!glfwWindowShouldClose(window))											//провер€ет, не передано ли указание закончить работу 
 		{
@@ -262,156 +251,21 @@ public:
 			ObjectShader.setVec3("dirLight.ambient", 0.005f, 0.005f, 0.005f);
 			ObjectShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
 			ObjectShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
-			/*
-			ObjectShader.setVec3("spotLight.position", camera.Position);
-			ObjectShader.setVec3("spotLight.direction", camera.Front);
-			ObjectShader.setVec3("spotLight.ambient", 0.05f, 0.05f, 0.05f);
-			ObjectShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
-			ObjectShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
-			ObjectShader.setFloat("spotLight.constant", 1.0f);
-			ObjectShader.setFloat("spotLight.linear", 0.09);
-			ObjectShader.setFloat("spotLight.quadratic", 0.032);
-			ObjectShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
-			ObjectShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
-			*/
 			mat4 projection = perspective(90.0f, (float)intilizaton.GetWidht() / (float)intilizaton.GetWidht(), 0.1f, 100.0f);				//матрица проекции, определ€юща€ поле обзора: 45.0f - угол обзора = fov
 			mat4 view = camera.GetViewMatrix();																								//матрица вида LookAt, составленна€ из позиции камеры, координаты цели и вектора направленнего вверх
 			ObjectShader.setMat4("projection", projection);
 			ObjectShader.setMat4("view", view);
 
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, diffuseMap);
-			glBindVertexArray(objectVAO);
 			mat4 model = mat4(1.0f);
-			model = scale(model, vec3(4.0f, 2.0f, 8.0f));
+			model = translate(model, vec3(0.0f, -0.8f, 0.0f));
 			ObjectShader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-
-			model = mat4(1.0f);
-			model = scale(model, vec3(4.0f, 2.0f, 2.5f));
-			model = translate(model, vec3(0.0f, 0.0f, 2.093f));
-			ObjectShader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-
-			model = mat4(1.0f);
-			model = scale(model, vec3(2.0f));
-			model = translate(model, vec3(1.501f, 0.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-			
-			model = mat4(1.0f);
-			model = scale(model, vec3(2.5f, 2.0f, 2.5f));
-			model = translate(model, vec3(1.301f, 0.0f, -1.0f));
-			ObjectShader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-			
-			model = mat4(1.0f);
-			model = scale(model, vec3(9.7f, 1.0f, 13.0f));
-			model = translate(model, vec3(0.0f, -1.51f, 0.15f));
-			model = rotate(model, 90.0f, vec3(0.0f, 0.0f, 1.0f));
-			ObjectShader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.4f, -0.5f, 5.0f));
-			model = scale(model, vec3(0.01f));
-			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Bed.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(2.35f, -0.35f, -3.3f));
-			model = scale(model, vec3(0.9f, 0.9f, 0.9f));
-			model = rotate(model, 270.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Refregarator.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(4.15f, -1.0f, -2.1f));
-			model = scale(model, vec3(0.009f));
-			model = rotate(model, 180.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Table_kitchen.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f, -1.0f, -3.38f));
-			model = scale(model, vec3(0.4f));
-			ObjectShader.setMat4("model", model);
-			Sofa.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(3.0f, -0.5f, 0.0f));
-			model = scale(model, vec3(0.02f));
-			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Toilet.Draw(ObjectShader);
-			
-			model = mat4(1.0f);
-			model = translate(model, vec3(-0.85f, -1.0f, 4.06f));
-			model = scale(model, vec3(0.8f));
-			model = rotate(model, 180.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Door.Draw(ObjectShader);
-			
-			model = mat4(1.0f);
-			model = translate(model, vec3(2.07f, -1.0f, 0.0f));
-			model = scale(model, vec3(0.8f));
-			model = rotate(model, 270.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Door.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(2.07f, -1.0f, -1.7f));
-			model = scale(model, vec3(0.8f));
-			model = rotate(model, 270.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Door.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(-1.94f, -1.0f, 0.0f));
-			model = scale(model, vec3(0.8f));
-			model = rotate(model, 270.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Door.Draw(ObjectShader);
-			
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f, -0.5f, -3.95f));
-			model = scale(model, vec3(0.5f));
-			ObjectShader.setMat4("model", model);
-			Window.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(3.98f, -0.5f, 0.0f));
-			model = scale(model, vec3(0.5f));
-			model = rotate(model, 270.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Window.Draw(ObjectShader);
-			
-			model = mat4(1.0f);
-			model = translate(model, vec3(3.07f, -0.5f, -3.7f));
-			model = scale(model, vec3(0.5f));
-			ObjectShader.setMat4("model", model);
-			Window.Draw(ObjectShader);
-			
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f, -0.5f, 6.52f));
-			model = scale(model, vec3(0.5f));
-			ObjectShader.setMat4("model", model);
-			Window.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f, -0.5f, 6.52f));
-			model = scale(model, vec3(0.5f));
-			ObjectShader.setMat4("model", model);
-			Window.Draw(ObjectShader);
+			House.Draw(ObjectShader);
 
 			//txt.read_txt(ObjectShader, lamp, jalousie);
-		
 			txt.read_txt2(ObjectShader, lamp, jalousie);
 			
-
-
-			
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, diffuseMap);
 			glBindVertexArray(objectVAO);
 			switch (true)
 			{
@@ -424,7 +278,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.3 + i / 10), 0.0f, -3.8f));
+						model = translate(model, vec3((-0.85 + i / 10), 0.7f, -3.45f));
 						model = scale(model, vec3(0.08f, 1.4f, 0.01f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -437,7 +291,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.3 + i / 10), 0.0f, -3.8f));
+						model = translate(model, vec3((-0.85 + i / 10), 0.7f, -3.4f));
 						model = scale(model, vec3(0.01f, 1.4f, 0.08f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -451,8 +305,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.3 + i / 10), 0.0f, -3.8f));
-						model = rotate(model, 45.0f, vec3(0.0f, 1.0f, 0.0f));
+						model = translate(model, vec3((-0.85 + i / 10), 0.7f, -3.4f));
+						model = rotate(model, 60.0f, vec3(0.0f, 1.0f, 0.0f));
 						model = scale(model, vec3(0.1f, 1.4f, 0.015f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -471,7 +325,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.25f + i / 10), 0.0f, 6.42f));
+						model = translate(model, vec3((-1.8f + i / 10), 0.56f, 4.73f));
 						model = scale(model, vec3(0.08f, 1.4f, 0.01f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -484,7 +338,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.25f + i / 10), 0.0f, 6.42f));
+						model = translate(model, vec3((-1.8f + i / 10), 0.56f, 4.73f));
 						model = scale(model, vec3(0.01f, 1.4f, 0.08f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -497,8 +351,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((-0.25f + i / 10), 0.0f, 6.42f));
-						model = rotate(model, 45.0f, vec3(0.0f, 1.0f, 0.0f));
+						model = translate(model, vec3((-1.8f + i / 10), 0.56f, 4.73f));
+						model = rotate(model, 60.0f, vec3(0.0f, 1.0f, 0.0f));
 						model = scale(model, vec3(0.1f, 1.4f, 0.015f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -517,8 +371,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((2.8f + i/10), 0.0f, -3.6f));
-						model = scale(model, vec3(0.08f, 1.4f, 0.01f));
+						model = translate(model, vec3(5.0f, 0.7f, (-2.05f + i / 10)));
+						model = scale(model, vec3(0.01f, 1.4f, 0.08f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
 					}
@@ -530,8 +384,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((2.8f + i / 10), 0.0f, -3.6f));
-						model = scale(model, vec3(0.01f, 1.4f, 0.08f));
+						model = translate(model, vec3(5.0f, 0.7f, (-2.05f + i / 10)));
+						model = scale(model, vec3(0.08f, 1.4f, 0.01f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
 					}
@@ -543,8 +397,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3((2.8f + i / 10), 0.0f, -3.6f));
-						model = rotate(model, 45.0f, vec3(0.0f, 1.0f, 0.0f));
+						model = translate(model, vec3(5.0f, 0.7f, (-2.05f + i / 10)));
+						model = rotate(model, 60.0f, vec3(0.0f, 1.0f, 0.0f));
 						model = scale(model, vec3(0.1f, 1.4f, 0.015f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -563,7 +417,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3(3.86f, 0.0f, (-0.2f + i / 10)));
+						model = translate(model, vec3(5.0f, 0.7f, (0.85f + i / 10)));
 						model = scale(model, vec3(0.01f, 1.4f, 0.08f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -576,7 +430,7 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3(3.86f, 0.0f, (-0.2f + i / 10)));
+						model = translate(model, vec3(4.98f, 0.7f, (0.85f + i / 10)));
 						model = scale(model, vec3(0.08f, 1.4f, 0.01f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -589,8 +443,8 @@ public:
 					for (float i = 0.0f; i < 7.0f; i++)
 					{
 						model = mat4(1.0f);
-						model = translate(model, vec3(3.86f, 0.0f, (-0.2f + i / 10)));
-						model = rotate(model, 45.0f, vec3(0.0f, 1.0f, 0.0f));
+						model = translate(model, vec3(4.98f, 0.7f, (0.85f + i / 10)));
+						model = rotate(model, 60.0f, vec3(0.0f, 1.0f, 0.0f));
 						model = scale(model, vec3(0.1f, 1.4f, 0.015f));
 						ObjectShader.setMat4("model", model);
 						glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -601,78 +455,15 @@ public:
 				}
 				break;
 			}
-			}		
+			}	
 
 			lamp.change_brightness_depended_jalousie(ObjectShader, jalousie.Get_count_closer_jalousie());
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 13; i++)
 			{
-				cout << jalousie.mode_j[i] << "  ";
+				cout << lamp.modes_lights[i] << "  ";
 			}
 			cout << endl;
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f));
-			model = scale(model, vec3(0.05f));
-			ObjectShader.setMat4("model", model);
-			Humidifier.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(0.0f, -2.21f, 0.0f));
-			model = scale(model, vec3(0.1f));
-			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			Grass.Draw(ObjectShader);
-
-			for (int i = 0; i < 3; i++)
-			{
-				model = mat4(1.0f);
-				model = translate(model, vec3((3.0f - 3 * i), -1.0f, -4.5f));
-				model = scale(model, vec3(0.018, 0.005f, 0.018f));
-				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-				ObjectShader.setMat4("model", model);
-				Fence.Draw(ObjectShader);
-
-				model = mat4(1.0f);
-				model = translate(model, vec3((2.9f - 3 * i), -1.0f, 8.5f));
-				model = scale(model, vec3(0.018, 0.005f, 0.018f));
-				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-				ObjectShader.setMat4("model", model);
-				Fence.Draw(ObjectShader);
-			}
-			for (int i = 0; i < 4; i++)
-			{
-				model = mat4(1.0f);
-				model = translate(model, vec3(-4.7f, -1.0f, (-2.7 + 3 * i)));
-				model = scale(model, vec3(0.018, 0.005f, 0.018f));
-				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-				model = rotate(model, 90.0f, vec3(0.0f, 0.0f, 1.0f));
-				ObjectShader.setMat4("model", model);
-				Fence.Draw(ObjectShader);
-
-				model = mat4(1.0f);
-				model = translate(model, vec3(5.0f, -1.0f, (-2.7 + 3 * i)));
-				model = scale(model, vec3(0.02, 0.005f, 0.02f));
-				model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-				model = rotate(model, 90.0f, vec3(0.0f, 0.0f, 1.0f));
-				ObjectShader.setMat4("model", model);
-				Fence.Draw(ObjectShader);
-			}
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(-2.4f, 0.0f, -2.0f));
-			model = scale(model, vec3(0.03f, 0.03f, 0.03f));
-			model = rotate(model, 270.0f, vec3(1.0f, 0.0f, 0.0f));
-			model = rotate(model, 270.0f, vec3(0.0f, 0.0f, 1.0f));
-			ObjectShader.setMat4("model", model);
-			OUTair.Draw(ObjectShader);
-
-			model = mat4(1.0f);
-			model = translate(model, vec3(-1.9f, 0.7f, -2.0f));
-			model = scale(model, vec3(0.08f, 0.15f, 0.15f));
-			model = rotate(model, 90.0f, vec3(0.0f, 1.0f, 0.0f));
-			ObjectShader.setMat4("model", model);
-			INair.Draw(ObjectShader);
 
 			glBindVertexArray(0);
 			

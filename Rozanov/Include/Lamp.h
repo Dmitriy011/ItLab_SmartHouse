@@ -43,8 +43,4 @@ private:
 	vector<float> constant_lamp;
 	vector<float> linear_lamp;
 	vector<float> quadratic_lamp;
-
-	
-
-	void init_brightness_constants(size_t _number);
 };

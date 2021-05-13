@@ -52,12 +52,29 @@ void Lamp::init_all_lights(Shader& shader, vec3 pointLightPositions[])
 
 void Lamp::change_brightness_light(Shader& shader, int value, int number_lamp)
 {
-    shader.setFloat(light_const, constant_lamp[0]);
-    shader.setFloat(light_linear,linear_lamp[value]);
-    shader.setFloat(light_quadratic, quadratic_lamp[value]);
+    string tmp1;
+    string tmp2;
+    string tmp3;
+    string tmp4;
+    tmp1 = "pointLights[";
+    tmp2 = to_string(number_lamp-1);
+    tmp1.append(tmp2);
+    tmp3 = "].constant";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, constant_lamp[0]);
 
+    tmp3 = "].linear";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, linear_lamp[value]);
+
+    tmp3 = "].quadratic";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, quadratic_lamp[value]);
+ 
     modes_lights[number_lamp - 1] = value;
-    init_brightness_constants(number_lamp);
 }
 
 void Lamp::change_brightness_depended_jalousie(Shader& shader, int count_close_jalousie)
@@ -96,11 +113,27 @@ void Lamp::change_brightness_depended_jalousie(Shader& shader, int count_close_j
     }
     }
 
-    shader.setFloat(light_const, constant_lamp[0]);
-    shader.setFloat(light_linear, linear_lamp[modes_lights[12]]);
-    shader.setFloat(light_quadratic, quadratic_lamp[modes_lights[12]]);
+    string tmp1;
+    string tmp2;
+    string tmp3;
+    string tmp4;
+    tmp1 = "pointLights[";
+    tmp2 = to_string(12);
+    tmp1.append(tmp2);
+    tmp3 = "].constant";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, constant_lamp[0]);
 
-    init_brightness_constants(13);
+    tmp3 = "].linear";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, linear_lamp[modes_lights[12]]);
+
+    tmp3 = "].quadratic";
+    tmp4 = tmp1;
+    tmp4.append(tmp3);
+    shader.setFloat(tmp4, quadratic_lamp[modes_lights[12]]);
 }
 
 void Lamp::on_max_all_lamp(Shader& shader)
@@ -187,30 +220,4 @@ string Lamp::get_light_quadratic() const
 int Lamp::get_mode_light(int index) const
 {
     return modes_lights[index];
-}
-
-void Lamp::init_brightness_constants(size_t _number)
-{
-    string tmp1;
-    string tmp2;
-    string tmp3;
-    string tmp4;
-
-    tmp1 = "pointLights[";
-    tmp2 = to_string(_number - 1);
-    tmp1.append(tmp2);
-    tmp3 = "].constant";
-    tmp4 = tmp1;
-    tmp4.append(tmp3);
-    light_const = tmp4;
-
-    tmp3 = "].linear";
-    tmp4 = tmp1;
-    tmp4.append(tmp3);
-    light_linear = tmp4;
-
-    tmp3 = "].quadratic";
-    tmp4 = tmp1;
-    tmp4.append(tmp3);
-    light_quadratic = tmp4;
 }
