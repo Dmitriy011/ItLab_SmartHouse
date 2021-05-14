@@ -1,6 +1,7 @@
 from SmartThing import SmartThing
 import time
 from SensorInfoBaseWorker import SensorInfoBaseWorker
+import client
 
 class Work_with_data:
 
@@ -19,4 +20,4 @@ class Work_with_data:
             SmartThing.Update_battery((SensorInfoBaseWorker.ReadData("bed/temperature"))["value"],rooms[3])
 
 
-    
+client.sensor_insert("out/brightness",300)    
