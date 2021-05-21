@@ -86,13 +86,15 @@ html.P(style={"margin-top":"30px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
-                html.Div(
-                id='my-output-lamp1',
-                className="state"
-            )
+                dcc.Interval(
+                    id='my-output-lamp1',
+                    className="state",
+                    interval=1*1000, # in milliseconds
+                    n_intervals=0
+                )
            ] 
             )
         ])
@@ -133,7 +135,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -180,7 +182,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -218,7 +220,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "90", "value": "90"}
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -273,7 +275,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "1200", "value": "1200"}
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"380px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -301,43 +303,59 @@ def update_output_div(input_value):
 
 @bedroom.callback(
     Output(component_id='my-output-lamp1', component_property='children'),
-    Input(component_id='my-input-lamp1', component_property='value')
+    Input(component_id='my-input-lamp1', component_property='n_intervals')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("bed/lamp1",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("bed/lamp1",input_value,True)
+    else:
+        n=client.lamp_select("bed/lamp1")
+        client.lamp_upsert("bed/lamp1",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("bed/lamp1")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @bedroom.callback(
     Output(component_id='my-output-lamp2', component_property='children'),
     Input(component_id='my-input-lamp2', component_property='value')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("bed/lamp2",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("bed/lamp2",input_value,True)
+    else:
+        n=client.lamp_select("bed/lamp2")
+        client.lamp_upsert("bed/lamp2",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("bed/lamp2")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @bedroom.callback(
     Output(component_id='my-output-lamp3', component_property='children'),
     Input(component_id='my-input-lamp3', component_property='value')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("bed/lamp3",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("bed/lamp3",input_value,True)
+    else:
+        n=client.lamp_select("bed/lamp3")
+        client.lamp_upsert("bed/lamp3",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("bed/lamp3")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @bedroom.callback(
     Output(component_id='my-output-j1', component_property='children'),
     Input(component_id='my-input-j1', component_property='value')
 )
 def update_output_div(input_value):
-    client.jalousie_upsert("bed/jalousie",input_value,True)
+    if input_value=='0' or input_value=='60' or input_value=='90':
+        client.jalousie_upsert("bed/jalousie",input_value,True)
+    else:
+        n=client.jalousie_select("bed/jalousie")
+        client.jalousie_upsert("bed/jalousie",n["rotation"],False)
+        return 'Текущий градус жалюзи: {}'.format(n["rotation"])
     n=client.jalousie_select("bed/jalousie")
-    n=n["rotation"]
-    return 'Текущий градус жалюзи: {}'.format(n)
+    return 'Текущий градус жалюзи: {}'.format(n["rotation"])
 
 @bedroom.callback(
     Output(component_id='my-output-auto-temperature', component_property='children'),
@@ -354,11 +372,14 @@ def update_output_div(input_value):
     Input(component_id='my-input-h1', component_property='value')
 )
 def update_output_div(input_value):
-    client.heater_upsert("bed/heater",input_value,True)
+    if input_value=='0' or input_value=='200' or input_value=='400' or input_value=='600' or input_value=='800' or input_value=='1000' or input_value=='1200':
+        client.heater_upsert("bed/heater",input_value,True)
+    else:
+        n=client.heater_select("bed/heater")
+        client.heater_upsert("bed/heater",n["warmth"],False)
+        return 'Текущая мощность батареи: {}'.format(n["warmth"])
     n=client.heater_select("bed/heater")
-    n=n["warmth"]
-    return 'Текущая мощность батареи: {}'.format(n)
-
+    return 'Текущая мощность батареи: {}'.format(n["warmth"])
 
 if __name__ == '__main__':
     bedroom.run_server(debug=True,host = '127.0.0.2')

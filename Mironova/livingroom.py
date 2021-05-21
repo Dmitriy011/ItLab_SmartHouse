@@ -86,7 +86,7 @@ html.P(style={"margin-top":"30px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -133,7 +133,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -180,7 +180,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "11", "value": "11"},
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -218,7 +218,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "90", "value": "90"}
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -273,7 +273,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "1200", "value": "1200"}
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"380px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -332,7 +332,7 @@ html.P(style={"margin-top":"20px"},children=[
                             {"label": "100", "value": "100"}
                         ],
                         placeholder="Выбрать",
-                        clearable=False,
+                        clearable=True,
                     ),style={"margin-left":"420px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
                 html.Div(
@@ -362,40 +362,56 @@ def update_output_div(input_value):
     Input(component_id='my-input-lamp1', component_property='value')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("living/lamp1",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("living/lamp1",input_value,True)
+    else:
+        n=client.lamp_select("living/lamp1")
+        client.lamp_upsert("living/lamp1",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("living/lamp1")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @livingroom.callback(
     Output(component_id='my-output-lamp2', component_property='children'),
     Input(component_id='my-input-lamp2', component_property='value')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("living/lamp2",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("living/lamp2",input_value,True)
+    else:
+        n=client.lamp_select("living/lamp2")
+        client.lamp_upsert("living/lamp2",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("living/lamp2")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @livingroom.callback(
     Output(component_id='my-output-lamp3', component_property='children'),
     Input(component_id='my-input-lamp3', component_property='value')
 )
 def update_output_div(input_value):
-    client.lamp_upsert("living/lamp3",input_value,True)
+    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
+        client.lamp_upsert("living/lamp3",input_value,True)
+    else:
+        n=client.lamp_select("living/lamp3")
+        client.lamp_upsert("living/lamp3",n["power"],False)
+        return 'Текущая яркость лампы: {}'.format(n["power"])
     n=client.lamp_select("living/lamp3")
-    n=n["power"]
-    return 'Текущая яркость лампы: {}'.format(n)
+    return 'Текущая яркость лампы: {}'.format(n["power"])
 
 @livingroom.callback(
     Output(component_id='my-output-j1', component_property='children'),
     Input(component_id='my-input-j1', component_property='value')
 )
 def update_output_div(input_value):
-    client.jalousie_upsert("living/jalousie",input_value,True)
+    if input_value=='0' or input_value=='60' or input_value=='90':
+        client.jalousie_upsert("living/jalousie",input_value,True)
+    else:
+        n=client.jalousie_select("living/jalousie")
+        client.jalousie_upsert("living/jalousie",n["rotation"],False)
+        return 'Текущий градус жалюзи: {}'.format(n["rotation"])
     n=client.jalousie_select("living/jalousie")
-    n=n["rotation"]
-    return 'Текущий градус жалюзи: {}'.format(n)
+    return 'Текущий градус жалюзи: {}'.format(n["rotation"])
 
 @livingroom.callback(
     Output(component_id='my-output-auto-temperature', component_property='children'),
@@ -412,10 +428,14 @@ def update_output_div(input_value):
     Input(component_id='my-input-h1', component_property='value')
 )
 def update_output_div(input_value):
-    client.heater_upsert("living/heater",input_value,True)
+    if input_value=='0' or input_value=='200' or input_value=='400' or input_value=='600' or input_value=='800' or input_value=='1000' or input_value=='1200':
+        client.heater_upsert("living/heater",input_value,True)
+    else:
+        n=client.heater_select("living/heater")
+        client.heater_upsert("living/heater",n["warmth"],False)
+        return 'Текущая мощность батареи: {}'.format(n["warmth"])
     n=client.heater_select("living/heater")
-    n=n["warmth"]
-    return 'Текущая мощность батареи: {}'.format(n)
+    return 'Текущая мощность батареи: {}'.format(n["warmth"])
 
 @livingroom.callback(
     Output(component_id='my-output-auto-him', component_property='children'),
@@ -432,12 +452,14 @@ def update_output_div(input_value):
     Input(component_id='my-input-him1', component_property='value')
 )
 def update_output_div(input_value):
-    client.humidifier_upsert("living/humidifier",input_value,True)
+    if input_value=='0' or input_value=='10' or input_value=='20' or input_value=='30' or input_value=='40' or input_value=='50' or input_value=='60' or input_value=='70' or input_value=='80' or input_value=='90' or input_value=='100':
+        client.humidifier_upsert("living/humidifier",input_value,True)
+    else:
+        n=client.humidifier_select("living/humidifier")
+        client.humidifier_upsert("living/humidifier",n["power"],False)
+        return 'Текущая мощность увлажнителя: {}'.format(n["power"])
     n=client.humidifier_select("living/humidifier")
-    n=n["power"]
-    return 'Текущая мощность увлажнителя: {}'.format(n)
-
-
+    return 'Текущая мощность увлажнителя: {}'.format(n["power"])
 
 if __name__ == '__main__':
     livingroom.run_server(debug=True,host = '127.0.0.1')
