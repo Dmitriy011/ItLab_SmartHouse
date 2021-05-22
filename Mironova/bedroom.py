@@ -89,12 +89,10 @@ html.P(style={"margin-top":"30px"},children=[
                         clearable=True,
                     ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
                 html.Br(),
-                dcc.Interval(
-                    id='my-output-lamp1',
-                    className="state",
-                    interval=1*1000, # in milliseconds
-                    n_intervals=0
-                )
+                html.Div(
+                id='my-output-lamp1',
+                className="state"
+            )
            ] 
             )
         ])
@@ -303,7 +301,7 @@ def update_output_div(input_value):
 
 @bedroom.callback(
     Output(component_id='my-output-lamp1', component_property='children'),
-    Input(component_id='my-input-lamp1', component_property='n_intervals')
+    Input(component_id='my-input-lamp1', component_property='value')
 )
 def update_output_div(input_value):
     if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
