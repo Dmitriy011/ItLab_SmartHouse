@@ -16,3 +16,4 @@ class Work_with_data:
             SmartThing.Update_light((SensorInfoBaseWorker.ReadData("out/brightness"))["value"],(SensorInfoBaseWorker.ReadData("bed/brightness"))["value"],rooms[3])
             SmartThing.Update_humidity((SensorInfoBaseWorker.ReadData("bed/humidity"))["value"],rooms[3])
             SmartThing.Update_battery((SensorInfoBaseWorker.ReadData("bed/temperature"))["value"],rooms[3])
+

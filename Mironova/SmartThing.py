@@ -164,6 +164,7 @@ class SmartThing(SmartLamp,Jalousie,Humidifier,Battery):
                     if int(h.pw)==0:
                         print("Включить увлажнитель")
                         h.pw=50
+                        f=1
                     else:
                         if int(h.pw)<=90:
                             print("Увлажнитель работает сильнее")

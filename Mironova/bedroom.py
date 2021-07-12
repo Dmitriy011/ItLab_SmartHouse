@@ -12,13 +12,15 @@ external_stylesheets = ['./assets/style.css']
 bedroom = dash.Dash(external_stylesheets=external_stylesheets)
 
 bedroom.layout = html.Div(style={"background-image": "url('assets/images/header.png')","background-repeat":"no-repeat","background-size": "100%"},children=[
+dcc.Interval(
+        id="interval-component", interval=5 * 1000, n_intervals=0 # in milliseconds
+),
 html.P(children=[
     html.Div(
         children=[
             html.A(children="Гостиная", className="link", href="http://127.0.0.1:8050/")
         ],
-        className="another_rooms",
-        style={"margin-left":"50px"}
+        className="another_rooms first_room",
         ),
     html.Div(
         children="Спальня",
@@ -47,7 +49,7 @@ html.P(style={"margin-top":"100px"},children=[
         {'label': 'Вкл', 'value': '1'},
     ],
     value='0',
-    labelStyle={'display': 'inline-block',"font-size":"20px"},
+    labelStyle={"display": 'inline-block',"font-size":"20px"},
     style={"margin-left":"630px"}
 ),
 html.Div(id='my-output-auto-light',className="auto_light")
@@ -71,23 +73,10 @@ html.P(style={"margin-top":"30px"},children=[
                 html.Div(
                     dcc.Dropdown(
                     id="my-input-lamp1",
-                        options=[
-                            {"label": "0", "value": "0"},
-                            {"label": "1", "value": "1"},
-                            {"label": "2", "value": "2"},
-                            {"label": "3", "value": "3"},
-                            {"label": "4", "value": "4"},
-                            {"label": "5", "value": "5"},
-                            {"label": "6", "value": "6"},
-                            {"label": "7", "value": "7"},
-                            {"label": "8", "value": "8"},
-                            {"label": "9", "value": "9"},
-                            {"label": "10", "value": "10"},
-                            {"label": "11", "value": "11"},
-                        ],
+                        options=[dict(label=x, value=x) for x in range(0, 12, 1)],
                         placeholder="Выбрать",
                         clearable=True,
-                    ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
+                    ),className="input_place_lamp_and_jalousie"),
                 html.Br(),
                 html.Div(
                 id='my-output-lamp1',
@@ -118,23 +107,10 @@ html.P(style={"margin-top":"20px"},children=[
                 html.Div(
                     dcc.Dropdown(
                     id="my-input-lamp2",
-                        options=[
-                            {"label": "0", "value": "0"},
-                            {"label": "1", "value": "1"},
-                            {"label": "2", "value": "2"},
-                            {"label": "3", "value": "3"},
-                            {"label": "4", "value": "4"},
-                            {"label": "5", "value": "5"},
-                            {"label": "6", "value": "6"},
-                            {"label": "7", "value": "7"},
-                            {"label": "8", "value": "8"},
-                            {"label": "9", "value": "9"},
-                            {"label": "10", "value": "10"},
-                            {"label": "11", "value": "11"},
-                        ],
+                        options=[dict(label=x, value=x) for x in range(0, 12, 1)],
                         placeholder="Выбрать",
                         clearable=True,
-                    ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
+                    ),className="input_place_lamp_and_jalousie"),
                 html.Br(),
                 html.Div(
                 id='my-output-lamp2',
@@ -165,23 +141,10 @@ html.P(style={"margin-top":"20px"},children=[
                 html.Div(
                     dcc.Dropdown(
                     id="my-input-lamp3",
-                        options=[
-                            {"label": "0", "value": "0"},
-                            {"label": "1", "value": "1"},
-                            {"label": "2", "value": "2"},
-                            {"label": "3", "value": "3"},
-                            {"label": "4", "value": "4"},
-                            {"label": "5", "value": "5"},
-                            {"label": "6", "value": "6"},
-                            {"label": "7", "value": "7"},
-                            {"label": "8", "value": "8"},
-                            {"label": "9", "value": "9"},
-                            {"label": "10", "value": "10"},
-                            {"label": "11", "value": "11"},
-                        ],
+                        options=[dict(label=x, value=x) for x in range(0, 12, 1)],
                         placeholder="Выбрать",
                         clearable=True,
-                    ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
+                    ),className="input_place_lamp_and_jalousie"),
                 html.Br(),
                 html.Div(
                 id='my-output-lamp3',
@@ -219,7 +182,7 @@ html.P(style={"margin-top":"20px"},children=[
                         ],
                         placeholder="Выбрать",
                         clearable=True,
-                    ),style={"margin-left":"350px","margin-top":"-30px","width":"100px"}),
+                    ),className="input_place_lamp_and_jalousie"),
                 html.Br(),
                 html.Div(
                 id='my-output-j1',
@@ -263,18 +226,10 @@ html.P(style={"margin-top":"20px"},children=[
                 html.Div(
                     dcc.Dropdown(
                     id="my-input-h1",
-                        options=[
-                            {"label": "0", "value": "0"},
-                            {"label": "200", "value": "200"},
-                            {"label": "400", "value": "400"},
-                            {"label": "600", "value": "600"},
-                            {"label": "800", "value": "800"},
-                            {"label": "1000", "value": "1000"},
-                            {"label": "1200", "value": "1200"}
-                        ],
+                        options=[dict(label=x, value=x) for x in range(0, 1300, 200)],
                         placeholder="Выбрать",
                         clearable=True,
-                    ),style={"margin-left":"380px","margin-top":"-30px","width":"100px"}),
+                    ),className="input_place_battery_and_humidifier"),
                 html.Br(),
                 html.Div(
                 id='my-output-h1',
@@ -293,91 +248,120 @@ html.Div(className="end")
     Output(component_id='my-output-auto-light', component_property='children'),
     Input(component_id='my-input-auto-light', component_property='value')
 )
-def update_output_div(input_value):
-    print(input_value)
+def bedroom_update_light_auto(input_value):
     if input_value=='1':
         SmartThing.Update_light((SensorInfoBaseWorker.ReadData("out/brightness"))["value"],(SensorInfoBaseWorker.ReadData("bed/brightness"))["value"],"bed")
     return 'Включить автоматическое регулирование освещения?'
 
 @bedroom.callback(
-    Output(component_id='my-output-lamp1', component_property='children'),
-    Input(component_id='my-input-lamp1', component_property='value')
-)
-def update_output_div(input_value):
-    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
-        client.lamp_upsert("bed/lamp1",input_value,True)
+    Output(component_id="my-output-lamp1", component_property="children"),
+    Input(component_id="my-input-lamp1", component_property="value"),
+    Input("interval-component", "n_intervals"),
+    )
+def bedroom_update_lamp1(input_value, n_intervals):
+    ctx = dash.callback_context
+
+    if ctx.triggered[0]['prop_id'].split('.')[0] == "interval-component":
+        n = client.lamp_select("bed/lamp1")["power"]
+        print("Интервал", n_intervals)
     else:
-        n=client.lamp_select("bed/lamp1")
-        client.lamp_upsert("bed/lamp1",n["power"],False)
-        return 'Текущая яркость лампы: {}'.format(n["power"])
-    n=client.lamp_select("bed/lamp1")
-    return 'Текущая яркость лампы: {}'.format(n["power"])
+        if input_value != None:
+            client.lamp_upsert("bed/lamp1", input_value, True)
+            n=input_value
+        else:
+            n = client.lamp_select("bed/lamp1")["power"]
+            client.lamp_upsert("bed/lamp1", n, False)
+    return "Текущая яркость лампы: {}".format(n)
 
 @bedroom.callback(
     Output(component_id='my-output-lamp2', component_property='children'),
-    Input(component_id='my-input-lamp2', component_property='value')
+    Input(component_id='my-input-lamp2', component_property='value'),
+    Input("interval-component", "n_intervals"),
 )
-def update_output_div(input_value):
-    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
-        client.lamp_upsert("bed/lamp2",input_value,True)
+def bedroom_update_lamp2(input_value, n_intervals):
+    ctx = dash.callback_context
+
+    if ctx.triggered[0]['prop_id'].split('.')[0] == "interval-component":
+        n = client.lamp_select("bed/lamp2")["power"]
+        print("Интервал", n_intervals)
     else:
-        n=client.lamp_select("bed/lamp2")
-        client.lamp_upsert("bed/lamp2",n["power"],False)
-        return 'Текущая яркость лампы: {}'.format(n["power"])
-    n=client.lamp_select("bed/lamp2")
-    return 'Текущая яркость лампы: {}'.format(n["power"])
+        if input_value!=None:
+            client.lamp_upsert("bed/lamp2",input_value,True)
+            n=input_value
+        else:
+            n=client.lamp_select("bed/lamp2")["power"]
+            client.lamp_upsert("bed/lamp2",n,False)
+    return 'Текущая яркость лампы: {}'.format(n)
 
 @bedroom.callback(
     Output(component_id='my-output-lamp3', component_property='children'),
-    Input(component_id='my-input-lamp3', component_property='value')
+    Input(component_id='my-input-lamp3', component_property='value'),
+    Input("interval-component", "n_intervals"),
 )
-def update_output_div(input_value):
-    if input_value=='0' or input_value=='1' or input_value=='2' or input_value=='3' or input_value=='4' or input_value=='5' or input_value=='6' or input_value=='7' or input_value=='8' or input_value=='9' or input_value=='10' or input_value=='11':
-        client.lamp_upsert("bed/lamp3",input_value,True)
+def bedroom_update_lamp3(input_value, n_intervals):
+    ctx = dash.callback_context
+
+    if ctx.triggered[0]['prop_id'].split('.')[0] == "interval-component":
+        n = client.lamp_select("bed/lamp3")["power"]
+        print("Интервал", n_intervals)
     else:
-        n=client.lamp_select("bed/lamp3")
-        client.lamp_upsert("bed/lamp3",n["power"],False)
-        return 'Текущая яркость лампы: {}'.format(n["power"])
-    n=client.lamp_select("bed/lamp3")
-    return 'Текущая яркость лампы: {}'.format(n["power"])
+        if input_value!=None:
+            client.lamp_upsert("bed/lamp3",input_value,True)
+            n=input_value
+        else:
+            n=client.lamp_select("bed/lamp3")["power"]
+            client.lamp_upsert("bed/lamp3",n,False)
+    return 'Текущая яркость лампы: {}'.format(n)
 
 @bedroom.callback(
     Output(component_id='my-output-j1', component_property='children'),
-    Input(component_id='my-input-j1', component_property='value')
+    Input(component_id='my-input-j1', component_property='value'),
+    Input("interval-component", "n_intervals"),
 )
-def update_output_div(input_value):
-    if input_value=='0' or input_value=='60' or input_value=='90':
-        client.jalousie_upsert("bed/jalousie",input_value,True)
+def bedroom_update_jalousie(input_value, n_intervals):
+    ctx = dash.callback_context
+
+    if ctx.triggered[0]['prop_id'].split('.')[0] == "interval-component":
+        n = client.jalousie_select("bed/jalousie")["rotation"]
+        print("Интервал", n_intervals)
     else:
-        n=client.jalousie_select("bed/jalousie")
-        client.jalousie_upsert("bed/jalousie",n["rotation"],False)
-        return 'Текущий градус жалюзи: {}'.format(n["rotation"])
-    n=client.jalousie_select("bed/jalousie")
-    return 'Текущий градус жалюзи: {}'.format(n["rotation"])
+        if input_value!=None:
+            client.jalousie_upsert("bed/jalousie",input_value,True)
+            n=input_value
+        else:
+            n=client.jalousie_select("bed/jalousie")["rotation"]
+            client.jalousie_upsert("bed/jalousie",n,False)
+    return 'Текущий градус жалюзи: {}'.format(n)
 
 @bedroom.callback(
     Output(component_id='my-output-auto-temperature', component_property='children'),
     Input(component_id='my-input-auto-temperature', component_property='value')
 )
-def update_output_div(input_value):
-    print(input_value)
+def bedroom_update_battery_auto(input_value):
     if input_value=='1':
         SmartThing.Update_battery((SensorInfoBaseWorker.ReadData("bed/temperature"))["value"],"bed")
     return 'Включить автоматическое регулирование температуры?'
 
 @bedroom.callback(
     Output(component_id='my-output-h1', component_property='children'),
-    Input(component_id='my-input-h1', component_property='value')
+    Input(component_id='my-input-h1', component_property='value'),
+    Input("interval-component", "n_intervals"),
 )
-def update_output_div(input_value):
-    if input_value=='0' or input_value=='200' or input_value=='400' or input_value=='600' or input_value=='800' or input_value=='1000' or input_value=='1200':
-        client.heater_upsert("bed/heater",input_value,True)
+def bedroom_update_battery(input_value, n_intervals):
+    ctx = dash.callback_context
+
+    if ctx.triggered[0]['prop_id'].split('.')[0] == "interval-component":
+        n = client.heater_select("bed/heater")["warmth"]
+        print("Интервал", n_intervals)
     else:
-        n=client.heater_select("bed/heater")
-        client.heater_upsert("bed/heater",n["warmth"],False)
-        return 'Текущая мощность батареи: {}'.format(n["warmth"])
-    n=client.heater_select("bed/heater")
-    return 'Текущая мощность батареи: {}'.format(n["warmth"])
+        if input_value!=None:
+            client.heater_upsert("bed/heater",input_value,True)
+            n=input_value
+        else:
+            n=client.heater_select("bed/heater")["warmth"]
+            client.heater_upsert("bed/heater",n,False)
+    return 'Текущая мощность батареи: {}'.format(n)
 
 if __name__ == '__main__':
     bedroom.run_server(debug=True,host = '127.0.0.2')
+
